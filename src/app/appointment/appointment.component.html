@@ -1,0 +1,41 @@
+<div class="container mt-4">
+  <div class="text-center" style="margin-top: 100px;">
+    <h2>Make your appointment online</h2>
+    <h4>Fill in the following information</h4>
+  </div>
+
+  <div *ngIf="!showHiddenCard" [@cardAnimation]="'visible'" class="card mx-auto mt-4" style="max-width: 700px; margin-top: 100px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    <div class="card-header" style="background-color: #85e2de; color: #070707; border-radius: 10px 10px 0 0;">
+      Choose your reason for consultation
+    </div>
+    <div class="card-body">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item" style="height: 80px; cursor: pointer;" (click)="showAppointmentCard('adult')">Adult - Dental consultation</li>
+        <li class="list-group-item" style="height: 80px; cursor: pointer;" (click)="showAppointmentCard('child')">Child - Dental consultation</li>
+        <li class="list-group-item" style="height: 80px; cursor: pointer;" (click)="showAppointmentCard('whitening')">Teeth whitening</li>
+        <li class="list-group-item" style="height: 80px; cursor: pointer;" (click)="showAppointmentCard('emergency')">Dental emergency </li>
+      </ul>
+    </div>
+  </div>
+
+  <div *ngIf="showHiddenCard && showThirdCard" [@cardAnimation]="'visible'" class="card mx-auto mt-4" style="max-width: 700px; margin-top: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    <div class="card-header" style="background-color: #85e2de; color: #070707; border-radius: 10px 10px 0 0;">
+      <div style="display: flex; align-items: center;">
+        <div style="cursor: pointer;" (click)="goBack()" class="back-button">
+          <span class="back-icon">&lt;</span> 
+        
+          Choose the type of appointment that suits you best
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item" style="height: 80px;">Call</li>
+        <li class="list-group-item" style="height: 80px;">Video</li>
+        <li class="list-group-item" style="height: 80px; cursor: pointer;">Face-to-face</li>
+      </ul>
+    </div>
+  </div>
+</div>
+  
+

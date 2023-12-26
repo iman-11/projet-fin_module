@@ -1,0 +1,195 @@
+
+.team .member {
+    position: relative;
+    box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    border-radius: 5px;
+    background: #fff;
+    }
+    
+    .team .member .teampic {
+    overflow: hidden;
+    width: 180px;
+    border-radius: 50%;
+    }
+    
+    
+    .team .member .member-info {
+    padding-left: 30px;
+    }
+    
+    .team .member h4 {
+    font-weight: 700;
+    margin-bottom: 5px;
+    font-size: 20px;
+    color: tomato;
+    }
+    
+    .team .member span {
+    display: block;
+    font-size: 15px;
+    padding-bottom: 10px;
+    position: relative;
+    font-weight: 500;
+    }
+    
+    .team .member span::after {
+    content: "";
+    position: absolute;
+    display: block;
+    width: 50px;
+    height: 2px;
+    background: black;
+    bottom: 0;
+    left: 0;
+    }
+    
+    .team .member p {
+    margin: 10px 0 0 0;
+    font-size: 14px;
+    }
+    
+    .team .member .social {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    }
+    
+    .team .member .social a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: #eff2f8;
+    }
+    
+    .team .member .social a i {
+    color: tomato;
+    font-size: 16px;
+    margin: 0 2px;
+    }
+    
+    .team .member .social a:hover {
+    background: tomato;
+    }
+    
+    .team .member .social a:hover i {
+    color: #fff;
+    }
+    
+    .team .member .social a+a {
+    margin-left: 8px;
+    }
+    
+    section {
+    padding: 60px 0;
+    overflow: hidden;
+    }
+    
+    
+    
+    .section-title {
+    text-align: center;
+    padding-bottom: 30px;
+    }
+    
+    .section-title h2 {
+    font-size: 32px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    position: relative;
+    color: tomato;
+    }
+    .button {
+        position: relative;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+        padding-block: 0.5rem;
+        padding-inline: 1.25rem;
+        background-color: rgb(0 107 179);
+        border-radius: 9999px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffff;
+        gap: 10px;
+        font-weight: bold;
+        border: 3px solid #ffffff4d;
+        outline: none;
+        overflow: hidden;
+        font-size: 15px;
+      }
+      
+      .icon {
+        width: 24px;
+        height: 24px;
+        transition: all 0.3s ease-in-out;
+      }
+      
+      .button:hover {
+        transform: scale(1.05);
+        border-color: #fff9;
+      }
+      
+      .button:hover .icon {
+        transform: translate(4px);
+      }
+      
+      .button:hover::before {
+        animation: shine 1.5s ease-out infinite;
+      }
+      
+      .button::before {
+        content: "";
+        position: absolute;
+        width: 100px;
+        height: 100%;
+        background-image: linear-gradient(
+          120deg,
+          rgba(255, 255, 255, 0) 30%,
+          rgba(255, 255, 255, 0.8),
+          rgba(255, 255, 255, 0) 70%
+        );
+        top: 0;
+        left: -100px;
+        opacity: 0.6;
+      }
+      
+      @keyframes shine {
+        0% {
+          left: -100px;
+        }
+      
+        60% {
+          left: 100%;
+        }
+      
+        to {
+          left: 100%;
+        }
+      }
+      
+    
+    .underline{
+        width: 1000px;
+        height: 1px;
+        background-color: black;
+        margin: auto;
+        margin-top: -30px;
+    }
+   
+    .section-title p {
+    margin-top: 20px;
+    }
+    
+
+
+
+
+    
+    
+    

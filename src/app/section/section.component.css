@@ -1,0 +1,87 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+.search-results {
+    position: absolute;
+    top: calc(100% + 10px); /* Adjust the spacing as needed */
+    left: 0;
+    width: 100%;
+    max-height: 170px; /* Set a maximum height for the results */
+    overflow-y: auto; /* Add a scrollbar if the results exceed the maximum height */
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    z-index: 9999; 
+}
+  
+  .search-results ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .search-results li {
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd; /* Add a border between results */
+  }
+  
+  .search-results li:hover {
+    background-color: #f8f9fa;
+  }
+  
+  .user-info img {
+    width: 40px; /* Adjust the image size as needed */
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .user-name {
+    font-weight: bold;
+  }
+  
+  .user-specialty,
+  .user-address {
+    font-size: 14px; /* Adjust font size as needed */
+    margin: 0;
+  }
+  
+
+
+
+
+.grish{
+    color: #338573;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');

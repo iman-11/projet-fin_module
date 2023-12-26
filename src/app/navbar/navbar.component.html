@@ -1,0 +1,99 @@
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">LoG</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6 text-center">
+            <button type="button" class="btn btn-primary" [routerLink]="['/login']" data-bs-dismiss="modal">
+              <img src="./assets/images/patient4.png" alt="" class="btnicon">
+              PATIENT
+            </button>
+          </div>
+          <div class="col-md-6 text-center">
+            <button type="button" class="btn btn-primary" [routerLink]="['/register']" data-bs-dismiss="modal">
+              <img src="./assets/images/doctor.png" alt="" class="btnicon">
+              DOCTOR
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <nav class="navbar navbar-expand-lg" style="background-color: #80d0c7;">
+    <div class="container">
+        <a class="navbar-brand" [routerLink]="'/section'">
+          <i class="fas fa-stethoscope fa-sm mb-1"></i>
+            <span>DocLink</span>
+            <a href="#">
+              
+          </a>
+        </a>
+
+        <div class="d-lg-none ms-auto me-4">
+            <a href="#top" class="navbar-icon bi-person smoothscroll"></a>
+        </div>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-lg-5 me-lg-auto">
+                <li class="nav-item">
+                    <a class="nav-link click-scroll" >Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link click-scroll"  >Browse Topics</a>
+                </li>
+
+              
+               
+                
+                <li class="nav-item">
+                    <a class="nav-link click-scroll">How it works</a>
+                </li>   
+                <li class="nav-item">
+                  <a class="nav-link click-scroll" (click)="toggleSpecialtyList()">Speciality</a>
+                </li>
+                <div *ngIf="showSpecialtyList" class="specialty-list">
+                  <ul>
+                    <li *ngFor="let specialty of specialties">{{ specialty }}</li>
+                  </ul>
+                </div>  
+      
+
+                <li class="nav-item">
+                    <a class="nav-link click-scroll" [routerLink]="['/contact']" routerLinkActive="active">Contact</a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarLightDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
+
+                    <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
+                        <li><a class="dropdown-item" href="topics-listing.html" href="#exampleModal" data-bs-toggle="modal">Login</a></li>
+
+                        <li><a class="dropdown-item" href="contact.html" href="#exampleModal" data-bs-toggle="modal">register</a></li>
+                    </ul>
+                </li>
+            </ul>
+           
+
+            <div class="d-none d-lg-block">
+                <a href="#top" class="navbar-icon bi-person smoothscroll"></a>
+            </div>
+        </div>
+    </div>
+</nav>

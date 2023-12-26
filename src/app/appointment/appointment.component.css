@@ -1,0 +1,13 @@
+.back-button {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .back-icon {
+    margin-right: 5px; /* Adjust the spacing between the icon and text */
+    font-size: 1.5em; /* Adjust the font size of the back icon */
+    color: #007bff; /* Adjust the color of the back icon */
+    /* Add any other styles you want for the back icon */
+  }
+  

@@ -1,0 +1,59 @@
+/* Custom styles for the modal body and buttons */
+.modal-body {
+    display: flex;
+    justify-content: space-around;
+}
+
+.btn-primary {
+  width: 100%;
+  margin-top: 10px; /* Add margin around the entire button */
+  background-color: #80d0c7;
+  border-color: #80d0c7;
+}
+
+.btn-primary img {
+  width: 100%;
+  height: auto;
+  max-height: 150px; /* Adjust the maximum height as needed */
+  object-fit: contain;
+  margin-bottom: 10px; /* Add margin between the image and the text */
+}
+
+
+/* Adjust margins or padding as needed */
+.specialty-list {
+    position: fixed;
+    top: 37%;
+    left: 54%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    background-color:#ffffff;
+    border: 1px none ;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-height: 400px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .specialty-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .specialty-list li {
+    margin-bottom: 8px;
+    cursor: pointer;
+  }
+  
+  .specialty-list.hidden {
+    display: none;
+  }
+
+  /* styles.css */
+.specialty-list li:hover {
+    background-color: #e0e0e0; /* Couleur de fond lorsque survolé */
+  }
+  
