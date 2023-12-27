@@ -8,6 +8,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+
         <div class="row">
           <div class="col-md-6 text-center">
             <button type="button" class="btn btn-primary" [routerLink]="['/login']" data-bs-dismiss="modal">
@@ -51,6 +52,8 @@
 
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-lg-5 me-lg-auto">
+
+
                 <li class="nav-item">
                     <a class="nav-link click-scroll" >Home</a>
                 </li>
@@ -70,7 +73,9 @@
                 </li>
                 <div *ngIf="showSpecialtyList" class="specialty-list">
                   <ul>
-                    <li *ngFor="let specialty of specialties">{{ specialty }}</li>
+                    <li *ngFor="let specialty of specialties" (click)="selectSpecialty(specialty)">
+                      {{ specialty }}
+                    </li>
                   </ul>
                 </div>  
       
@@ -88,6 +93,7 @@
                         <li><a class="dropdown-item" href="contact.html" href="#exampleModal" data-bs-toggle="modal">register</a></li>
                     </ul>
                 </li>
+
             </ul>
            
 
@@ -97,3 +103,4 @@
         </div>
     </div>
 </nav>
+

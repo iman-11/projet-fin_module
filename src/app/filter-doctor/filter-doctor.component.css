@@ -187,7 +187,69 @@
     }
 
 
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
     
+    .search-container {
+        position: relative;
+    }
+    
+    .search-results {
+        position: absolute;
+        top: 100%; /* Adjust as needed */
+        left: 0;
+        width: 100%;
+        max-height: 200px; /* Adjust as needed */
+        overflow-y: auto;
+        background-color: #fff;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+        display: block ;
+        
+    }
+    
+    .search-results ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .search-results li {
+        padding: 10px;
+        cursor: pointer;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .search-results li:hover {
+        background-color: #f8f9fa;
+    }
+    
+    .user-info img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+    
+    .user-name {
+        font-weight: bold;
+    }
+    
+    .user-specialty,
+    .user-address {
+        font-size: 14px;
+        margin: 0;
+    }
+    
+    .grish {
+        color: #338573;
+    }
+
+
+
     
 
 

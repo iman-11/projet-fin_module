@@ -2,6 +2,7 @@ import { Component, ElementRef, HostListener, ViewEncapsulation } from '@angular
 import { Router } from '@angular/router';
 import { SpcialityService } from '../spciality/spciality.service';
 import { Spciality } from '../spciality/spciality';
+import { ServiceService } from '../service.service';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -12,12 +13,36 @@ import { Spciality } from '../spciality/spciality';
 })
 export class NavbarComponent {
   showSpecialtyList = false;
-  specialties: string[] = [];
+  specialties = [
+    "Cardiologie",
+    "Chirurgien-dentiste",
+    "Gynécologue obstétricien",
+    "Médecin généraliste",
+    "Pédiatre",
+    "Ophtalmologue",
+    "Dermatologue et vénérologue",
+    "Ostéopathe",
+    "Masseur-kinésithérapeute",
+    "Opticien-lunetier",
+    "Pédicure-podologue",
+    "Sage-femme",
+    "ORL",
+    "Allergologue",
+    "Chirurgien urologue",
+    "Rhumatologue",
+    "Stomatologue",
+    "Endocrinologue",
+    "Chirurgien orthopédiste et traumatologue",
+    "Diététicien",
+    "Psychologue"
+  ];
+  spciality: any;
 
   constructor(
     private router: Router,
     private SpcialityService: SpcialityService,
-    private el: ElementRef
+    private el: ElementRef,
+    private authservice: ServiceService,
   ) {}
 
   navigateToContact() {
@@ -54,6 +79,15 @@ export class NavbarComponent {
         this.toggleSpecialtyList();
       }
     }
+  }
+
+  selectSpecialty(specialty: string) {
+
+    this.authservice.setSelectedSpecialty(specialty);
+    
+    this.router.navigate(['/filter']); // <-- Update here
+
+    this.toggleSpecialtyList();
   }
 
 

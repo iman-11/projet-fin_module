@@ -65,9 +65,7 @@ export class SectionComponent {
     });
   }
 
-  onSubmit(): void {
-    // Handle form submission if necessary
-  }
+
 
   selectResult(result: any): void {
     console.log('Selected result:', result);
@@ -102,5 +100,10 @@ export class SectionComponent {
         }
       );
   }
+  onSubmit(event: Event) {
+    event.preventDefault(); // Prevent the default form submission
+    // Rest of your onSubmit logic
+}
+
   
 }

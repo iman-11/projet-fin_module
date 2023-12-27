@@ -38,9 +38,10 @@
       box-shadow: 0 0 10px  #3498db
     }
 </style>
-
-     
-<section class="hero-section d-flex " >
+<section class="hero-section d-flex " style="
+padding-top: 60px;
+padding-bottom: 50px;
+">
     <div class="container">
 
         <div class="col-lg-8 col-12 mx-auto">
@@ -95,130 +96,35 @@
   </section>
 
   
-    <section id="team" class="team section-bg" style="margin-top: 60px;">
-        
-
-        
-        
-        
-        <div class="container">
-            
-            
-            
-          <div class="section-title">
-            
-          </div>
-          <div class="underline"></div>
-          <br>
-
-          <div class="row">
-  
-            <div class="col-lg-6 mt-4">                                                                                        
-              <div class="member d-flex align-items-start" >
-                <div class="teampic"><img src="./assets/images/team1.png" class="img-fluid" alt=""></div>
-                <div class="member-info">
-                  <h4>
-                    Dr Chloé Prieur</h4>
-                  <span>Médecin généraliste
-                </span>
-                  
-                  <p>Consultation vidéo disponible
-                </p>
-                  <p>119 Avenue des Alpes<br>
-                    06800 Cagnes-sur-Mer</p>
-                    <br>
-                    <button class="button">
-                        Prendre rendez vous
-                        <svg fill="currentColor" viewBox="0 0 24 24" class="icon">
-                          <path clip-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z" fill-rule="evenodd"></path>
-                        </svg>
-                      </button>
-
-                  
-                </div>
+  <section id="team" class="team section-bg" style="margin-top: 60px;">
+    <div class="container">
+      <div class="section-title">
+      </div>
+      <div class="underline"></div>
+      <br>
+      <div class="row">
+        <div class="col-lg-6 mt-4" *ngFor="let doctor of results1">
+          <div class="member d-flex align-items-start">
+            <div class="teampic">
+            <img *ngIf="doctor.imageUrl" src="{{doctor.imageUrl}}" class="img-fluid" alt="">
+         
               </div>
-
+            <div class="member-info">
+              <h4>Dr {{ doctor.firstname }} {{ doctor.lastname }}</h4>
+              <span>{{ doctor.speciality }}</span>
+              <p>Consultation vidéo disponible</p>
+              <p>{{ doctor.address }}</p>
+              <br>
+              <button class="button">
+                Prendre rendez vous
+                <svg fill="currentColor" viewBox="0 0 24 24" class="icon">
+                  <path clip-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z" fill-rule="evenodd"></path>
+                </svg>
+              </button>
             </div>
-            <div class="col-lg-6 mt-4">                                                                                        
-                <div class="member d-flex align-items-start" >
-                  <div class="teampic"><img src="./assets/images/team1.png" class="img-fluid" alt=""></div>
-                  <div class="member-info">
-                    <h4>
-                      Dr Chloé Prieur</h4>
-                    <span>Médecin généraliste
-                  </span>
-                    
-                    <p>Consultation vidéo disponible
-                  </p>
-                    <p>119 Avenue des Alpes<br>
-                      06800 Cagnes-sur-Mer</p>
-                      <br>
-                      <button class="button">
-                          Prendre rendez vous
-                          <svg fill="currentColor" viewBox="0 0 24 24" class="icon">
-                            <path clip-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z" fill-rule="evenodd"></path>
-                          </svg>
-                        </button>
-  
-                    
-                  </div>
-                </div>
-  
-              </div>
-              <div class="col-lg-6 mt-4">                                                                                        
-                <div class="member d-flex align-items-start" >
-                  <div class="teampic"><img src="./assets/images/team1.png" class="img-fluid" alt=""></div>
-                  <div class="member-info">
-                    <h4>
-                      Dr Chloé Prieur</h4>
-                    <span>Médecin généraliste
-                  </span>
-                    
-                    <p>Consultation vidéo disponible
-                  </p>
-                    <p>119 Avenue des Alpes<br>
-                      06800 Cagnes-sur-Mer</p>
-                      <br>
-                      <button class="button">
-                          Prendre rendez vous
-                          <svg fill="currentColor" viewBox="0 0 24 24" class="icon">
-                            <path clip-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z" fill-rule="evenodd"></path>
-                          </svg>
-                        </button>
-  
-                    
-                  </div>
-                </div>
-  
-              </div>
-              <div class="col-lg-6 mt-4">                                                                                        
-                <div class="member d-flex align-items-start" >
-                  <div class="teampic"><img src="./assets/images/team1.png" class="img-fluid" alt=""></div>
-                  <div class="member-info">
-                    <h4>
-                      Dr Chloé Prieur</h4>
-                    <span>Médecin généraliste
-                  </span>
-                    
-                    <p>Consultation vidéo disponible
-                  </p>
-                    <p>119 Avenue des Alpes<br>
-                      06800 Cagnes-sur-Mer</p>
-                      <br>
-                      <button class="button">
-                          Prendre rendez vous
-                          <svg fill="currentColor" viewBox="0 0 24 24" class="icon">
-                            <path clip-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z" fill-rule="evenodd"></path>
-                          </svg>
-                        </button>
-  
-                    
-                  </div>
-                </div>
-  
-              </div>
           </div>
-  
         </div>
-      </section>
-
+      </div>
+    </div>
+  </section>
+  

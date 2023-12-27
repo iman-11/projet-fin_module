@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Register } from './register/register';
 import { jwtDecode } from 'jwt-decode';
 
@@ -59,7 +59,21 @@ export class ServiceService {
   search(keyword: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl1}/${keyword}`);
   }
-  
+  private apiUrl2="http://localhost:8080/api/v1/users/alldoctor";
+
+  getalldoctor():Observable<any[]>{
+    return this.http.get<any[]>(`${this.apiUrl2}`);
+  }
+  private selectedSpecialtySubject = new BehaviorSubject<string | null>(null);
+  selectedSpecialty$ = this.selectedSpecialtySubject.asObservable();
+
+  setSelectedSpecialty(specialty: string) {
+    console.log('Emitting specialty:', specialty);
+    this.selectedSpecialtySubject.next(specialty);
+  }
+  getdoctor(userid: any): Observable<any> {
+    return this.http.get<any>(`http://localhost:8080/api/v1/users/getdoctor/${userid}`);
+  }
   
 
   

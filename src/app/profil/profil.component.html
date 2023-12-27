@@ -6,6 +6,23 @@
         /* Add any other styles you want to apply on hover */
     }
 </style>
+<style>
+   .opening-hours {
+     display: flex;
+     flex-direction: column;
+   }
+ 
+   .opening-hours p {
+     text-transform: capitalize;
+     font-size: 0.9rem;
+     color: black;
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     margin-bottom: 5px; /* Ajoutez une marge en bas pour séparer légèrement chaque ligne */
+     margin-right: 130px;
+   }
+ </style>
 <div  style="margin-top: 75px; margin-left: 0px;margin-right: 0px;">
    <div class="col-md-12">
       <div id="content" class="content content-full-width" >
@@ -19,13 +36,13 @@
                <div class="profile-header-content">
                   <!-- BEGIN profile-header-img -->
                   <div class="profile-header-img profile-header-img:hover">
-                    <img src=".\assets\images\WhatsApp Image 2023-11-02 at 00.47.23.jpeg" alt="">
-                 </div>
+                     <img src="{{ imageUrl || 'https://bootdey.com/img/Content/avatar/avatar3.png' }}" alt="">
+                  </div>
                   <!-- END profile-header-img -->
                   <!-- BEGIN profile-header-info -->
                   <div class="profile-header-info">
-                     <h4 class="m-t-10 m-b-5">EL HARTI IMANE</h4>
-                     <p class="m-b-10" style="color: rgb(252, 246, 236);">Chirurgien-dentiste</p>
+                     <h4 class="m-t-10 m-b-5">{{ doctor.firstname.toUpperCase()}} {{ doctor.lastname.toUpperCase() }}</h4>
+                     <p class="m-b-10" style="color: rgb(252, 246, 236);">{{ doctor.speciality.toUpperCase() }}</p>
                      <button href="#" class="btn btn-sm btn-info mb-2" (click)="Openpopup()" style="background-color: hsl(175, 49%, 65%);color: white;border: #e2e7eb;">Edit Profile</button>
                      <input type="file" (change)="onFileSelected($event)" style="display: none;" #fileInput>
                      <button class="btn btn-sm btn-info mb-2" (click)="fileInput.click()" style="margin-left:10px;background-color: hsl(175, 49%, 65%);color: white;border: #e2e7eb;">Choisir une image</button>
@@ -36,10 +53,13 @@
                <!-- END profile-header-content -->
                <!-- BEGIN profile-header-tab -->
                <ul class="profile-header-tab nav nav-tabs">
-                  <li class="nav-item"><a href="#carte-section" target="__blank" class="nav-link_">Carte</a></li>
-                  <li class="nav-item"><a href="#posts-section" target="__blank" class="nav-link_">Présentation</a></li>
-                  <li class="nav-item"><a href="#Horaires-section" target="__blank" class="nav-link_">Horaires</a></li>
-                  <li class="nav-item"><a href="#Faqs-section" target="__blank" class="nav-link_">Faqs</a></li>
+                  <li class="nav-item"><a href="#carte-section" target="__blank" class="nav-link_">Présentation</a></li>
+                  <li class="nav-item"><a href="#posts-section" target="__blank" class="nav-link_">Diplomes et Formation</a></li>
+                  <li class="nav-item"><a href="#exp-section" target="__blank" class="nav-link_">Expriences</a></li>
+
+
+                  <li class="nav-item"><a href="#Horaires-section" target="__blank" class="nav-link_">horaires</a></li>
+                  <li class="nav-item"><a href="#tarif-section" target="__blank" class="nav-link_">Tarifs</a></li>
 
                </ul>
                <!-- END profile-header-tab -->
@@ -63,36 +83,7 @@
          <div class="tab-pane fade active show" id="profile-post" style="padding: 0px;margin: 0px;">
             <!-- begin timeline -->
             <ul class="timeline" >
-               <li>
-                  <!-- begin timeline-time -->
-                  <div class="timeline-time">
-                
-                  </div>
-                  <!-- end timeline-time -->
-                  <!-- begin timeline-icon -->
-                  <div class="timeline-icon">
-                     <a href="javascript:;">&nbsp;</a>
-                  </div>
-                  <!-- end timeline-icon -->
-                  <!-- begin timeline-body -->
-              
-                  <div class="timeline-body" style="margin-left: 40px; width: 750px;" id="carte-section" >
-                      <div class="timeline-header">
-                        <img src=".\assets\images\placeholder.png"alt="Icon Description" class="icon"><tr>  </tr>
-                         <span class="username">Carte et informations d'accès</span>
-                      </div>
-                      
-                      <div class="timeline-content">
-                        <p style=" text-transform: capitalize;font-size: 0.95rem; color: black;  font-weight: bold;"> Description</p>
-                        <br>
-                        <p style=" text-transform: capitalize;font-size: 0.95rem; color: black;  font-weight: bold;">Moyens de transport
-                        </p>
-                        <br>
-                        <p style=" text-transform: capitalize;font-size: 0.95rem; color: black;  font-weight: bold;">Informations pratiques</p>
-                       </div>
-                   </div>
-                  <!-- end timeline-body -->
-               </li>
+             
                <li>
                   <!-- begin timeline-time -->
                   <div class="timeline-time">
@@ -116,94 +107,236 @@
                       </div>
                       <div class="timeline-footer">
                         
+
+                           <br>
+                      </div>
+                      
+                   </div>
+                  <!-- end timeline-body -->
+               </li>
+
+
+
+               
+
+
+
+
+
+
+
+
+               <li>
+                  <!-- begin timeline-time -->
+                  <div class="timeline-time">
+                    <!-- Display the year or any other time-related information -->
+                  </div>
+                  <!-- end timeline-time -->
+                  <!-- begin timeline-icon -->
+                  <div class="timeline-icon">
+                    <a href="javascript:;">&nbsp;</a>
+                  </div>
+                  <!-- end timeline-icon -->
+                  <!-- begin timeline-body -->
+                  <div class="timeline-body" style="margin-left: 40px; width: 750px;" id="diplomes">
+                
+                    <!-- Formations -->
+                    <div class="timeline-header">
+                      <img src=".\assets\images\diploma.png" alt="Icon Description" class="icon">
+                      <span class="username">Diplômes nationaux et universitaires</span>
+                    </div>
+                    <div class="timeline-content">
+                      <ul>
+                        <li *ngFor="let diplome of doctor.diplomas">
+                          <p style="text-transform: capitalize; font-size: 0.9rem; color: black;">
+                           Diplôme d'État de docteur en{{ diplome.speciality }} - {{ diplome.institute }}-{{diplome.year}}
+                          </p>
+                        </li>
+                      </ul>
+                    </div>
+                
+                    <!-- Experiences -->
+                    <div class="timeline-header">
+                      <img src=".\assets\images\experience.png" alt="Icon Description" class="icon">
+                      <span class="username">Formations</span>
+                    </div>
+                    <div class="timeline-content">
+                      <ul>
+                        <li *ngFor="let formation of doctor.formations">
+                          <p style="text-transform: capitalize; font-size: 0.9rem; color: black;">
+                           Formations en {{ formation.speciality }} - {{ formation.institute }} - {{formation.year}}
+                        </p>
+                        </li>
+                      </ul>
+                    </div>
+                
+                  </div>
+                  <!-- end timeline-body -->
+                </li>
+                
+
+
+
+
+               <li>
+                  <!-- begin timeline-time -->
+                  <div class="timeline-time">
+                
+                  </div>
+                  <!-- end timeline-time -->
+                  <!-- begin timeline-icon -->
+                  <div class="timeline-icon">
+                     <a href="javascript:;">&nbsp;</a>
+                  </div>
+                  <!-- end timeline-icon -->
+                  <!-- begin timeline-body -->
+              
+                  <div class="timeline-body" style="margin-left: 40px; width: 750px;"  id="exp-section">
+                     <div class="timeline-header">
+                        <img src=".\assets\images\diploma.png"alt="Icon Description" class="icon"><tr>  </tr>
+
+                        <span class="username" >expriences</span>
+                     </div>
+                     <div class="timeline-content" >
+                        <li *ngFor="let experience of  doctor.experiences">
+
+                        <p style=" text-transform: capitalize;font-size: 0.9rem; color: black;">
+                           {{ experience.titre }} - {{ experience.lieu }} - {{experience.year}}
+
+  
+                        </p>
+                        </li>
+
+                       </div>
+
+                     
+                     
+                      <div class="timeline-footer">
+                        
                         <img src=".\assets\images\translator.png"alt="Icon Description" class="icon"><tr>  </tr>
 
                        <span class="username" style=" text-transform: capitalize;font-size: 0.9rem; color: black; font-size: 0.8em;">langue parle</span>
                            <br>
                       </div>
-                      <p style=" text-transform: capitalize;font-size: 0.9rem; color: black;">Anglais et Français
-                     </p>
+                      <li>
+                        <p style="text-transform: capitalize; font-size: 0.9rem; color: black;">
+                          <ng-container *ngFor="let langue of doctor.langues; let last = last">
+                            {{ langue }}
+                            <ng-container *ngIf="!last"> et </ng-container>
+                          </ng-container>
+                        </p>
+                      </li>
                    </div>
                   <!-- end timeline-body -->
                </li>
 
-               <li>
-                  <!-- begin timeline-time -->
-                  <div class="timeline-time">
-                   
-                  </div>
-                  <!-- end timeline-time -->
-                  <!-- begin timeline-icon -->
-                  <div class="timeline-icon" >
-                     <a href="javascript:;">&nbsp;</a>
-                  </div>
-                  <!-- end timeline-icon -->
-                  <!-- begin timeline-body -->
-                  <div class="timeline-body"  style="margin-left: 40px; width: 750px;">
-                     <div class="timeline-header">
-                        <img src=".\assets\images\diploma.png"alt="Icon Description" class="icon"><tr>  </tr>
 
-                        <span class="username" >Diplômes nationaux et universitaires</span>
-                     </div>
-
-                     <div class="timeline-content" >
-
-                      <p style=" text-transform: capitalize;font-size: 0.9rem; color: black;">Diplôme d'État de docteur en chirurgie dentaire - Université Paris 7 - Diderot
-                           <br>
-                        <p style=" text-transform: capitalize;font-size: 0.9rem; color: black;">Diplôme d'État de docteur en chirurgie dentaire - Université Paris 7 - Diderot
-
-
-                      </p>
-                     </div>
-                     
-                        <div class="timeline-header">
-                           <img src=".\assets\images\experience.png"alt="Icon Description" class="icon"><tr>  </tr>
-   
-                            <span class="username">formations et experience</span>
-                         </div>
-                     
-                         <div class="timeline-content" >
-
-                           <p style=" text-transform: capitalize;font-size: 0.9rem; color: black;">Diplôme d'État de docteur en chirurgie dentaire - Université Paris 7 - Diderot
-                                <br>
-                             <p style=" text-transform: capitalize;font-size: 0.9rem; color: black;">Diplôme d'État de docteur en chirurgie dentaire - Université Paris 7 - Diderot
-     
-     
-                           </p>
-                          </div>
-                  </div>
-                  <!-- end timeline-body -->
-               </li>
-               <li>
-                  <!-- begin timeline-time -->
-                  <div class="timeline-time" >
                
-                  </div>
+
+
+
+
+
+
+
+
+
+
+
+               <li>
+                  <!-- begin timeline-time -->
+                  <div class="timeline-time"></div>
                   <!-- end timeline-time -->
                   <!-- begin timeline-icon -->
-                  <div class="timeline-icon" >
-                     <a href="javascript:;">&nbsp;</a>
+                  <div class="timeline-icon">
+                    <a href="javascript:;">&nbsp;</a>
                   </div>
                   <!-- end timeline-icon -->
                   <!-- begin timeline-body -->
-                  <div class="timeline-body"  style="margin-left: 40px; width: 750px;" id="Horaires-section">
-                      <div class="timeline-header">
-                        <img src=".\assets\images\clockk.png"alt="Icon Description" class="icon"><tr>  </tr>
+                  <div class="timeline-body" style="margin-left: 40px; width: 750px;" id="Horaires-section">
+                    <div class="timeline-header">
+                      <img src=".\assets\images\clockk.png" alt="Icon Description" class="icon">
+                      <span class="username">Horaires d'ouverture et contacts</span>
+                    </div>
+                
+                    <div class="timeline-content">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <p style="text-transform: capitalize; font-size: 0.95rem; color: black; font-weight: bold;"> Horaires d'ouverture</p>
+                          <li *ngFor="let horaire of doctor.horaires">
+                           <div class="opening-hours">
+                             <p>{{ horaire.jour }}: <span>{{ horaire.heure_depart }} - {{ horaire.heure_arrivee }}</span></p>
+                           </div>
+                         </li>
+                          <!-- Ajoutez vos horaires d'ouverture ici -->
+                        </div>
+                        <div class="col-md-6">
+                          <p style="text-transform: capitalize; font-size: 0.95rem; color: black; font-weight: bold;">Contact d'urgence</p>
+                          <p style="text-transform: capitalize; font-size: 0.9rem; color: black;">En cas d'urgence, contactez le 15 (Samu)</p>
 
-                         <span class="username">Horaires d'ouverture et contacts</span>
+                          <!-- Ajoutez vos informations de contact d'urgence ici -->
+                        </div>
                       </div>
-                      <div class="timeline-content">
-                       <p style=" text-transform: capitalize;font-size: 0.95rem; color: black;  font-weight: bold;"> Horaires d'ouverture</p>
-                       <br>
-                       <p style=" text-transform: capitalize;font-size: 0.95rem; color: black;  font-weight: bold;">Coordonnées
-                       </p>
-                       <br>
-                       <p style=" text-transform: capitalize;font-size: 0.95rem; color: black;  font-weight: bold;">Contact d'urgence</p>
-                      </div>
-                    
-                   </div>
+                    </div>
+                
+                    <div class="timeline-footer">
+                      <img src=".\assets\images\translator.png" alt="Icon Description" class="icon">
+                      <p style="text-transform: capitalize; font-size: 0.95rem; color: black; font-weight: bold;">Coordonnées</p>
+                      <br>
+                    </div>
+                    <p style="text-transform: capitalize; font-size: 0.9rem; color: black;">+212{{doctor.telephone}}</p>
+                  </div>
                   <!-- end timeline-body -->
-               </li>
+                </li>
+
+
+
+
+
+
+                
+
+                
+
+
+                <li>
+                  <!-- begin timeline-time -->
+                  <div class="timeline-time"></div>
+                  <!-- end timeline-time -->
+                  <!-- begin timeline-icon -->
+                  <div class="timeline-icon">
+                    <a href="javascript:;">&nbsp;</a>
+                  </div>
+                  <!-- end timeline-icon -->
+                  <!-- begin timeline-body -->
+                  <div class="timeline-body" style="margin-left: 40px; width: 750px;" id="tarif-section">
+                    <div class="timeline-header">
+                      <img src=".\assets\images\clockk.png" alt="Icon Description" class="icon">
+                      <span class="username">Tarifs</span>
+                    </div>
+                
+                    <div class="timeline-content">
+                      <p class="text-style"></p>
+                      <p style=" text-transform: capitalize;font-size: 1.1rem; color: black;">Consultation <span class="price" style="float: right; color: black;"   > {{doctor.tarif_const}}€</span></p>
+
+                      <hr> <!-- Ligne de séparation -->
+                      <p style=" text-transform: capitalize;font-size: 1.1rem; color: black;">Consultation Video <span class="price" style="float: right; color: black;"   >{{doctor.tarif_video}}€ </span></p>
+                      <br>
+
+                      <h3>Ces honoraires vous sont communiqués à titre indicatif par le praticien et peuvent varier selon le type de soins, le nombre de consultations et les actes additionnels nécessaires</h3>
+
+                    </div>
+                  </div>
+                  <!-- end timeline-body -->
+                </li>
+                
+               
+
+
+
+
+
+                
                <li>
                   <!-- begin timeline-icon -->
                   <div class="timeline-icon">
@@ -211,49 +344,63 @@
                   </div>
                   <!-- end timeline-icon -->
                   <!-- begin timeline-body -->
-                  <div class="timeline-body"  style="margin-left: 40px; width: 750px;" id="Faqs-section">
-                      <div class="timeline-header">
-                        <img src=".\assets\images\help.png"alt="Icon Description" class="icon"><tr>  </tr>
-
-                          <span class="username">Faqs</span>
+                  <div class="timeline-body" style="margin-left: 40px; width: 750px;" id="Faqs-section">
+                     <div class="timeline-header">
+                       <img src=".\assets\images\help.png" alt="Icon Description" class="icon"><tr> </tr>
+                       <span class="username">Faqs</span>
+                     </div>
+                   
+                     <div class="accordion accordion-flush" id="accordionFlushExample">
+                       <!-- First Accordion Item -->
+                       <div class="accordion-item">
+                         <h2 class="accordion-header" id="flush-headingOne">
+                           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                             Quelle est l'adresse de Dr {{ doctor.firstname.toUpperCase()}} {{ doctor.lastname.toUpperCase() }} ?
+                           </button>
+                         </h2>
+                         <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                           <div class="accordion-body">
+                             <p style="text-transform: capitalize; font-size: 0.9rem; color: black;">L'adresse de Dr {{ doctor.firstname.toUpperCase()}} {{ doctor.lastname.toUpperCase() }} est {{doctor.address}}</p>
+                           </div>
+                         </div>
                        </div>
-                     
-<div class="accordion accordion-flush" id="accordionFlushExample">
-<div class="accordion-item">
-<h2 class="accordion-header" id="flush-headingOne">
-<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-Quelle est l'adress de Dr imane bennani ?
-</button>
-</h2>
-<div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-<div class="accordion-body"> L'adresse de Dr Imane BENNANI est 42 Boulevard Thibaud de Champagne, 77600 Bussy-Saint-Georges
-</div>
-</div>
-</div>
-<div class="accordion-item">
-<h2 class="accordion-header" id="flush-headingTwo">
-<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-  Quelle sont les langues parles par doctor Imane?
-</button>
-</h2>
-<div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-<div class="accordion-body">Les langues qui peuvent être parlées avec Dr Imane BENNANI sont les suivantes : Anglais et Français
-</div>
-</div>
-</div>
-<div class="accordion-item">
-<h2 class="accordion-header" id="flush-headingThree">
-<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-Accordion Item #3
-</button>
-</h2>
-<div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-<div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
-</div>
-</div>
-</div>
-                  
+                   
+                       <!-- Second Accordion Item -->
+                       <div class="accordion-item">
+                         <h2 class="accordion-header" id="flush-headingTwo">
+                           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                             Quelles sont les langues parlées par Dr {{ doctor.firstname.toUpperCase()}} {{ doctor.lastname.toUpperCase() }}?
+                           </button>
+                         </h2>
+                         <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+                           <p style="text-transform: capitalize; font-size: 0.9rem; color: black;">
+                             Les langues qui peuvent être parlées avec Dr {{ doctor.firstname.toUpperCase() }} {{ doctor.lastname.toUpperCase() }} sont les suivantes :
+                             <ng-container *ngFor="let langue of doctor.langues; let last = last">
+                               {{ langue }}
+                               <ng-container *ngIf="!last"> et </ng-container>
+                             </ng-container>
+                           </p>
+                         </div>
+                       </div>
+                   
+                       <!-- Third Accordion Item -->
+                       <div class="accordion-item">
+                         <h2 class="accordion-header" id="flush-headingThree">
+                           <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                             Quelle est les Coordonnées de Dr {{ doctor.firstname.toUpperCase()}} {{ doctor.lastname.toUpperCase() }} ?
+                           </button>
+                         </h2>
+                         <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+                           <div class="accordion-body">
+                             <p style="text-transform: capitalize; font-size: 0.9rem; color: black;">le numéro de téléphone de Dr {{ doctor.firstname.toUpperCase()}} {{ doctor.lastname.toUpperCase() }} est {{doctor.telephone}}</p>
+                           </div>
+                         </div>
+                       </div>
+                     </div>
                    </div>
+                   
+                   
+                  
                   <!-- begin timeline-body -->
                </li>
             </ul>
@@ -269,12 +416,12 @@ Accordion Item #3
       <div class="card bg-white" [ngClass]="{'fixed': isFixed}" style="width: 420px; font-weight: bold;">
           <h4 class="card-header" style="border-bottom: 1px solid #e2e7eb;background-color: #e2e7eb; font-weight: bold;">En résumé</h4>
           <div class="card-body">
-              <p class="card-text" style=" text-transform: capitalize;font-size: 0.9rem; color: black;display: flex;"> <img src=".\assets\images\placeholder.png"alt="Icon Description" class="icon"><tr>  </tr> Accepte les nouveaux patients sur Doctolib</p>
+              <p class="card-text" style=" text-transform: capitalize;font-size: 0.9rem; color: black;display: flex;"> <img src=".\assets\images\placeholder.png"alt="Icon Description" class="icon"><tr>  </tr> Accepte les nouveaux patients sur DocLink</p>
 
               <p class="card-text" style=" text-transform: capitalize;font-size: 0.9rem; color: black;display: flex; "><img src=".\assets\images\profile.png"alt="Icon Description" class="icon"><tr>  </tr>
-               Cabinet dentaire du docteur Bennani Imane
+               Cabinet dentaire du docteur {{ doctor.firstname.toUpperCase()}} {{ doctor.lastname.toUpperCase() }}
 
-               42 Boulevard Thibaud de Champagne, 77600 Bussy-Saint-Georges</p>
+               {{doctor.address}}</p>
 
               <a href="#" class="btn btn-primary" style="background-color:hsl(175, 49%, 65%); border: none; text-transform: capitalize;font-size: 0.9rem; color:white;  justify-content: center; margin-left: 90px;" [routerLink]="['/Appointment']" >  <img src=".\assets\images\calendar.png"alt="Icon Description" class="icon">PRENDRE RENDEZ-VOUS</a>
           </div>
@@ -285,3 +432,7 @@ Accordion Item #3
 
   
    
+
+
+
+

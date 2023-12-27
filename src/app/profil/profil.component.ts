@@ -2,6 +2,8 @@ import { Component, ViewEncapsulation,HostListener } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PopupComponent } from '../popup/popup.component';
 import { HttpClient, HttpHeaders, HttpEventType } from '@angular/common/http';
+import { ServiceService } from '../service.service';
+import { Doctor } from '../test/test';
 
 @Component({
   selector: 'app-profil',
@@ -12,12 +14,35 @@ import { HttpClient, HttpHeaders, HttpEventType } from '@angular/common/http';
 export class ProfilComponent {
   isFixed = false;
   imageUrl: any;
-  userId=sessionStorage.getItem('userId')
-  constructor(private http: HttpClient, private dialog: MatDialog) {
+  userId = '657b7d3c1a776e0161c02de1';
+  doctor!: any;
+  constructor(private http: HttpClient, private dialog: MatDialog,private authservice: ServiceService,
+    ) {
 
     console.log('User ID:', this.userId);
     this.downloadImage();
   }
+  ngOnInit(): void {
+    // Exemple d'utilisation de la méthode getdoctor avec un ID utilisateur fictif (remplacez par un ID réel)
+    const userId = '657b7d361a776e0161c02ddf';
+    
+    this.authservice.getdoctor(userId).subscribe(
+      (data) => {
+        // Faites quelque chose avec les données renvoyées par le service
+        console.log('Données du médecin :', data);
+        this.doctor=data
+      },
+      (error) => {
+        // Gérez les erreurs éventuelles
+        console.error('Erreur lors de la récupération du médecin :', error);
+      }
+    );
+  }
+
+
+
+
+
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(event: Event) {
     this.isFixed = window.scrollY > 220; // Changez 100 selon votre besoin
@@ -103,4 +128,8 @@ export class ProfilComponent {
       height: '400px',
     });
   }
+
+
+
+
 }

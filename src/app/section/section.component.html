@@ -18,67 +18,65 @@
 
 
   <main>
- <section class="hero-section d-flex justify-content-center align-items-center" id="section_1">
+    <section class="hero-section d-flex justify-content-center align-items-center" id="section_1">
         <div class="container">
-          <div class="row">
-    
-            <div class="col-lg-8 col-12 mx-auto">
-                <h2  id="oussamach" style="    margin-right: 70px;
-                ">FIND A <span id="och" class="grish">{{ jobType }} </span> THAT<br><span class="grish">MATCHES</span> YOUR <span id="ouch">{{ passionType }}</span></h2>
+            <div class="row">
+                <div class="col-lg-8 col-12 mx-auto">
+                    <h2 id="oussamach" style="margin-right: 70px;">
+                        FIND A <span id="och" class="grish">{{ jobType }} </span> THAT<br>
+                        <span class="grish">MATCHES</span> YOUR <span id="ouch">{{ passionType }}</span>
+                    </h2>
 
-    
-    
-              <!-- search.component.html -->
-              <form (ngSubmit)="onSubmit()" class="custom-form mt-4 pt-2 mb-lg-0 mb-5">
-                <div class="input-group input-group-lg position-relative" style="margin-top: 20px;">
-                  <span class="input-group-text bi-search" id="basic-addon1" ></span>
-    
-                  <input
-                    name="keyword"
-                    type="search"
-                    class="form-control"
-                    id="keyword"
-                    placeholder="Design, Code, Marketing, Finance ..."
-                    aria-label="Search"
-                    [(ngModel)]="searchText"
-                    (input)="search()"
-                  />
-    
-                  <div *ngIf="searchText && results.length > 0; else noResults" class="search-results">
-                    <!-- Display results in a list below the search input -->
-                    <ul>
-                      <li *ngFor="let result of results" (click)="selectResult(result)">
-                        <div class="user-info d-flex align-items-center">
-                          <div class="profile-header-img profile-header-img:hover" style="margin-right: 10px;">
-                            <img src="{{ result.imageUrl || 'https://bootdey.com/img/Content/avatar/avatar3.png' }}" alt="">
-                          </div>
-                          <div>
-                            <span class="user-name">{{ result.firstname }} {{ result.lastname }}</span>
-                            <p class="user-details">{{ result.speciality }} - {{ result.address }}</p>
-                          </div>
+                    <!-- search.component.html -->
+                    <form (ngSubmit)="onSubmit($event)" class="custom-form mt-4 pt-2 mb-lg-0 mb-5">
+                        <div class="input-group input-group-lg position-relative search-container" style="margin-top: 20px;">
+                            <span class="input-group-text bi-search" id="basic-addon1"></span>
+
+                            <input
+                                name="keyword"
+                                type="search"
+                                class="form-control"
+                                id="keyword"
+                                placeholder="Hospital, Speciality, Doctor... "
+                                aria-label="Search"
+                                [(ngModel)]="searchText"
+                                (input)="search()"
+                            />
+
+                            <div *ngIf="searchText && results.length > 0; else noResults" class="search-results">
+                                <!-- Display results in a list below the search input -->
+                                <ul>
+                                    <li *ngFor="let result of results" (click)="selectResult(result)">
+                                        <div class="user-info d-flex align-items-center">
+                                            <div class="profile-header-img profile-header-img:hover" style="margin-right: 10px;">
+                                                <img src="{{ result.imageUrl || 'https://bootdey.com/img/Content/avatar/avatar3.png' }}" alt="">
+                                            </div>
+                                            <div>
+                                                <span class="user-name">{{ result.firstname }} {{ result.lastname }}</span>
+                                                <p class="user-details">{{ result.speciality }} - {{ result.address }}</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <ng-template #noResults>
+                                <!-- Display a message when there are no results -->
+                            </ng-template>
+
+                            <button type="submit" class="form-control">Search</button>
                         </div>
-                      </li>
-                    </ul>
-                  </div>
-    
-                  <ng-template #noResults>
-                    <!-- Display a message when there are no results -->
-                  </ng-template>
-    
-                  <button type="submit" class="form-control">Search</button>
+                    </form>
+
                 </div>
-              </form>
-    
+
             </div>
-    
-          </div>
         </div>
-      </section>
-    
+    </section>
     
 
 
-      <section class="explore-section section-padding" id="section_2">
+      <section class="explore-section section-padding" id="section_2" style="z-index: -900;">
         <div class="container">
             <div class="row">
                 <div  style="margin-left:32% ; margin-bottom: 20px;">
@@ -248,27 +246,7 @@
               </div>
               </div>
     </section>
-    <script>
-
-oussama=document.getElementById("och")
-oussama1=document.getElementById("ouch")
-setInterval(change, 2500);
-function change(){
-
-
-          if(oussama.innerText==="JOB"){
-        oussama.innerText="EMPLOYE";
-        oussama1.innerText="SEARCH";
-    }
-    else{oussama.innerText="JOB";
-    oussama1.innerText="PASSION";
-}
-
-
-}
-
-        
-    </script>
+  
 
   </main>
 

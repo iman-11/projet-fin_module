@@ -17,11 +17,12 @@ export class RegisterComponent {
 
   ngOnInit(): void {
     this.formregister=this.fb.group({
-      firstName:this.fb.control(""),
-      lastName:this.fb.control(""),
+      firstname:this.fb.control(""),
+      lastname:this.fb.control(""),
       email:this.fb.control(""),
       password:this.fb.control(""),
-      repeatpassword:this.fb.control("")
+      repeatpassword:this.fb.control(""),
+      role:this.fb.control(""), // Ajout du champ "role"
 
 
 
@@ -30,12 +31,13 @@ export class RegisterComponent {
 
     handleregister(): void{
 
-  const firstName=this.formregister.get("firstName")?.value
-  const lastName=this.formregister.get("lastName")?.value
+  const firstName=this.formregister.get("firstname")?.value
+  const lastName=this.formregister.get("lastname")?.value
 
   const email=this.formregister.get("email")?.value
   const password=this.formregister.get("password")?.value
   const repeatpassword=this.formregister.get("repeatpassword")?.value
+  
 
   const registrationData: Register = this.formregister.value; // Use the Register interface here
 
@@ -52,6 +54,10 @@ export class RegisterComponent {
 
 
 
+    }
+    onUserTypeChange(event: Event): void {
+      const userType = (event.target as HTMLSelectElement).value;
+      this.formregister.patchValue({ role: userType });
     }
 
 
