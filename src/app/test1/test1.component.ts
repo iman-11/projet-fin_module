@@ -1,23 +1,47 @@
 import { HttpClient, HttpEventType } from '@angular/common/http';
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ServiceService } from '../service.service';
 
 @Component({
-  selector: 'app-filter-doctor',
-  templateUrl: './filter-doctor.component.html',
-  styleUrls: ['./filter-doctor.component.css'],
-  encapsulation:ViewEncapsulation.None
+  selector: 'app-test1',
+  templateUrl: './test1.component.html',
+  styleUrls: ['./test1.component.css']
 })
-export class FilterDoctorComponent {
+export class Test1Component {
+  oussama!: HTMLElement | null;
+  oussama1!: HTMLElement | null;
+
+  
 
   constructor(
     private http: HttpClient,
     private fb: FormBuilder,
     private authservice: ServiceService,
     private router: Router
-  ) {}
+  ) {
+    document.addEventListener('DOMContentLoaded', () => {
+      this.oussama = document.getElementById('och');
+      this.oussama1 = document.getElementById('ouch');
+
+      if (this.oussama && this.oussama1) {
+        setInterval(() => this.change(), 2500);
+      }
+    });
+  }
+  jobType: string = 'DOCTOR'; // Initial value for job type
+  passionType: string = 'PASSION';
+  change() {
+    if (this.jobType === 'DOCTOR') {
+      this.jobType = 'HOSPITAL';
+      this.passionType = 'SEARCH';
+    } else {
+      this.jobType = 'DOCTOR';
+      this.passionType = 'INTEREST';
+    }
+  }
+
 
   searchText = '';
   results: any[] = [];
@@ -75,6 +99,5 @@ export class FilterDoctorComponent {
         }
       );
   }
-  
 
 }

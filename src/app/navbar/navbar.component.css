@@ -6,7 +6,7 @@
 
 .btn-primary {
   width: 100%;
-  margin-top: 10px; /* Add margin around the entire button */
+  margin-top: 10px; 
   background-color: #80d0c7;
   border-color: #80d0c7;
 }
@@ -14,9 +14,9 @@
 .btn-primary img {
   width: 100%;
   height: auto;
-  max-height: 150px; /* Adjust the maximum height as needed */
+  max-height: 150px; 
   object-fit: contain;
-  margin-bottom: 10px; /* Add margin between the image and the text */
+  margin-bottom: 10px; 
 }
 
 

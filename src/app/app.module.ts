@@ -25,6 +25,7 @@ import { ContactService } from './contact/contact.service';
 import { FormsModule } from '@angular/forms';
 import { AppointmentComponent } from './appointment/appointment.component';
 import { FilterDoctorComponent } from './filter-doctor/filter-doctor.component';
+import { Test1Component } from './test1/test1.component';
 
 
 
@@ -43,6 +44,7 @@ import { FilterDoctorComponent } from './filter-doctor/filter-doctor.component';
          PopupComponent,
          AppointmentComponent,
          FilterDoctorComponent,
+         Test1Component,
  
    
   ],
