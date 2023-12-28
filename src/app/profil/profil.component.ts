@@ -3,7 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { PopupComponent } from '../popup/popup.component';
 import { HttpClient, HttpHeaders, HttpEventType } from '@angular/common/http';
 import { ServiceService } from '../service.service';
-import { Doctor } from '../test/test';
+import { ActivatedRoute } from '@angular/router';
+import * as bootstrap from 'bootstrap';
+
 
 @Component({
   selector: 'app-profil',
@@ -12,32 +14,45 @@ import { Doctor } from '../test/test';
   encapsulation: ViewEncapsulation.None
 })
 export class ProfilComponent {
+
+
+
+  doctorId: string = ''; 
+
   isFixed = false;
   imageUrl: any;
-  userId = '657b7d3c1a776e0161c02de1';
   doctor!: any;
   constructor(private http: HttpClient, private dialog: MatDialog,private authservice: ServiceService,
+    private route: ActivatedRoute 
+
     ) {
 
-    console.log('User ID:', this.userId);
     this.downloadImage();
   }
-  ngOnInit(): void {
-    // Exemple d'utilisation de la méthode getdoctor avec un ID utilisateur fictif (remplacez par un ID réel)
-    const userId = '657b7d361a776e0161c02ddf';
-    
-    this.authservice.getdoctor(userId).subscribe(
-      (data) => {
-        // Faites quelque chose avec les données renvoyées par le service
-        console.log('Données du médecin :', data);
-        this.doctor=data
-      },
-      (error) => {
-        // Gérez les erreurs éventuelles
-        console.error('Erreur lors de la récupération du médecin :', error);
-      }
-    );
-  }
+ngOnInit(): void {
+  // Get the doctorId from the route parameters
+  this.route.queryParams.subscribe(params => {
+    console.log('Route params:', params);
+
+     this.doctorId = params['id'];
+     console.log('Route id:', this.doctorId);
+
+
+  });
+  this.authservice.getdoctor(this.doctorId).subscribe(
+    (data) => {
+      console.log('Doctor data:', data);
+      this.doctor = data;
+
+      // After getting the doctor's information, download the image
+      this.downloadImage();
+    },
+    (error) => {
+      console.error('Error getting doctor data:', error);
+    }
+  );
+}
+
 
 
 
@@ -48,15 +63,14 @@ export class ProfilComponent {
     this.isFixed = window.scrollY > 220; // Changez 100 selon votre besoin
   }
   uploadImage(formData: FormData): void {
-    if (!this.userId) {
-      console.error('User ID not found in session storage');
+    if (!this.doctorId) {
       return;
     }
 
     // Append user ID to the form data
-    formData.append('userId', this.userId);
+    formData.append('userId', this.doctorId);
 
-    this.http.post<any>(`http://localhost:8080/image/${this.userId}`, formData).subscribe(
+    this.http.post<any>(`http://localhost:8080/image/${this.doctorId}`, formData).subscribe(
       (response) => {
         // Image upload successful
         const imageUrl = response.imageUrl;
@@ -76,14 +90,13 @@ export class ProfilComponent {
   }
 
   downloadImage(): void {
-    if (!this.userId) {
-      console.error('User ID not found in session storage');
+    if (!this.doctorId) {
       return;
     }
   
     // Use HttpClient to download the image from the server
     this.http
-      .get(`http://localhost:8080/image/download/${this.userId}`, {
+      .get(`http://localhost:8080/image/download/${this.doctorId}`, {
         responseType: 'arraybuffer', // Set the response type to arraybuffer
         observe: 'events', // Observe progress events
       })
@@ -104,7 +117,7 @@ export class ProfilComponent {
           console.error('Error downloading image', error);
         }
       );
-      console.log('Downloading image for user ID:', this.userId);
+      console.log('Downloading image for user ID:', this.doctorId);
 
   }
 
@@ -130,6 +143,26 @@ export class ProfilComponent {
   }
 
 
+  openProfileModal() {
+    // Use Bootstrap modal API to show the modal
+    const modalElement = document.getElementById('exampleModal1');
+  
+    if (modalElement) {
+      const modal = new bootstrap.Modal(modalElement);
+      modal.show();
+    } else {
+      console.error('Modal element not found');
+    }
+  }
+  getRoleFromSessionStorage(): string | null {
+    // Retrieve the role from sessionStorage
+    return sessionStorage.getItem('role');
+  }
+
 
 
 }
+
+
+
+

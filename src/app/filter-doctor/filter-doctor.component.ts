@@ -1,7 +1,7 @@
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ServiceService } from '../service.service';
 
 @Component({
@@ -11,18 +11,19 @@ import { ServiceService } from '../service.service';
   encapsulation:ViewEncapsulation.None
 })
 export class FilterDoctorComponent {
-  selectedSpecialty!: any;
+  selectedSpecialty: string = ''; 
   results1: any[] = [];
 
 
-  ngOnInit(): void {
-    this.loadDoctorsAndImages();
 
-    this.authservice.selectedSpecialty$.subscribe((specialty) => {
-      this.selectedSpecialty = specialty;
-      console.log('Inside subscription:', this.selectedSpecialty);
+
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+       this.selectedSpecialty = params['specialty'];
+      // Faites quelque chose avec la valeur de la spécialité, par exemple, l'afficher dans la console
+      console.log('Specialty from URL:', this.selectedSpecialty);
       this.loadDoctorsAndImages();
-      // Other actions based on the selected specialty
+
     });
   }
 
@@ -33,7 +34,8 @@ export class FilterDoctorComponent {
     private http: HttpClient,
     private fb: FormBuilder,
     private authservice: ServiceService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
  ) {}
 
   searchText = '';
@@ -113,24 +115,29 @@ export class FilterDoctorComponent {
   }
   
   loadDoctorsAndImages(): void {
+    if (!this.selectedSpecialty) {
+      console.error('Selected specialty is not defined.');
+      return;
+    }
+  
     this.authservice.getalldoctor().subscribe(
       (data) => {
-     
-          // Filter doctors based on the selected specialty
-          this.results1 = data.filter((doctor1) => doctor1.speciality === this.selectedSpecialty);
-  
-          // Download images for each doctor
-          this.results1.forEach((doctor) => {
-  
+        // Download images for each doctor
+        this.results1 = data.filter((doctor) => {
+          const isSelectedSpecialty = doctor.speciality === this.selectedSpecialty;
+          if (isSelectedSpecialty) {
             this.downloadImage1(doctor.id);
-          });
-        
+          }
+          return isSelectedSpecialty;
+        });
       },
       (error) => {
         console.error('Error loading doctors', error);
       }
     );
   }
+  
+  
   
   
 

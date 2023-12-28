@@ -23,6 +23,29 @@
      margin-right: 130px;
    }
  </style>
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog modal-fullscreen" >
+     <div class="modal-content">
+       <div class="modal-header">
+         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+       </div>
+       <div class="modal-body d-flex justify-content-center align-items-center">
+         <img id="profile-image-modal" src="{{ imageUrl || 'https://bootdey.com/img/Content/avatar/avatar3.png' }}" alt="Profile Image" style="max-width: 100%; max-height: 80vh;">
+
+       </div>
+       <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+       </div>
+     </div>
+   </div>
+ </div>
+
+
+
+
+
+
+
 <div  style="margin-top: 75px; margin-left: 0px;margin-right: 0px;">
    <div class="col-md-12">
       <div id="content" class="content content-full-width" >
@@ -35,17 +58,19 @@
                <!-- BEGIN profile-header-content -->
                <div class="profile-header-content">
                   <!-- BEGIN profile-header-img -->
-                  <div class="profile-header-img profile-header-img:hover">
+                  <div class="profile-header-img profile-header-img:hover" (click)="openProfileModal()">
                      <img src="{{ imageUrl || 'https://bootdey.com/img/Content/avatar/avatar3.png' }}" alt="">
-                  </div>
+                 </div>
                   <!-- END profile-header-img -->
                   <!-- BEGIN profile-header-info -->
                   <div class="profile-header-info">
                      <h4 class="m-t-10 m-b-5">{{ doctor.firstname.toUpperCase()}} {{ doctor.lastname.toUpperCase() }}</h4>
                      <p class="m-b-10" style="color: rgb(252, 246, 236);">{{ doctor.speciality.toUpperCase() }}</p>
-                     <button href="#" class="btn btn-sm btn-info mb-2" (click)="Openpopup()" style="background-color: hsl(175, 49%, 65%);color: white;border: #e2e7eb;">Edit Profile</button>
-                     <input type="file" (change)="onFileSelected($event)" style="display: none;" #fileInput>
-                     <button class="btn btn-sm btn-info mb-2" (click)="fileInput.click()" style="margin-left:10px;background-color: hsl(175, 49%, 65%);color: white;border: #e2e7eb;">Choisir une image</button>
+                     <button *ngIf=" (getRoleFromSessionStorage() === 'DOCTOR')" href="#" class="btn btn-sm btn-info mb-2" (click)="Openpopup()" style="background-color: hsl(175, 49%, 65%);color: white;border: #e2e7eb;">Edit Profile</button>
+                     <input  type="file" (change)="onFileSelected($event)" style="display: none;" #fileInput>
+                     <button  *ngIf=" (getRoleFromSessionStorage() === 'DOCTOR')" class="btn btn-sm btn-info mb-2" (click)="fileInput.click()" style="margin-left:10px;background-color: hsl(175, 49%, 65%);color: white;border: #e2e7eb;">Choisir une image</button>
+                     <button *ngIf="!(getRoleFromSessionStorage() === 'DOCTOR')"  class="btn btn-sm btn-info mb-2" (click)="openProfileModal()" style="background-color: hsl(175, 49%, 65%);color: white;border: #e2e7eb;">Ouvrir le profil</button>
+
                   
                     </div>
                   <!-- END profile-header-info -->

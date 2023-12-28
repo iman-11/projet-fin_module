@@ -4,17 +4,17 @@
       <div class="col-md-8 col-lg-7 col-xl-6">
         <img src="./assets/images/Mobile-login-Cristina.jpg" class="img-fluid" alt="Phone image">
       </div>
-      <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
+      <div class="col-md-7 col-lg-2 col-xl-5 offset-xl-1">
         <p class="mb-4 text-center" style="color: black;">Saisissez vos informations pour continuer.</p>
 
         <form [formGroup]="formregister" (ngSubmit)="handleregister()">
           <div class="form-outline mb-4">
             <input type="text" id="form1Example11" class="form-control form-control-lg" formControlName="firstname"/>
-            <label class="form-label" for="form1Example13">firstName</label>
+            <label class="form-label" for="form1Example13">FirstName</label>
           </div>
           <div class="form-outline mb-4">
             <input type="text" id="form1Example12" class="form-control form-control-lg" formControlName="lastname"/>
-            <label class="form-label" for="form1Example13">lastName</label>
+            <label class="form-label" for="form1Example13">LastName</label>
           </div>
 
           <div class="form-outline mb-4">
@@ -33,19 +33,21 @@
           </div>
 
          <!-- ... Autres éléments du formulaire ... -->
-<div class="form-outline mb-4">
-  <select class="form-select form-select-lg" formControlName="role" (change)="onUserTypeChange($event)">
-    <option value="PATIENT">Je suis un patient</option>
-    <option value="DOCTOR">Je suis un docteur</option>
-  </select>
-  <label class="form-label" for="userType">Choisissez votre type d'utilisateur</label>
-</div>
+        
+        
+        <div class="form-outline mb-4">
+          <select class="form-select form-select-lg" formControlName="role" (change)="onUserTypeChange($event)">
+            <option value="PATIENT">Je suis un patient</option>
+            <option value="DOCTOR">Je suis un docteur</option>
+          </select>
+          <label class="form-label" for="userType">Choisissez votre type d'utilisateur</label>
+        </div>
+        
+        
 <!-- ... Autres éléments du formulaire ... -->
 
 
-          <div class="d-flex justify-content-around align-items-center mb-4">
-            <a href="#!">J'ai déjà un compte</a>
-          </div>
+      
 
           <div class="d-flex justify-content-between align-items-center mb-4">
             <div class="form-check">
@@ -54,28 +56,22 @@
             </div>
           </div>
 
-          
 
-          <div class="d-flex justify-content-between align-items-center mb-4">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" value="" id="rememberUsername" formControlName="rememberUsername"/>
-              <label class="form-check-label" for="rememberUsername">Se souvenir de mon identifiant</label>
-            </div>
-          </div>
-
-          <button type="submit" style="background-color: #80d0c7;" class="btn btn-primary btn-lg btn-block">Sign in</button>
+          <button type="submit" style="background-color: #80d0c7; justify-content: center;" class="btn btn-primary btn-lg btn-block">Sign up</button>
        
-          <div class="divider d-flex align-items-center my-4">
-            <p class="text-center fw-bold mx-3 mb-0 text-muted">OR</p>
-          </div>
+        
 
           <div class="d-flex justify-content-around align-items-center mb-4">
             <a href="#!">J'ai déjà un compte</a>
           </div>
-          <button type="submit" style="background-color: #80d0c7;" class="btn btn-primary btn-lg btn-block">Sign up</button>
+          <button type="submit" style="background-color: #80d0c7;" class="btn btn-primary btn-lg btn-block">Sign in</button>
         </form>
       </div>
     </div>
   </div>
 </section>
 
+<div style="height: 250px;">
+
+
+</div>

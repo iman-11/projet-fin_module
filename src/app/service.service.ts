@@ -67,10 +67,7 @@ export class ServiceService {
   private selectedSpecialtySubject = new BehaviorSubject<string | null>(null);
   selectedSpecialty$ = this.selectedSpecialtySubject.asObservable();
 
-  setSelectedSpecialty(specialty: string) {
-    console.log('Emitting specialty:', specialty);
-    this.selectedSpecialtySubject.next(specialty);
-  }
+  
   getdoctor(userid: any): Observable<any> {
     return this.http.get<any>(`http://localhost:8080/api/v1/users/getdoctor/${userid}`);
   }

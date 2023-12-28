@@ -8,15 +8,36 @@ import { ProfilComponent } from './profil/profil.component';
 import{AppointmentComponent} from './appointment/appointment.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FilterDoctorComponent } from './filter-doctor/filter-doctor.component';
+import { DashbordComponent } from './dashbord/dashbord.component';
 const routes: Routes = [
 
 
 
 
-  {path:'login',component:LoginComponent},
-  {path:'profil',component:ProfilComponent},
   
-  { path: 'filter', component: FilterDoctorComponent },
+
+  {
+    path: '',
+    component: DashbordComponent,
+    children: [
+
+      { path: 'section', component: SectionComponent },
+
+      { path: 'login', component: LoginComponent },
+      { path: 'filter', component: FilterDoctorComponent },
+      { path: 'doctor-profile', component: ProfilComponent },
+
+
+      
+
+      
+
+      { path: 'register', component: RegisterComponent },
+      { path: 'contact', component: ContactComponent },
+      { path: '', redirectTo: '/section', pathMatch: 'full' },
+
+    ],
+  },
 
  
 

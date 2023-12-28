@@ -45,9 +45,7 @@ export class NavbarComponent {
     private authservice: ServiceService,
   ) {}
 
-  navigateToContact() {
-    this.router.navigate(['/navbar/contact']);
-  }
+ 
 
   toggleSpecialtyList() {
     this.showSpecialtyList = !this.showSpecialtyList;
@@ -82,13 +80,11 @@ export class NavbarComponent {
   }
 
   selectSpecialty(specialty: string) {
-
-    this.authservice.setSelectedSpecialty(specialty);
-    
-    this.router.navigate(['/filter']); // <-- Update here
-
+  
+    // Utilisez le router pour naviguer vers la composante 'filter' avec le paramètre 'specialty'
+    this.router.navigate(['/filter'], { queryParams: { specialty: specialty } });
+  
     this.toggleSpecialtyList();
   }
-
 
 }

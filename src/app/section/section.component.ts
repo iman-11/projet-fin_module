@@ -34,7 +34,7 @@ export class SectionComponent {
     });
   }
   jobType: string = 'DOCTOR'; // Initial value for job type
-  passionType: string = 'PASSION';
+  passionType: string = 'INTEREST';
   change() {
     if (this.jobType === 'DOCTOR') {
       this.jobType = 'HOSPITAL';
@@ -68,7 +68,15 @@ export class SectionComponent {
 
 
   selectResult(result: any): void {
-    console.log('Selected result:', result);
+  
+    // Check if doctorId is available
+    if (result.id) {
+      this.router.navigate(['/doctor-profile'], { queryParams: { id: result.id } });
+      console.log('Selected id:', result.id);
+
+    } else {
+      console.error('Doctor ID is not available');
+    }
   }
 
   downloadImage(userId: string): void {

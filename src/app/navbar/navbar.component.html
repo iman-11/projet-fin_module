@@ -17,7 +17,7 @@
             </button>
           </div>
           <div class="col-md-6 text-center">
-            <button type="button" class="btn btn-primary" [routerLink]="['/register']" data-bs-dismiss="modal">
+            <button type="button" class="btn btn-primary" [routerLink]="['/login']" data-bs-dismiss="modal">
               <img src="./assets/images/doctor.png" alt="" class="btnicon">
               DOCTOR
             </button>
@@ -90,7 +90,7 @@
                     <ul class="dropdown-menu dropdown-menu-light" aria-labelledby="navbarLightDropdownMenuLink">
                         <li><a class="dropdown-item" href="topics-listing.html" href="#exampleModal" data-bs-toggle="modal">Login</a></li>
 
-                        <li><a class="dropdown-item" href="contact.html" href="#exampleModal" data-bs-toggle="modal">register</a></li>
+                        <li><a class="dropdown-item" [routerLink]="['/register']" data-bs-toggle="modal">register</a></li>
                     </ul>
                 </li>
 
