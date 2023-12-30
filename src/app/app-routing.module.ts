@@ -9,6 +9,9 @@ import{AppointmentComponent} from './appointment/appointment.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FilterDoctorComponent } from './filter-doctor/filter-doctor.component';
 import { DashbordComponent } from './dashbord/dashbord.component';
+import { Test1Component } from './test1/test1.component';
+import { TestComponent } from './test/test.component';
+import { DoctorsectionComponent } from './doctorsection/doctorsection.component';
 const routes: Routes = [
 
 
@@ -26,6 +29,12 @@ const routes: Routes = [
       { path: 'login', component: LoginComponent },
       { path: 'filter', component: FilterDoctorComponent },
       { path: 'doctor-profile', component: ProfilComponent },
+      { path: 'test', component: TestComponent },
+      { path: 'profil', component: ProfilComponent },
+      { path: 'doctor', component: DoctorsectionComponent },
+
+
+
 
 
       

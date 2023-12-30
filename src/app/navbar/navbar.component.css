@@ -57,3 +57,38 @@
     background-color: #e0e0e0; /* Couleur de fond lorsque survolé */
   }
   
+
+
+
+
+  /* Navbar */
+
+
+/* Navbar */
+
+/* navbar.component.css */
+
+.nav-profile-img {
+  position: relative;
+}
+
+.availability-status {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 12px; /* You can adjust the size as needed */
+  height: 12px;
+  background-color: #28a745; /* Adjust the color as needed */
+  border-radius: 50%;
+  border: 2px solid #ffffff; /* Adjust the color as needed */
+}
+
+.profile-image {
+  margin-right: 8px; /* You can adjust the margin as needed */
+}
+
+.profile-name {
+  font-size: 14px; /* You can adjust the font size as needed */
+  margin-top: 4px; /* You can adjust the margin as needed */
+  margin-bottom: 0;
+}

@@ -17,7 +17,7 @@ export class ProfilComponent {
 
 
 
-  doctorId: string = ''; 
+  doctorId =sessionStorage.getItem('userId')
 
   isFixed = false;
   imageUrl: any;
@@ -31,14 +31,14 @@ export class ProfilComponent {
   }
 ngOnInit(): void {
   // Get the doctorId from the route parameters
-  this.route.queryParams.subscribe(params => {
-    console.log('Route params:', params);
+  // this.route.queryParams.subscribe(params => {
+  //   console.log('Route params:', params);
 
-     this.doctorId = params['id'];
-     console.log('Route id:', this.doctorId);
+  //    this.doctorId = params['id'];
+  //    console.log('Route id:', this.doctorId);
 
 
-  });
+  // });
   this.authservice.getdoctor(this.doctorId).subscribe(
     (data) => {
       console.log('Doctor data:', data);
@@ -155,10 +155,9 @@ ngOnInit(): void {
     }
   }
   getRoleFromSessionStorage(): string | null {
-    // Retrieve the role from sessionStorage
-    return sessionStorage.getItem('role');
+    return (JSON.parse(sessionStorage.getItem('roles') || '[]')[0]) || null;
   }
-
+  
 
 
 }

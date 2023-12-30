@@ -1,8 +1,10 @@
 import { Component, ElementRef, HostListener, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SpcialityService } from '../spciality/spciality.service';
 import { Spciality } from '../spciality/spciality';
 import { ServiceService } from '../service.service';
+import { HttpClient, HttpEventType } from '@angular/common/http';
+import { FormBuilder } from '@angular/forms';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -12,6 +14,10 @@ import { ServiceService } from '../service.service';
   
 })
 export class NavbarComponent {
+  imageUrl: string | null = null; // Declare the imageUrl property
+
+  doctorId=sessionStorage.getItem('userId');
+
   showSpecialtyList = false;
   specialties = [
     "Cardiologie",
@@ -37,14 +43,22 @@ export class NavbarComponent {
     "Psychologue"
   ];
   spciality: any;
+  firstName: any;
+  lastName: any;
+
+  
 
   constructor(
-    private router: Router,
-    private SpcialityService: SpcialityService,
-    private el: ElementRef,
+    private http: HttpClient,
+    private fb: FormBuilder,
     private authservice: ServiceService,
-  ) {}
+    private router: Router,
+    private route: ActivatedRoute,
+    private el: ElementRef,
+    private SpcialityService: SpcialityService,
 
+
+ ) {}
  
 
   toggleSpecialtyList() {
@@ -86,5 +100,94 @@ export class NavbarComponent {
   
     this.toggleSpecialtyList();
   }
+  getRoleFromSessionStorage(): string | null {
+    return (JSON.parse(sessionStorage.getItem('roles') || '[]')[0]) || null;
+  }
+
+
+  selectedSpecialty: string = ''; 
+  results: any[] = [];
+
+
+
+
+  ngOnInit() {
+    this.downloadImage();
+    this.loadDoctorDetails();
+
+  }
+
+
+ 
+
+
+
+
+
+
+
+  downloadImage(): void {
+    const userId = sessionStorage.getItem('userId');
+  
+    if (!userId) {
+      console.error('User ID not found in session storage.');
+      return;
+    }
+  
+    this.http
+      .get(`http://localhost:8080/image/download/${userId}`, {
+        responseType: 'arraybuffer',
+        observe: 'events',
+      })
+      .subscribe(
+        (event) => {
+          if (event.type === HttpEventType.Response) {
+            const arrayBuffer = event.body as ArrayBuffer;
+            const blob = new Blob([arrayBuffer], { type: 'image/png' });
+  
+            // Set the imageUrl directly for the logged-in user
+            this.imageUrl = URL.createObjectURL(blob);
+          }
+        },
+        (error) => {
+          console.error(`Error downloading image for user ID ${userId}`, error);
+        }
+      );
+  }
+  
+
+  loadDoctorDetails(): void {
+    const userId = sessionStorage.getItem('userId');
+  
+    if (userId) {
+      this.authservice.getdoctor(userId).subscribe(
+        (doctorData) => {
+          console.log('Doctor Data:', doctorData); // Check the received data
+          this.firstName = doctorData.firstname;
+          this.lastName = doctorData.lastname;
+        },
+        (error) => {
+          console.error('Error fetching doctor details:', error);
+        }
+      );
+    } else {
+      console.error('User ID not found in session storage.');
+    }
+  }
+  
+
+  
+  
+  
+  
+  
+
+
+
+
+  
+  
+
+  
 
 }

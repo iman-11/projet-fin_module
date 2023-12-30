@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { ServiceService } from '../service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-test',
@@ -13,9 +14,12 @@ export class TestComponent {
   personalDetails!: FormGroup;
   addressDetails!: FormGroup;
   educationalDetails!: FormGroup;
+  horairesdetails!:FormGroup;
+
   personal_step = false;
   address_step = false;
   education_step = false;
+  horairesstep=false;
   step = 1;
 
 specialites = [
@@ -45,7 +49,7 @@ monFormulaire!: FormGroup;
 
 
 
-  constructor(private formBuilder: FormBuilder,private authservice:ServiceService) { }
+  constructor(private formBuilder: FormBuilder,private authservice:ServiceService,private router: Router) { }
 
   ngOnInit() {
  
@@ -59,27 +63,63 @@ monFormulaire!: FormGroup;
 
     this.addressDetails = this.formBuilder.group({
     
-      diplomes: this.formBuilder.array([]),
-      formations: this.formBuilder.array([]),
+      diplomes: this.formBuilder.array([this.createEmptydiplome()]),
+      formations: this.formBuilder.array([this.createEmptyformation()]),
     });
 
     this.educationalDetails = this.formBuilder.group({
       year: ['', Validators.required],
       speciality: ['', Validators.required],
       institute: ['', Validators.required],
-      experiences:this.formBuilder.array([]),
+      experiences:this.formBuilder.array([this.createEmptyexprience()]),
       specialite: ['', Validators.required],
       langues: ['', Validators.required] // Utilisez un tableau pour la sélection multiple
 
     });
+    this.horairesdetails=this.formBuilder.group({
+      horaires:this.formBuilder.array([this.createEmptyHoraire()]),
+      tarif_const: ['', Validators.required],
+      tarif_video: ['', Validators.required],
+    })
 
   }
+  createEmptyHoraire() {
+    return this.formBuilder.group({
+      jour: ['', Validators.required],
+      heure_depart: ['', Validators.required],  // Match the template names
+      heure_arrivee: ['', Validators.required], // Match the template names
+    });
+  }
+createEmptydiplome() {
+  return this.formBuilder.group({
+    year: ['', Validators.required],
+speciality: ['', Validators.required],
+institute: ['', Validators.required],
+  });
+}
+createEmptyformation() {
+  return this.formBuilder.group({
+    year: ['', Validators.required],
+    speciality: ['', Validators.required],
+    institute: ['', Validators.required],
+  });
+}
+createEmptyexprience() {
+  return this.formBuilder.group({
+    year: ['', Validators.required],
+    titre: ['', Validators.required],
+    lieu: ['', Validators.required],
+  });
+}
+
+
 
   get personal() { return this.personalDetails.controls; }
 
   get address() { return this.addressDetails.controls; }
 
   get education() { return this.educationalDetails.controls; }
+
 
   get diplomes() {
     return (this.addressDetails.get('diplomes') as FormArray).controls;
@@ -91,6 +131,37 @@ monFormulaire!: FormGroup;
   get formations() {
     return (this.addressDetails.get('formations') as FormArray).controls;
   }
+  get horaires() {
+    return (this.horairesdetails.get('horaires') as FormArray).controls;
+  }
+
+  addHoraire() {
+    const horairesArray = this.horairesdetails.get('horaires') as FormArray;
+  
+    if (horairesArray.length === 0 || !this.isHoraireEmpty(horairesArray.at(horairesArray.length - 1) as FormGroup)) {
+      const horaire = this.formBuilder.group({
+        jour: ['', Validators.required],
+        heure_depart: ['', Validators.required],
+        heure_arrivee: ['', Validators.required],
+      });
+  
+      horairesArray.push(horaire);
+      console.log('Horaires:', horairesArray.value);
+    }
+  }
+  
+  removeHoraire(index: number) {
+    (this.horairesdetails.get('horaires') as FormArray).removeAt(index);
+  }
+  
+  
+  private isHoraireEmpty(horaireGroup: FormGroup): boolean {
+    const values = Object.values(horaireGroup.controls);
+    return values.every(value => !value.value);
+  }
+  
+
+ 
 
   adddiplome() {
     const diplomesArray = this.addressDetails.get('diplomes') as FormArray;
@@ -156,6 +227,9 @@ monFormulaire!: FormGroup;
     } else if (this.step == 3) {
       this.education_step = true;
       this.step++;
+    }else if (this.step == 4){
+      this.horairesstep=true;
+      this.step++;
     }
   }
   previous() {
@@ -166,6 +240,9 @@ monFormulaire!: FormGroup;
     }
     if (this.step == 2) {
       this.education_step = false;
+    }
+    if (this.step == 3) {
+      this.horairesstep = false;
     }
   }
 
@@ -181,7 +258,11 @@ monFormulaire!: FormGroup;
       telephone: this.personalDetails.value.téléphone,
       date_naissance: this.personalDetails.value.naissance,
       gender: this.personalDetails.value.gender,
-      langues:this.educationalDetails.value.langues
+      langues:this.educationalDetails.value.langues,
+      horaires:this.horairesdetails.value.horaires,
+      tarif_const:this.horairesdetails.value.tarif_const,
+      tarif_video:this.horairesdetails.value.tarif_video
+
     };
   
     const userId = sessionStorage.getItem('userId') ?? 'defaultUserId';
@@ -191,6 +272,9 @@ this.authservice.updateDoctor(userId, doctorData).subscribe({
   next: (response: any) => {
     if (response instanceof Object) {
       console.log('Doctor updated successfully:', response);
+      this.router.navigate(['/doctor']);
+
+
     } else {
       console.error('Unexpected response format:', response);
     }

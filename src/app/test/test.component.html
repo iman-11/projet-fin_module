@@ -1,225 +1,290 @@
-
-
-
-
 <div class="container py-5 container-with-margin">
-    <div class="row" style="margin-top: 40px;"> 
-        <div class="col-md-12 col-md-offset-3">
-            <form [formGroup]="personalDetails" id="msform">
+  <div class="row" style="margin-top: 40px;"> 
+      <div class="col-md-12 col-md-offset-3">
+          <form [formGroup]="personalDetails" id="msform">
+            
               
-                
-                <!-- progressbar -->
-               <!-- progressbar -->
+              <!-- progressbar -->
+             <!-- progressbar -->
 <ul id="progressbar">
-  <li [ngClass]="{ 'active': step >= 1, 'inactive': step < 1 }">
-      Information personnelle
-      <i *ngIf="step > 1" class="fas fa-check-circle success-icon"></i>
-  </li>
-  <li [ngClass]="{ 'active': step >= 2, 'inactive': step < 2 }">
-    Formations et diplomes
-      <i *ngIf="step > 2" class="fas fa-check-circle success-icon"></i>
-  </li>
-  <li [ngClass]="{ 'active': step === 3, 'inactive': step < 3 }">
-    Specialité et Experiences
-      <i *ngIf="step === 3" class="fas fa-check-circle success-icon"></i>
-  </li>
-  <!-- Add a new div for the progress line -->
-  <div class="progress-line"></div>
+<li [ngClass]="{ 'active': step >= 1, 'inactive': step < 1 }">
+    Information personnelle
+    <i *ngIf="step > 1" class="fas fa-check-circle success-icon"></i>
+</li>
+<li [ngClass]="{ 'active': step >= 2, 'inactive': step < 2 }">
+  Formations et diplomes
+    <i *ngIf="step > 2" class="fas fa-check-circle success-icon"></i>
+</li>
+<li [ngClass]="{ 'active': step >= 3, 'inactive': step < 3 }">
+  Specialité et Experiences
+    <i *ngIf="step > 3" class="fas fa-check-circle success-icon"></i>
+</li>
+<li [ngClass]="{ 'active': step === 4, 'inactive': step < 4 }">
+  horaires et tarifs
+  <i *ngIf="step > 4" class="fas fa-check-circle success-icon"></i>
+
+<!-- Add a new div for the progress line -->
+
 </ul>
 
-                <!-- fieldsets -->
+              <!-- fieldsets -->
 
 
-  
-                <fieldset *ngIf="step == 1">
-                    <h2 class="fs-title">Information personnelle</h2>
-                  
-                    <div class="form-group">
-                      <label for="name" class="text-left">Adresse :</label>
-                      <input type="text" id="name" formControlName="Adresse"  placeholder="Adresse (rue, ville, code postal)"/>
-                  
-                      </div>
-                  
-                    <div class="form-group">
-                      <label for="email" class="text-left">Numéro de téléphone :</label>
-                      <input type="text" id="email" formControlName="téléphone"  placeholder="Numéro de téléphone"/>
 
-                      </div>
-                  
-                    <div class="form-group">
-                      <label for="phone" class="text-left">Date de naissance :</label>
-                      <input type="date" id="phone" formControlName="naissance"  placeholder="Date de naissance"/>
-                     
+              <fieldset *ngIf="step == 1">
+                  <h2 class="fs-title">Information personnelle</h2>
+                
+                  <div class="form-group">
+                    <label for="name" class="text-left">Adresse :</label>
+                    <input type="text" id="name" formControlName="Adresse"  placeholder="Adresse (rue, ville, code postal)"/>
+                
                     </div>
-                  
-                    <div class="form-group">
-                      <label for="gender" class="text-left">Sexe :</label>
-                      <select id="gender" formControlName="gender"  placeholder="Sexe">
-                        <option value="" disabled selected>Choisissez le sexe</option>
-                        <option value="homme">Homme</option>
-                        <option value="femme">Femme</option>
-                      </select>
-                  
+                
+                  <div class="form-group">
+                    <label for="email" class="text-left">Numéro de téléphone :</label>
+                    <input type="text" id="email" formControlName="téléphone"  placeholder="Numéro de téléphone"/>
+
                     </div>
-                  
-                    <input (click)="next()" type="button" name="next" class="next  action-button" value="Next"/>
-                  </fieldset>
-                  
-                  
-            </form>
+                
+                  <div class="form-group">
+                    <label for="phone" class="text-left">Date de naissance :</label>
+                    <input type="date" id="phone" formControlName="naissance"  placeholder="Date de naissance"/>
+                   
+                  </div>
+                
+                  <div class="form-group">
+                    <label for="gender" class="text-left">Sexe :</label>
+                    <select id="gender" formControlName="gender"  placeholder="Sexe">
+                      <option value="" disabled selected>Choisissez le sexe</option>
+                      <option value="homme">Homme</option>
+                      <option value="femme">Femme</option>
+                    </select>
+                
+                  </div>
+                
+                  <input (click)="next()" type="button" name="next" class="next  action-button" value="Next"/>
+                </fieldset>
+                
+                
+          </form>
 
-            <form [formGroup]="addressDetails" id="msform">
-                <fieldset *ngIf="step == 2">
-                    <h2 class="fs-title">Formations et diplomes</h2>
-                    <br>
-                    
-                    <h3 class="text-left">diplomes nationaux et universitaires:</h3>
+          <form [formGroup]="addressDetails" id="msform">
+              <fieldset *ngIf="step == 2">
+                  <h2 class="fs-title">Formations et diplomes</h2>
+                  <br>
+                  
+                  <h3 class="text-left">diplomes nationaux et universitaires:</h3>
 
-                  
-                    <div *ngFor="let diplome of diplomes; let i = index">
-                        <hr>
-                        
-                  
-                        <div formArrayName="diplomes">
-                          <div [formGroupName]="i">
-                            <div class="form-group">
-                              <label class="text-left">Année :</label>
-                              <input type="text" formControlName="year" placeholder="Année" />
-                            </div>
-                            <div class="form-group">
-                              <label class="text-left">Spécialité de diplome :</label>
-                              <input type="text" formControlName="speciality" placeholder="Spécialité de formation" />
-                            </div>
-                            <div class="form-group">
-                              <label class="text-left">Institut de diplome :</label>
-                              <input type="text" formControlName="institute" placeholder="Institut de formation" />
-                            </div>
-                            <button type="button" class="btn btn-danger" (click)="removediplome(i)">Supprimer cette diplome</button>
-                            <br>
+                
+                  <div *ngFor="let diplome of diplomes; let i = index">
+                      <hr>
+                      
+                
+                      <div formArrayName="diplomes">
+                        <div [formGroupName]="i">
+                          <div class="form-group">
+                            <label class="text-left">Année :</label>
+                            <input type="text" formControlName="year" placeholder="Année" />
                           </div>
-                        </div>
-                      <br>
-                    </div>
-                  
-                    <button type="button" class="btn btn-success" (click)="adddiplome()">Ajouter une diplome</button>
-                    
-                    <br>
-                    
-                    <h3 class="text-left">Formations:</h3>
-
-                  
-                    <div *ngFor="let formation of formations; let i = index">
-                        <hr>
-                        <div formArrayName="formations">
-                          <div [formGroupName]="i">
-                  
-                      <div class="form-group">
-                        <label class="text-left">Année :</label>
-                        <input type="text" formControlName="year" placeholder="Année"  />
-                      </div>
-                  
-                      <div class="form-group">
-                        <label class="text-left">Spécialité de formation :</label>
-                        <input type="text" formControlName="speciality" placeholder="Spécialité de formation"  />
-                      </div>
-                  
-                      <div class="form-group">
-                        <label class="text-left">Institut de formation :</label>
-                        <input type="text" formControlName="institute" placeholder="Institut de formation"  />
-                      </div>
-                  
-                      <button type="button" class="btn btn-danger" (click)="removeFormation(i)">Supprimer cette Formation</button>
-                  
-                      <br>
+                          <div class="form-group">
+                            <label class="text-left">Spécialité de diplome :</label>
+                            <input type="text" formControlName="speciality" placeholder="Spécialité de formation" />
                           </div>
+                          <div class="form-group">
+                            <label class="text-left">Institut de diplome :</label>
+                            <input type="text" formControlName="institute" placeholder="Institut de formation" />
+                          </div>
+                         
+                            
+                           <button type="button" class="btn btn-danger" (click)="removeFormation(i)" style="border-radius: 35%; margin-left: 700px; background-color: rgb(240, 95, 95);">Supprimer</button>
+                           <br>
                         </div>
-  
-                    </div>
-                    
-                  
-                    <button type="button" class="btn btn-success" (click)="addFormation()">Ajouter une Formatiom</button>
-                  
-                    <input (click)="previous()" type="button" name="previous" class="previous action-button-previous" value="Previous" />
-                    <input (click)="next()" type="button" name="next" class="next action-button" value="Next" />
-                  </fieldset>
-                  
-            </form>
-
-
-            <form [formGroup]="educationalDetails" id="msform">
-                <fieldset *ngIf="step == 3">
-                    <h2 class="fs-title">Specialité et Experiences</h2>
+                      </div>
                     <br>
-                    <h3 class="text-left">Experiences:</h3>
-
+                  </div>
                   
-                    <div *ngFor="let experience of experiences; let i = index">
-                        <hr>
-
-                        <div formArrayName="experiences">
-                          <div [formGroupName]="i">
-                      <div class="form-group">
-                        <label class="text-left">year :</label>
-                        <input type="text" formControlName="year" placeholder="Année"  />
-                      </div>
+                  <button type="button" class="btn btn-success" (click)="adddiplome()" style="background-color: rgb(122, 219, 158); border: 0ch;" >Ajouter une diplome</button>
                   
-                      <div class="form-group">
-                        <label class="text-left">Titre :</label>
-                        <input type="text" formControlName="titre" placeholder="Spécialité de formation"  />
-                      </div>
+                  <br>
                   
-                      <div class="form-group">
-                        <label class="text-left">Lieu :</label>
-                        <input type="text" formControlName="lieu" placeholder="Institut de formation"  />
-                      </div>
+                  <h3 class="text-left">Formations:</h3>
                   
-                      <button type="button" class="btn btn-danger" (click)="removexperience(i)">Supprimer cette Experience</button>
-                  
-                      <br>
+                
+                  <div *ngFor="let formation of formations; let i = index">
+                      <hr>
+                      <div formArrayName="formations">
+                        <div [formGroupName]="i">
+                
+                    <div class="form-group">
+                      <label class="text-left">Année :</label>
+                      <input type="text" formControlName="year" placeholder="Année"  />
                     </div>
+                
+                    <div class="form-group">
+                      <label class="text-left">Spécialité de formation :</label>
+                      <input type="text" formControlName="speciality" placeholder="Spécialité de formation"  />
+                    </div>
+                
+                    <div class="form-group">
+                      <label class="text-left">Institut de formation :</label>
+                      <input type="text" formControlName="institute" placeholder="Institut de formation"  />
+                    </div>
+                
+                    <button type="button" class="btn btn-danger" (click)="removeFormation(i)" style="border-radius: 35%; margin-left: 700px;background-color: rgb(240, 95, 95);">Supprimer</button>
+                          <br>
+                    <br>
+                        </div>
+                      </div>
+
+                  </div>
+                  
+                
+                  <button type="button" class="btn btn-success" (click)="addFormation()" style="background-color: rgb(122, 219, 158); border: 0ch;">Ajouter une Formatiom</button>
+                   <br>
+                   <br>
+                  <input (click)="previous()" type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                  <input (click)="next()" type="button" name="next" class="next action-button" value="Next" />
+                </fieldset>
+                
+          </form>
+
+
+          <form [formGroup]="educationalDetails" id="msform">
+              <fieldset *ngIf="step == 3">
+                  <h2 class="fs-title">Specialité et Experiences</h2>
+                  <br>
+                  <h3 class="text-left">Experiences:</h3>
+
+                
+                  <div *ngFor="let experience of experiences; let i = index">
+                      <hr>
+
+                      <div formArrayName="experiences">
+                        <div [formGroupName]="i">
+                    <div class="form-group">
+                      <label class="text-left">year :</label>
+                      <input type="text" formControlName="year" placeholder="Année"  />
+                    </div>
+                
+                    <div class="form-group">
+                      <label class="text-left">Titre :</label>
+                      <input type="text" formControlName="titre" placeholder="Spécialité de formation"  />
+                    </div>
+                
+                    <div class="form-group">
+                      <label class="text-left">Lieu :</label>
+                      <input type="text" formControlName="lieu" placeholder="Institut de formation"  />
+                    </div>
+                
+                    <button type="button" class="btn btn-danger"               (click)="removexperience(i)"
+                    style="border-radius: 35%; margin-left: 700px;background-color: rgb(240, 95, 95);">Supprimer</button>
+
+                    <br>
                   </div>
                 </div>
+              </div>
+                  <button type="button" class="btn btn-success" (click)="addexperience()" style="background-color: rgb(122, 219, 158); border: 0ch;">Ajouter une Experience</button>
                   
-                    <button type="button" class="btn btn-success" (click)="addexperience()">Ajouter une Experience</button>
+                  <br>
+                      
+                  
+                  <h3 class="text-left">Specialite:</h3>
+                  <hr>
+                  <div class="form-group">
+                      <label class="text-left">Donnez votre spécialité :</label>
+                      <br>
+                      <select formControlName="specialite" class="form-control">
+                        <option value="" disabled selected>Choisissez votre spécialité</option>
+                        <!-- Utilisez *ngFor pour itérer sur les spécialités -->
+                        <option *ngFor="let specialite of specialites" [value]="specialite">{{ specialite }}</option>
+                      </select>
+                    </div>
                     
-                    <br>
-                        
-                    
-                    <h3 class="text-left">Specialite:</h3>
+
+
+          
+                 
+                    <h3 class="text-left">Langues:</h3>
                     <hr>
                     <div class="form-group">
-                        <label class="text-left">Donnez votre spécialité :</label>
-                        <select formControlName="specialite" class="form-control">
-                          <option value="" disabled selected>Choisissez votre spécialité</option>
-                          <!-- Utilisez *ngFor pour itérer sur les spécialités -->
-                          <option *ngFor="let specialite of specialites" [value]="specialite">{{ specialite }}</option>
-                        </select>
-                      </div>
-                      
-
-
-            
-                   
-                      <h3 class="text-left">Langues:</h3>
-                      <hr>
-                      <div class="form-group">
-                        <label class="text-left">Donnez votre langue :</label>
-                        <mat-select formControlName="langues" multiple>
-                          <mat-option *ngFor="let langue of langues" [value]="langue">{{ langue }}</mat-option>
-                        </mat-select>
-                      </div>
-                      
-                 
+                      <br>
+                      <label class="text-left" >Donnez votre langue : <mat-select formControlName="langues" multiple  >
+                        <mat-option *ngFor="let langue of langues" [value]="langue">{{ langue }}</mat-option>
+                      </mat-select> </label>
+                    </div>
+                    
                     <input (click)="previous()" type="button" name="previous" class="previous action-button-previous" value="Previous" />
-                    <button type="button" class="btn btn-success" (click)="submit()">Submit</button>
+                    <input (click)="next()" type="button" name="next" class="next action-button" value="Next" />
+  
+                  
+  
+                </fieldset>
+          </form>
 
-                  </fieldset>
-            </form>
 
-        </div>
-    </div>
+          <form [formGroup]="horairesdetails" id="msform">
+            <fieldset *ngIf="step == 4">
+            <div formArrayName="horaires">
+           
+                <h2 class="fs-title">Horaires et Tarifs</h2>
+                <br>
+          
+                <h3 class="text-left">Horaires:</h3>
+          
+                <div *ngFor="let horaire of horaires; let i = index">
+                  <hr>
+          
+                  <div [formGroupName]="i">
+                    <div class="form-group">
+                      <label class="text-left">Jour :</label>
+                      <input type="text" formControlName="jour" placeholder="Jour" />
+                    </div>
+                    <div class="form-group">
+                      <label class="text-left">Heure de début :</label>
+                      <input type="text" formControlName="heure_depart" placeholder="Heure de début" />
+                    </div>
+                    <div class="form-group">
+                      <label class="text-left">Heure de fin :</label>
+                      <input type="text" formControlName="heure_arrivee" placeholder="Heure de fin" />
+                    </div>
+                    <button type="button" class="btn btn-danger" (click)="removeHoraire(i)" style="border-radius: 35%; margin-left: 700px; background-color: rgb(240, 95, 95);">Supprimer</button>
+                    <br>
+                  </div>
+                </div>
+            </div>
+          
+                <br>
+          
+                <button type="button" class="btn btn-success" (click)="addHoraire()" style="background-color: rgb(122, 219, 158); border: 0ch;">Ajouter un horaire</button>
+          
+                <h3 class="text-left">Tarifs:</h3>
+                <hr>
+          
+                <!-- Nouveaux champs pour les tarifs -->
+                <div class="form-group">
+                  <label class="text-left">Consultation au cabinet :</label>
+                  <div class="d-flex">
+                    <input type="text" formControlName="tarif_const" placeholder="Tarif au cabinet" class="form-control mr-2" />
+                  </div>
+                </div>
+          
+                <div class="form-group">
+                  <label class="text-left">Consultation vidéo (si disponible) :</label>
+                  <div class="d-flex">
+                    <input type="text" formControlName="tarif_video" placeholder="Tarif vidéo" class="form-control mr-2" />
+                  </div>
+                </div>
+          
+                <input (click)="previous()" type="button" name="previous" class="previous action-button-previous" value="Previous" />
+                <button type="button" name="next" class="next action-button" (click)="submit()">Submit</button>
+              </fieldset>
+          </form>
+          
+
+
+
+
+
+      </div>
+  </div>
 </div>
-
-
-
-

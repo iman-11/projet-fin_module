@@ -27,6 +27,7 @@ import { AppointmentComponent } from './appointment/appointment.component';
 import { FilterDoctorComponent } from './filter-doctor/filter-doctor.component';
 import { Test1Component } from './test1/test1.component';
 import { DashbordComponent } from './dashbord/dashbord.component';
+import { DoctorsectionComponent } from './doctorsection/doctorsection.component';
 
 
 
@@ -47,6 +48,7 @@ import { DashbordComponent } from './dashbord/dashbord.component';
          FilterDoctorComponent,
          Test1Component,
          DashbordComponent,
+         DoctorsectionComponent,
  
    
   ],

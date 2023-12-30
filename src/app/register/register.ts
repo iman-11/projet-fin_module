@@ -4,6 +4,7 @@ export interface Register {
     email: string;
     password: string;
     repeatpassword:string;
+    mfaEnabled?:boolean;
 
   }
-  
+ 

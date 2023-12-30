@@ -69,7 +69,7 @@ export class SectionComponent {
 
   selectResult(result: any): void {
   
-    // Check if doctorId is available
+    // Check if doctorId ais available
     if (result.id) {
       this.router.navigate(['/doctor-profile'], { queryParams: { id: result.id } });
       console.log('Selected id:', result.id);

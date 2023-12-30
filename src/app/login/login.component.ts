@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ServiceService } from '../service.service';
 import { Router } from '@angular/router';
+import { AuthenticationResponse } from '../register/authentication-response';
+import { VerificationRequest } from '../register/verification-request';
 
 @Component({
   selector: 'app-login',
@@ -10,6 +12,8 @@ import { Router } from '@angular/router';
   
 })
 export class LoginComponent implements OnInit{
+  otpCode = '';
+  authResponse: AuthenticationResponse = {};
 
 
 
@@ -23,26 +27,42 @@ export class LoginComponent implements OnInit{
 
     })
   }
- 
 
-  handlelogin(): void {
+  handlelogin() {
     const email = this.formlogin.get('email')?.value;
     const password = this.formlogin.get('password')?.value;
-  
-    this.authservice.login(email, password).subscribe({
-      next: (data) => {
-        // Handle successful authentication response
-        this.authservice.loadprofile(data);
-        this.router.navigate(['/profil']);
+    this.authservice.login(email, password)
+      .subscribe({
+        next: (response) => {
+          // this.authResponse = response;
+          // if (!this.authResponse.mfaEnabled) {
+          //   this.authservice.loadprofile(this.authResponse)
 
-      },
-      error: (error) => {
-        console.error('Authentication error', error);
-      },
-      
-      
-    });
+
+          // }
+          this.authservice.loadprofile1(response)
+
+          this.router.navigate(['/doctor']);
+
+
+        }
+      });
   }
+
+  // verifyCode() {
+  //   const verifyRequest: VerificationRequest = {
+  //     email:this.formlogin.get('email')?.value,
+  //     code: this.otpCode
+  //   };
+    
+  //   this.authservice.verifyCode(verifyRequest)
+  //     .subscribe({
+  //       next: (response) => {
+  //         localStorage.setItem('token', response.accessToken as string);
+  //         this.router.navigate(['welcome']);
+  //       }
+  //     });
+  // }
   
 
 }

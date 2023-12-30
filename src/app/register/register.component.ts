@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ServiceService } from '../service.service';
 import { Router } from '@angular/router';
 import { Register } from './register';
+import { AuthenticationResponse } from './authentication-response';
+import { VerificationRequest } from './verification-request';
 
 @Component({
   selector: 'app-register',
@@ -12,8 +14,17 @@ import { Register } from './register';
 })
 export class RegisterComponent {
   constructor(private fb:FormBuilder,private authservice:ServiceService,private router: Router){}
-
+   message='';
   formregister!:FormGroup
+  authresponse:AuthenticationResponse={}
+  registrationData: Register={
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    repeatpassword: ''
+  }
+  otpCode='';
 
   ngOnInit(): void {
     this.formregister=this.fb.group({
@@ -22,42 +33,71 @@ export class RegisterComponent {
       email:this.fb.control(""),
       password:this.fb.control(""),
       repeatpassword:this.fb.control(""),
-      role:this.fb.control(""), // Ajout du champ "role"
-
-
+      role:this.fb.control(""), 
+      mfaEnabled: this.fb.control(false),
 
     })
+    this.formregister.get('mfaEnabled')?.valueChanges.subscribe((value) => {
+      console.log('mfaenabled value changed:', value);
+    });
   }
 
-    handleregister(): void{
+  handleregister() {
 
-  const firstName=this.formregister.get("firstname")?.value
-  const lastName=this.formregister.get("lastname")?.value
-
-  const email=this.formregister.get("email")?.value
-  const password=this.formregister.get("password")?.value
-  const repeatpassword=this.formregister.get("repeatpassword")?.value
+this.message='';
   
 
-  const registrationData: Register = this.formregister.value; // Use the Register interface here
-
-  this.authservice.register(registrationData).subscribe({
-    next: (response) => {
-      console.log('register successful', response);
-    },
-    error: (error) => {
-      console.error('register error', error);
-    },
+   this.registrationData = this.formregister.value; // Use the Register interface here    this.authService.register(this.registerRequest)
+  console.log('Registration Data:', this.registrationData);
+  this.authservice.register(this.registrationData)
+  
     
-    
-  });
+  .subscribe({
+        next: (response) => {
+           this.authresponse=response
+           this.authservice.loadprofile1(this.authresponse)
+            this.router.navigate(['/test']);
+          
+        }
+      });
+
+  }
 
 
 
-    }
+
+  
     onUserTypeChange(event: Event): void {
       const userType = (event.target as HTMLSelectElement).value;
       this.formregister.patchValue({ role: userType });
+    }
+
+
+
+    verifyTfa() {
+      this.message = '';
+      const verifyRequest: VerificationRequest = {
+        email: this.registrationData .email,
+        code: this.otpCode
+        
+
+
+
+      };
+      console.log("otp code",this.otpCode)
+      console.log("email for  code",this.registrationData .email)
+
+
+      this.authservice.verifyCode(verifyRequest)
+        .subscribe({
+          next: (response) => {
+            this.message = 'Account created successfully\nYou will be redirected to the Welcome page in 3 seconds';
+            setTimeout(() => {
+              localStorage.setItem('token', response.accessToken as string);
+              this.router.navigate(['/login']);
+            }, 3000);
+          }
+        });
     }
 
 
