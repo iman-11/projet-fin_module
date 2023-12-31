@@ -33,20 +33,20 @@ export class ProfilComponent {
   ngOnInit(): void {
     // Get the doctorId from the route parameters
     this.route.queryParams.subscribe((params) => {
-      console.log('Route params:', params);
-
-      // Check if id is available in the route parameters
-      if (params['id']) {
+      console.log('Route params1:', params);
+  
+      // Check if id1 is available in the route parameters
+      if (params['id1']) {
         // Update the doctorId in the component
-        this.doctorId = '';
+        this.doctorId = params['id1'];
         console.log('Updated doctorId in component:', this.doctorId);
-
+  
         // Fetch the doctor details
         this.authservice.getdoctor(this.doctorId).subscribe(
           (data) => {
             console.log('Doctor data:', data);
             this.doctor = data;
-
+  
             // After getting the doctor's information, download the image
             this.downloadImage();
           },
@@ -57,7 +57,7 @@ export class ProfilComponent {
       }
     });
   }
-
+  
 
 
 
