@@ -25,6 +25,13 @@ export class AppointmentService {
  getAllAppointmentsDoctor(userId: string): Observable<Appointment[]> {
     return this.http.get<Appointment[]>(`${this.baseUrl}/appointments/${userId}`);
   }
+  private apiUrl3 = 'http://localhost:8080/api/rendezvous/updateDecision';
+
+  updateAppointmentDecision(id: string, decision: string): Observable<any> {
+    const url = `${this.apiUrl3}/${id}`;
+    const body = { decision: decision };
+    return this.http.put(url, body);
+  }
 
 
 

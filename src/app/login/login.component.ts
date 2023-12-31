@@ -34,15 +34,16 @@ export class LoginComponent implements OnInit{
     this.authservice.login(email, password)
       .subscribe({
         next: (response) => {
-         
-          this.authservice.loadprofile1(response)
-
+          this.authservice.loadprofile1(response);
           this.router.navigate(['/doctor']);
-
-
+        },
+        error: (error) => {
+          console.error('Login error:', error);
+          // Handle the error (e.g., show a message to the user)
         }
       });
   }
+  
 
   // verifyCode() {
   //   const verifyRequest: VerificationRequest = {

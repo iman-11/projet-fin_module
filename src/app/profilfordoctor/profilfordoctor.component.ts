@@ -31,12 +31,9 @@ export class ProfilfordoctorComponent {
     this.downloadImage();
   }
   ngOnInit(): void {
-    // Get the doctorId from session storage
     const storedDoctorId = sessionStorage.getItem('userId');
   
-    // Check if id is available in session storage
     if (storedDoctorId) {
-      // Update the doctorId in the component
       this.doctorId = storedDoctorId;
       console.log('Updated doctorId in component:', this.doctorId);
   

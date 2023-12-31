@@ -11,6 +11,9 @@
      display: flex;
      flex-direction: column;
    }
+   #content .profile-content {
+      background-color: grey; /* Change this to the desired background color */
+   }
  
    .opening-hours p {
      text-transform: capitalize;
@@ -64,8 +67,8 @@
                   <!-- END profile-header-img -->
                   <!-- BEGIN profile-header-info -->
                   <div class="profile-header-info">
-                     <h4 class="m-t-10 m-b-5">{{ doctor.firstname.toUpperCase()}} {{ doctor.lastname.toUpperCase() }}</h4>
-                     <p class="m-b-10" style="color: rgb(252, 246, 236);">{{ doctor.speciality.toUpperCase() }}</p>
+                     <h4 class="m-t-10 m-b-5">{{ doctor?.firstname?.toUpperCase() }} {{ doctor?.lastname?.toUpperCase() }}</h4>
+                     <p class="m-b-10" style="color: rgb(252, 246, 236);">{{ doctor?.speciality?.toUpperCase() }}</p>
                      <button *ngIf=" (getRoleFromSessionStorage() === 'DOCTOR')" href="#" class="btn btn-sm btn-info mb-2" (click)="Openpopup()" style="background-color: hsl(175, 49%, 65%);color: white;border: #e2e7eb;">Edit Profile</button>
                      <input  type="file" (change)="onFileSelected($event)" style="display: none;" #fileInput>
                      <button  *ngIf=" (getRoleFromSessionStorage() === 'DOCTOR')" class="btn btn-sm btn-info mb-2" (click)="fileInput.click()" style="margin-left:10px;background-color: hsl(175, 49%, 65%);color: white;border: #e2e7eb;">Choisir une image</button>
@@ -172,9 +175,9 @@
                     </div>
                     <div class="timeline-content">
                       <ul>
-                        <li *ngFor="let diplome of doctor.diplomas">
+                        <li *ngFor="let diplome of doctor?.diplomas">
                           <p style="text-transform: capitalize; font-size: 0.9rem; color: black;">
-                           Diplôme d'État de docteur en{{ diplome.speciality }} - {{ diplome.institute }}-{{diplome.year}}
+                           Diplôme d'État de docteur en{{ diplome?.speciality }} - {{ diplome?.institute }}-{{diplome?.year}}
                           </p>
                         </li>
                       </ul>
@@ -187,9 +190,9 @@
                     </div>
                     <div class="timeline-content">
                       <ul>
-                        <li *ngFor="let formation of doctor.formations">
+                        <li *ngFor="let formation of doctor?.formations">
                           <p style="text-transform: capitalize; font-size: 0.9rem; color: black;">
-                           Formations en {{ formation.speciality }} - {{ formation.institute }} - {{formation.year}}
+                           Formations en {{ formation?.speciality }} - {{ formation?.institute }} - {{formation?.year}}
                         </p>
                         </li>
                       </ul>
@@ -223,10 +226,10 @@
                         <span class="username" >expriences</span>
                      </div>
                      <div class="timeline-content" >
-                        <li *ngFor="let experience of  doctor.experiences">
+                        <li *ngFor="let experience of  doctor?.experiences">
 
                         <p style=" text-transform: capitalize;font-size: 0.9rem; color: black;">
-                           {{ experience.titre }} - {{ experience.lieu }} - {{experience.year}}
+                           {{ experience?.titre }} - {{ experience?.lieu }} - {{experience?.year}}
 
   
                         </p>
@@ -245,7 +248,7 @@
                       </div>
                       <li>
                         <p style="text-transform: capitalize; font-size: 0.9rem; color: black;">
-                          <ng-container *ngFor="let langue of doctor.langues; let last = last">
+                          <ng-container *ngFor="let langue of doctor?.langues; let last = last">
                             {{ langue }}
                             <ng-container *ngIf="!last"> et </ng-container>
                           </ng-container>
@@ -288,9 +291,9 @@
                       <div class="row">
                         <div class="col-md-6">
                           <p style="text-transform: capitalize; font-size: 0.95rem; color: black; font-weight: bold;"> Horaires d'ouverture</p>
-                          <li *ngFor="let horaire of doctor.horaires">
+                          <li *ngFor="let horaire of doctor?.horaires">
                            <div class="opening-hours">
-                             <p>{{ horaire.jour }}: <span>{{ horaire.heure_depart }} - {{ horaire.heure_arrivee }}</span></p>
+                             <p>{{ horaire?.jour }}: <span>{{ horaire?.heure_depart }} - {{ horaire?.heure_arrivee }}</span></p>
                            </div>
                          </li>
                           <!-- Ajoutez vos horaires d'ouverture ici -->
@@ -309,7 +312,7 @@
                       <p style="text-transform: capitalize; font-size: 0.95rem; color: black; font-weight: bold;">Coordonnées</p>
                       <br>
                     </div>
-                    <p style="text-transform: capitalize; font-size: 0.9rem; color: black;">+212{{doctor.telephone}}</p>
+                    <p style="text-transform: capitalize; font-size: 0.9rem; color: black;">+212{{doctor?.telephone}}</p>
                   </div>
                   <!-- end timeline-body -->
                 </li>
@@ -342,10 +345,10 @@
                 
                     <div class="timeline-content">
                       <p class="text-style"></p>
-                      <p style=" text-transform: capitalize;font-size: 1.1rem; color: black;">Consultation <span class="price" style="float: right; color: black;"   > {{doctor.tarif_const}}€</span></p>
+                      <p style=" text-transform: capitalize;font-size: 1.1rem; color: black;">Consultation <span class="price" style="float: right; color: black;"   > {{doctor?.tarif_const}}€</span></p>
 
                       <hr> <!-- Ligne de séparation -->
-                      <p style=" text-transform: capitalize;font-size: 1.1rem; color: black;">Consultation Video <span class="price" style="float: right; color: black;"   >{{doctor.tarif_video}}€ </span></p>
+                      <p style=" text-transform: capitalize;font-size: 1.1rem; color: black;">Consultation Video <span class="price" style="float: right; color: black;"   >{{doctor?.tarif_video}}€ </span></p>
                       <br>
 
                       <h3>Ces honoraires vous sont communiqués à titre indicatif par le praticien et peuvent varier selon le type de soins, le nombre de consultations et les actes additionnels nécessaires</h3>
@@ -380,12 +383,12 @@
                        <div class="accordion-item">
                          <h2 class="accordion-header" id="flush-headingOne">
                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                             Quelle est l'adresse de Dr {{ doctor.firstname?.toUpperCase()}} {{ doctor.lastname.toUpperCase() }} ?
+                             Quelle est l'adresse de Dr {{ doctor?.firstname?.toUpperCase() }} {{ doctor?.lastname?.toUpperCase() }} ?
                            </button>
                          </h2>
                          <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                            <div class="accordion-body">
-                             <p style="text-transform: capitalize; font-size: 0.9rem; color: black;">L'adresse de Dr {{ doctor.firstname?.toUpperCase()}} {{ doctor.lastname.toUpperCase() }} est {{doctor.address}}</p>
+                             <p style="text-transform: capitalize; font-size: 0.9rem; color: black;">L'adresse de Dr {{ doctor?.firstname?.toUpperCase() }} {{ doctor?.lastname?.toUpperCase() }}est {{doctor?.address}}</p>
                            </div>
                          </div>
                        </div>
@@ -394,12 +397,12 @@
                        <div class="accordion-item">
                          <h2 class="accordion-header" id="flush-headingTwo">
                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                             Quelles sont les langues parlées par Dr {{ doctor.firstname.toUpperCase()}} {{ doctor.lastname.toUpperCase() }}?
+                             Quelles sont les langues parlées par Dr {{ doctor?.firstname?.toUpperCase() }} {{ doctor?.lastname?.toUpperCase() }}?
                            </button>
                          </h2>
                          <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
                            <p style="text-transform: capitalize; font-size: 0.9rem; color: black;">
-                             Les langues qui peuvent être parlées avec Dr {{ doctor.firstname?.toUpperCase() }} {{ doctor.lastname.toUpperCase() }} sont les suivantes :
+                             Les langues qui peuvent être parlées avec Dr {{ doctor?.firstname?.toUpperCase() }} {{ doctor?.lastname?.toUpperCase() }} sont les suivantes :
                              <ng-container *ngFor="let langue of doctor.langues; let last = last">
                                {{ langue }}
                                <ng-container *ngIf="!last"> et </ng-container>
@@ -412,12 +415,12 @@
                        <div class="accordion-item">
                          <h2 class="accordion-header" id="flush-headingThree">
                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                             Quelle est les Coordonnées de Dr {{ doctor.firstname.toUpperCase()}} {{ doctor.lastname.toUpperCase() }} ?
+                             Quelle est les Coordonnées de Dr {{ doctor?.firstname?.toUpperCase() }} {{ doctor?.lastname?.toUpperCase() }} ?
                            </button>
                          </h2>
                          <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
                            <div class="accordion-body">
-                             <p style="text-transform: capitalize; font-size: 0.9rem; color: black;">le numéro de téléphone de Dr {{ doctor.firstname?.toUpperCase()}} {{ doctor.lastname.toUpperCase() }} est {{doctor.telephone}}</p>
+                             <p style="text-transform: capitalize; font-size: 0.9rem; color: black;">le numéro de téléphone de Dr {{ doctor?.firstname?.toUpperCase() }} {{ doctor?.lastname?.toUpperCase() }}est {{doctor.telephone}}</p>
                            </div>
                          </div>
                        </div>
@@ -444,7 +447,7 @@
               <p class="card-text" style=" text-transform: capitalize;font-size: 0.9rem; color: black;display: flex;"> <img src=".\assets\images\placeholder.png"alt="Icon Description" class="icon"><tr>  </tr> Accepte les nouveaux patients sur DocLink</p>
 
               <p class="card-text" style=" text-transform: capitalize;font-size: 0.9rem; color: black;display: flex; "><img src=".\assets\images\profile.png"alt="Icon Description" class="icon"><tr>  </tr>
-               Cabinet dentaire du docteur {{ doctor.firstname?.toUpperCase()}} {{ doctor.lastname.toUpperCase() }}
+               Cabinet dentaire du docteur {{ doctor?.firstname?.toUpperCase() }} {{ doctor?.lastname?.toUpperCase() }}
 
                {{doctor.address}}</p>
 

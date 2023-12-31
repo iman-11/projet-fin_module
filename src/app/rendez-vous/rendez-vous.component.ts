@@ -9,18 +9,35 @@ import { ServiceService } from '../service.service';
   styleUrls: ['./rendez-vous.component.css']
 })
 export class RendezVousComponent {
+ 
+
 
 
 
   userid:any=sessionStorage.getItem('userId')
 
   appointments: Appointment[] = [];
+  selectedAppointment: Appointment | undefined;
+
 
   constructor(private appointmentService: AppointmentService,    private authservice: ServiceService,
 ) {} // Inject your service
 
   ngOnInit() {
     this.loadAppointments();
+  }
+
+  updateDecision(id: string, decision: string): void {
+    this.appointmentService.updateAppointmentDecision(id, decision).subscribe(
+      response => {
+        console.log('Mise à jour réussie :', response);
+        // Ajoutez ici la logique de gestion de la réponse
+      },
+      error => {
+        console.error('Erreur lors de la mise à jour :', error);
+        // Ajoutez ici la logique de gestion de l'erreur
+      }
+    );
   }
 
   loadAppointments() {
@@ -34,12 +51,14 @@ export class RendezVousComponent {
       }
     );
   }
+ 
 
   acceptAppointment(appointment: Appointment) {
     
     // Perform actions related to accepting the appointment
     // You can also call sendMail method here with the appropriate parameters
     console.log('Appointment accepted:', appointment);
+
 
     // Example: Send email
     this.sendMail(
@@ -48,6 +67,15 @@ export class RendezVousComponent {
       'Appointment Accepted',
       'Rendez-vous accepted'
     );
+
+
+    this.appointmentService.updateAppointmentDecision(appointment.id, 'accept').subscribe(() => {
+      // Mark the action as taken for this appointment
+      appointment.isActionTaken = true;
+    });
+  
+
+    
   }
 
   rejectAppointment(appointment: Appointment) {
@@ -58,10 +86,17 @@ export class RendezVousComponent {
     // Example: Send email
     this.sendMail(
       appointment.email,
-      [],
+      [appointment.email],
       'Appointment Rejected',
       'Rendez-vous rejected'
     );
+    appointment.isActionTaken = true;
+
+    this.appointmentService.updateAppointmentDecision(appointment.id, 'reject').subscribe(() => {
+      // Mark the action as taken for this appointment
+      appointment.isActionTaken = true;
+    });
+
   }
 
   sendMail(to: string, cc: string[], subject: string, body: string) {
@@ -75,6 +110,14 @@ export class RendezVousComponent {
       }
     );
   }
+  
+
+  viewAppointmentDetails(appointment: Appointment) {
+    this.selectedAppointment = appointment;
+  }
+
+
+  
     
   
 

@@ -129,10 +129,7 @@ export class NavbarComponent {
   downloadImage(): void {
     const userId = sessionStorage.getItem('userId');
   
-    if (!userId) {
-      console.error('User ID not found in session storage.');
-      return;
-    }
+   
   
     this.http
       .get(`http://localhost:8080/image/download/${userId}`, {
@@ -170,8 +167,6 @@ export class NavbarComponent {
           console.error('Error fetching doctor details:', error);
         }
       );
-    } else {
-      console.error('User ID not found in session storage.');
     }
   }
 

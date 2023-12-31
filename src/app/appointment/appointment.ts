@@ -1,4 +1,5 @@
 export interface Appointment {
+    id:string
     firstName: string;
     lastName: string;
     phone: string;
@@ -16,5 +17,7 @@ export interface Appointment {
     owner: string;
     email:string;
     id_patient:string;
+    decision:string;
+    isActionTaken:boolean;
 
 }
