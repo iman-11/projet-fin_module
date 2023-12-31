@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Register } from './register/register';
@@ -99,5 +99,29 @@ export class ServiceService {
     // For example, you can use the presence of the access token as an indicator of authentication
     return sessionStorage.getItem('accessToken') !== null;
   }
+
+  sendMail(file: File[], to: string, cc: string[], subject: string, body: string): Observable<string> {
+    const formData = new FormData();
+    if (file && file.length > 0) {
+      for (const currentFile of file) {
+        formData.append('file', currentFile);
+      }
+    }
+
+    formData.append('to', to);
+    if (cc && cc.length > 0) {
+      formData.append('cc', cc.join(','));
+    }
+    formData.append('subject', subject);
+    formData.append('body', body);
+
+    const headers = new HttpHeaders(); // Add any additional headers if needed
+
+    return this.http.post<string>(`http://localhost:8080/mail/send`, formData, { headers });
+  }
+
+
+
+
   
 }
