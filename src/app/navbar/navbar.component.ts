@@ -174,6 +174,15 @@ export class NavbarComponent {
       console.error('User ID not found in session storage.');
     }
   }
+
+  logout() {
+    // Clear session storage
+    sessionStorage.clear();
+
+    // Redirect to the section page
+    this.router.navigate(['/section']);
+  }
+
   
 
   

@@ -34,12 +34,7 @@ export class LoginComponent implements OnInit{
     this.authservice.login(email, password)
       .subscribe({
         next: (response) => {
-          // this.authResponse = response;
-          // if (!this.authResponse.mfaEnabled) {
-          //   this.authservice.loadprofile(this.authResponse)
-
-
-          // }
+         
           this.authservice.loadprofile1(response)
 
           this.router.navigate(['/doctor']);

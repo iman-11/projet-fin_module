@@ -1,13 +1,236 @@
-.back-button {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-  }
-  
-  .back-icon {
-    margin-right: 5px; /* Adjust the spacing between the icon and text */
-    font-size: 1.5em; /* Adjust the font size of the back icon */
-    color: #007bff; /* Adjust the color of the back icon */
-    /* Add any other styles you want for the back icon */
-  }
-  
+/* Styles existants */
+
+form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+select,
+input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #26acce;
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  cursor: pointer;
+}
+
+.form1 {
+  width: 00px;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Ajoutez un remplissage pour plus d'espace */
+}
+
+.formGroup {
+  width: 100%;
+  /* Ajustez la largeur selon vos besoins */
+  margin: 0 auto;
+  /* Centre le formulaire horizontalement */
+}
+
+.form2 {
+  width: 900px;
+}
+
+/* button {
+  margin-right: 10px;
+  margin-left: 10px;
+  cursor: pointer;
+} */
+.custom-icon {
+  /* Ajoutez vos styles spécifiques pour l'icône ici */
+  font-size: 24px; /* Par exemple, définir la taille de la police pour contrôler la taille de l'icône */
+  /* Ajoutez d'autres styles au besoin */
+}
+
+
+.container {
+  background-image: url('/assets/images/bac2.jpg');
+  background-position: center center;
+  margin: 0;
+  padding: 0;
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  /* 100% de la hauteur de la vue (viewport height) */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+  min-height: 100vh;
+}
+
+.image-background {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  /* Ajuste la taille tout en préservant les proportions de l'image */
+}
+
+.form1 input,
+.form1 select,
+.form2 input,
+.form2 select {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.form3 {
+  width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form3 input,
+.form3 select {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+/* Nouveaux styles ajoutés */
+
+.form-container {
+  max-width: 600px;
+  margin: auto;
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.accordion-header {
+  background-color: hsl(0, 0%, 99%);
+  color: #fff;
+}
+
+.accordion-body {
+  background-color: #fff;
+  color: #333;
+}
+
+.timeline-header {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.custom-button {
+  background-color: #ffffff;
+  color: #26acce;
+  /* Ajoutez d'autres styles personnalisés si nécessaire */
+}
+
+.my-form .form2 {
+  max-width: 900px; /* Ajustez la largeur selon vos besoins */
+  margin: auto; /* Centre le formulaire horizontalement */
+}
+
+/* Styles pour ajuster la largeur des éléments à l'intérieur */
+.my-form .form2 input,
+.my-form .form2 select {
+  width: 100%;
+  margin-bottom: 15px;
+}
+.timeline-body {
+  background-color: #f8f9fa; /* Couleur de fond de la timeline-body */
+  padding: 15px; /* Espacement intérieur */
+}
+
+.timeline-header {
+  background-color: #3ca9c4; /* Couleur de fond de la timeline-header */
+  color: #ffffff; /* Couleur du texte de la timeline-header */
+  padding: 10px; /* Espacement intérieur */
+}
+
+.accordion-button {
+  background-color: #ffffff; /* Couleur de fond du bouton d'accordéon */
+  color: #44c0c9; /* Couleur du texte du bouton d'accordéon */
+  border: 1px solid #007bff; /* Bordure du bouton d'accordéon */
+}
+
+.accordion-button:hover {
+  background-color: #f0f0f0; /* Couleur de fond au survol du bouton d'accordéon */
+}
+
+
+
+.accordion-body {
+  background-color: #f8f9fa; /* Couleur de fond de l'accordéon-body */
+  padding: 10px; /* Espacement intérieur */
+}
+
+ul {
+  list-style-type: none; /* Supprime les puces de la liste */
+  padding: 0; /* Supprime l'espacement interne de la liste */
+}
+
+li {
+  margin-bottom: 5px; /* Espacement entre les éléments de la liste */
+}
+
+.success-message {
+   /* couleur de fond verte, ajustez selon vos besoins */
+  color: #fff; /* couleur du texte blanc, ajustez selon vos besoins */
+  padding: 10px; /* espace intérieur */
+  border-radius: 5px; /* coins arrondis */
+  margin-top: 10px; /* marge supérieure */
+}
+/* Add these styles to your CSS file */
+.timeline-content .timeline-header .icon {
+  width: 20px; /* Set the desired width */
+  height: 20px; 
+}
+
+.no-slots-message {
+  color: hsl(0, 0%, 0%); /* Dark red text color */
+  padding: 15px; /* Padding around the message */
+  size: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  border-radius: 5px; /* Rounded corners */
+  margin-bottom: 20px; /* Bottom margin for separation */
+}
+
+.appointment-component .time-slots {
+  display: flex;
+  flex-wrap: wrap;
+}
+.appointment-component .time-slot label {
+  margin: 0; /* Supprime toute marge interne (padding) du label */
+}
+
+.appointment-component .time-slot {
+  flex: 1 0 22%; /* Répartit l'espace disponible en 4 colonnes avec une marge */
+  margin: 5px;
+  border: 1px solid #ccc;
+  padding: 3px;
+  text-align: center; /* Centre le texte à l'intérieur du cadre */
+  color: rgb(12, 207, 241); /* Couleur du texte pour les heures */
+}
+
+.appointment-component .time-slot input {
+  margin-left: 5px; /* Ajoute un espace entre le texte et la case à cocher */
+}
+
+/* Ajoutez ces styles dans votre fichier CSS ou dans le style de votre composant */
+.selected-slot {
+  background-color:#d3caca; /* Remplacez par la couleur que vous souhaitez */
+  color:#333; /* Remplacez par la couleur du texte que vous souhaitez */
+}

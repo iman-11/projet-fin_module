@@ -380,12 +380,12 @@
                        <div class="accordion-item">
                          <h2 class="accordion-header" id="flush-headingOne">
                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                             Quelle est l'adresse de Dr {{ doctor.firstname.toUpperCase()}} {{ doctor.lastname.toUpperCase() }} ?
+                             Quelle est l'adresse de Dr {{ doctor.firstname?.toUpperCase()}} {{ doctor.lastname.toUpperCase() }} ?
                            </button>
                          </h2>
                          <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
                            <div class="accordion-body">
-                             <p style="text-transform: capitalize; font-size: 0.9rem; color: black;">L'adresse de Dr {{ doctor.firstname.toUpperCase()}} {{ doctor.lastname.toUpperCase() }} est {{doctor.address}}</p>
+                             <p style="text-transform: capitalize; font-size: 0.9rem; color: black;">L'adresse de Dr {{ doctor.firstname?.toUpperCase()}} {{ doctor.lastname.toUpperCase() }} est {{doctor.address}}</p>
                            </div>
                          </div>
                        </div>
@@ -399,7 +399,7 @@
                          </h2>
                          <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
                            <p style="text-transform: capitalize; font-size: 0.9rem; color: black;">
-                             Les langues qui peuvent être parlées avec Dr {{ doctor.firstname.toUpperCase() }} {{ doctor.lastname.toUpperCase() }} sont les suivantes :
+                             Les langues qui peuvent être parlées avec Dr {{ doctor.firstname?.toUpperCase() }} {{ doctor.lastname.toUpperCase() }} sont les suivantes :
                              <ng-container *ngFor="let langue of doctor.langues; let last = last">
                                {{ langue }}
                                <ng-container *ngIf="!last"> et </ng-container>
@@ -417,7 +417,7 @@
                          </h2>
                          <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
                            <div class="accordion-body">
-                             <p style="text-transform: capitalize; font-size: 0.9rem; color: black;">le numéro de téléphone de Dr {{ doctor.firstname.toUpperCase()}} {{ doctor.lastname.toUpperCase() }} est {{doctor.telephone}}</p>
+                             <p style="text-transform: capitalize; font-size: 0.9rem; color: black;">le numéro de téléphone de Dr {{ doctor.firstname?.toUpperCase()}} {{ doctor.lastname.toUpperCase() }} est {{doctor.telephone}}</p>
                            </div>
                          </div>
                        </div>
@@ -444,7 +444,7 @@
               <p class="card-text" style=" text-transform: capitalize;font-size: 0.9rem; color: black;display: flex;"> <img src=".\assets\images\placeholder.png"alt="Icon Description" class="icon"><tr>  </tr> Accepte les nouveaux patients sur DocLink</p>
 
               <p class="card-text" style=" text-transform: capitalize;font-size: 0.9rem; color: black;display: flex; "><img src=".\assets\images\profile.png"alt="Icon Description" class="icon"><tr>  </tr>
-               Cabinet dentaire du docteur {{ doctor.firstname.toUpperCase()}} {{ doctor.lastname.toUpperCase() }}
+               Cabinet dentaire du docteur {{ doctor.firstname?.toUpperCase()}} {{ doctor.lastname.toUpperCase() }}
 
                {{doctor.address}}</p>
 

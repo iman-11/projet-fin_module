@@ -14,7 +14,6 @@ export class ServiceService {
   
   private apiUrl = 'http://localhost:8080/api/v1/users'; // Replace with your actual backend API URL
 
- isAuthenticated:Boolean=false;
  roles:any
  username:any;
  accesstoken!:string;
@@ -40,7 +39,6 @@ export class ServiceService {
     return this.http.put(`${this.apiUrl}/${userId}`, doctorData);
   }
   loadprofile(data: any) {
-    this.isAuthenticated = true;
     this.accesstoken = data['access_token'];  
     let jwtdecoder: any = jwtDecode(this.accesstoken);
   
@@ -55,7 +53,6 @@ export class ServiceService {
     sessionStorage.setItem('userId', this.user_id);
   }
   loadprofile1(data: any) {
-    this.isAuthenticated = true;
     this.accesstoken = data['accessToken'];  
     let jwtdecoder: any = jwtDecode(this.accesstoken);
   
@@ -96,6 +93,11 @@ export class ServiceService {
     (`${this.baseUrl}/verify`, verificationRequest);
   }
   
-
+ 
+  isAuthenticated(): boolean {
+    // Check if the token is stored in sessionStorage or any other authentication logic
+    // For example, you can use the presence of the access token as an indicator of authentication
+    return sessionStorage.getItem('accessToken') !== null;
+  }
   
 }

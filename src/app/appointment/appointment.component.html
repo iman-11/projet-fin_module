@@ -1,41 +1,215 @@
-<div class="container mt-4">
-  <div class="text-center" style="margin-top: 100px;">
-    <h2>Make your appointment online</h2>
-    <h4>Fill in the following information</h4>
-  </div>
 
-  <div *ngIf="!showHiddenCard" [@cardAnimation]="'visible'" class="card mx-auto mt-4" style="max-width: 700px; margin-top: 100px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-    <div class="card-header" style="background-color: #85e2de; color: #070707; border-radius: 10px 10px 0 0;">
-      Choose your reason for consultation
-    </div>
-    <div class="card-body">
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item" style="height: 80px; cursor: pointer;" (click)="showAppointmentCard('adult')">Adult - Dental consultation</li>
-        <li class="list-group-item" style="height: 80px; cursor: pointer;" (click)="showAppointmentCard('child')">Child - Dental consultation</li>
-        <li class="list-group-item" style="height: 80px; cursor: pointer;" (click)="showAppointmentCard('whitening')">Teeth whitening</li>
-        <li class="list-group-item" style="height: 80px; cursor: pointer;" (click)="showAppointmentCard('emergency')">Dental emergency </li>
-      </ul>
-    </div>
-  </div>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-12">
 
-  <div *ngIf="showHiddenCard && showThirdCard" [@cardAnimation]="'visible'" class="card mx-auto mt-4" style="max-width: 700px; margin-top: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
-    <div class="card-header" style="background-color: #85e2de; color: #070707; border-radius: 10px 10px 0 0;">
+      <form  *ngIf="!showSuccessMessage" [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
+
+          <div *ngIf="currentStep === 0">
+            <div [@cardAnimation]="'visible'" class="card mx-auto mt-4" style="max-width: 1800px; margin-top: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); width: 500px;">
+              <div class="card-header" style="background-color: #e7e9e8; color: #070707; border-radius: 10px 10px 0 0;">
+                <div style="display: flex; align-items: center;">
+                  <div style="cursor: pointer;" class="back-button">
+                    Your appointment matters. Your time is valuable, and we're here to ensure a seamless and convenient scheduling experience just for you
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item" style="height: 90px; cursor: pointer;" (click)="nextStep()">
+                    <i class="fas fa-times"></i> Click to make your appointment here
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+  
+
+
+        <!-- Step 1: Who are you making this appointment for? -->
+        <div *ngIf="currentStep === 1" style="margin-top: 90px;">
+          <label for="owner">Who are you making this appointment for?</label>
+            <select formControlName="owner" id="Owner" class="form-control">
+              <option value="Me">Me</option>
+              <option value="Relative">Relative</option>
+            </select>
+
+          <label for="firstName" >First name:*</label>
+          <input formControlName="firstName" id="firstName" type="text" class="form-control"  />
+          <label for="lastName">Last name:*</label>
+          <input formControlName="lastName" id="lastName" type="text" class="form-control" />
+          <label for="sexe">Gender:*</label>
+          <select formControlName="sexe" id="sexe" class="form-control">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+          <label for="phone">Phone number:*</label>
+          <input formControlName="phone" id="phone" type="tel" class="form-control"/>
+
+          <i class="bi bi-arrow-left-circle-fill" (click)="previousStep()" style="font-size: 35px;padding-right: 270px;"></i>
+          <i class="bi bi-arrow-right-circle-fill" (click)="nextStep()" style="font-size: 35px;padding: 270;"></i>
+        </div>
+
+        <!-- Step 2: Additional user details -->
+        <div *ngIf="currentStep === 2" style="width:350px ;margin-top: 90px;">
+
+          <label for="dateNaissance">Email:*</label>
+          <input formControlName="email" id="email" type="text" class="form-control"/>
+
+          <label for="dateNaissance">Date of birth:*</label>
+          <input formControlName="dateNaissance" id="dateNaissance" type="date" class="form-control"/>
+
+
+          <label for="adresse">Address:*</label>
+          <input formControlName="adresse" id="address" type="text" class="form-control"/>
+
+          <label for="city">City:*</label>
+          <select formControlName="ville" id="ville" class="form-control">
+            <option value="">Select a city</option>
+            <option *ngFor="let city of getPostalCodeCities()" [value]="city">{{ city }}</option>
+          </select>
+
+          <label for="zipCode">Postal Code:*</label>
+          <select formControlName="zipCode" id="zipCode" class="form-control">
+            <option value="">Select a postal code</option>
+            <option *ngFor="let city of getPostalCodeKeys()" [value]="postalCodes ? postalCodes[city] : ''">{{ city }}: {{ postalCodes ? postalCodes[city] : '' }}</option>
+          </select>
+          <i class="bi bi-arrow-left-circle-fill" (click)="previousStep()" style="font-size: 35px;padding-right: 270px;"></i>
+          <i class="bi bi-arrow-right-circle-fill" (click)="nextStep()" style="font-size: 35px;padding-right: 270;"></i>
+        </div>
+
+        <!-- Step 3: Health details -->
+        <div *ngIf="currentStep === 3" style="width:350px ;">
+          <label for="longueur">Length (in cm) :*</label>
+          <input formControlName="longueur" id="longueur" type="number" class="form-control"/>
+
+          <label for="poids">weight (in kg) :*</label>
+          <input formControlName="poids" id="poids" type="number" class="form-control"/>
+
+           <label for="maladie">disease :*</label>
+          <input formControlName="maladie" id="maladie" class="form-control" [(ngModel)]="selectedDisease">
+
+
+          <i class="bi bi-arrow-left-circle-fill" (click)="previousStep()" style="font-size: 35px;padding-right: 270px;"></i>
+          <i class="bi bi-arrow-right-circle-fill" (click)="nextStep()" style="font-size: 35px;padding-left: 270;"></i>
+        </div>
+
+        <!-- Step 4: Choose the type of appointment -->
+       <!-- Step 4: Choose the type of appointment -->
+<div *ngIf="currentStep === 4">
+  <div [@cardAnimation]="'visible'" class="card mx-auto mt-4" style="max-width: 900px; margin-top: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    <div class="card-header" style="background-color: #e7e9e8; color: #070707; border-radius: 10px 10px 0 0;">
       <div style="display: flex; align-items: center;">
-        <div style="cursor: pointer;" (click)="goBack()" class="back-button">
-          <span class="back-icon">&lt;</span> 
-        
+        <div style="cursor: pointer;"  class="back-button">
           Choose the type of appointment that suits you best
         </div>
       </div>
     </div>
     <div class="card-body">
       <ul class="list-group list-group-flush">
-        <li class="list-group-item" style="height: 80px;">Call</li>
-        <li class="list-group-item" style="height: 80px;">Video</li>
-        <li class="list-group-item" style="height: 80px; cursor: pointer;">Face-to-face</li>
+        <li class="list-group-item" style="height: 80px;" (click)="setAppointmentType('call')">
+          <i class="fas fa-video"></i> Video
+        </li>
+        <li class="list-group-item" style="height: 80px; cursor: pointer;" (click)="setAppointmentType('Face-to-face')">
+          <i class="fas fa-hospital"></i> Face-to-face
+        </li>
       </ul>
     </div>
   </div>
+  <i class="bi bi-arrow-left-circle-fill" (click)="previousStep()" style="font-size: 35px;padding-right: 270px;"></i>
 </div>
-  
+<!-- Your component template -->
+<div *ngIf="currentStep === 5" style="width:500px; height: 500px; margin-top: 70px; margin-bottom: 30px;">
+  <div class="timeline-body">
+    <div class="timeline-header">
+      <span class="username">Choose the appointment date</span>
+    </div>
 
+    <div class="accordion accordion-flush" id="accordionFlushExample">
+      <div *ngFor="let day of availableSlots.slice(0, 4)">
+        <div class="accordion-item">
+          <h2 class="accordion-header" [id]="'flush-heading' + day.jour">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              [attr.data-bs-toggle]="'collapse'"
+              [attr.data-bs-target]="'#flush-collapse' + day.jour"
+              [attr.aria-expanded]="isSelectedDay(day)"
+              [attr.aria-controls]="'flush-collapse' + day.jour"
+              (click)="toggleTimeSlots(day)"
+            >
+              {{ day.jour }}
+            </button>
+          </h2>
+         <!-- ... votre code existant ... -->
+
+         <div [id]="'flush-collapse' + day.jour" class="appointment-component accordion-collapse collapse" [attr.aria-labelledby]="'flush-heading' + day.jour" [attr.data-bs-parent]="'#accordionFlushExample'" *ngIf="isSelectedDay(day)">
+          <div class="accordion-body">
+            <div *ngIf="selectedDay && selectedDay.timeSlots && selectedDay.timeSlots.length > 0; else noSlots">
+              <p class="time-slots">
+                <ng-container *ngFor="let slot of selectedDay.timeSlots; let i = index">
+                  <span class="time-slot" (click)="onTimeSlotClick(slot)" [class.selected-slot]="isSelectedSlot(slot)">
+                    {{ slot }}
+                  </span>
+                  
+                  <span *ngIf="i < selectedDay.timeSlots.length - 1"></span> 
+                </ng-container>
+              </p>
+            </div>
+          
+            <ng-template #noSlots>
+              <div class="no-slots-message" style="color: #070707; font-size: medium; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+                <p sty>No available time slots for this day</p>
+              </div>
+            </ng-template>
+          </div>
+        </div>
+        
+     
+</div>
+</div>
+</div>
+
+
+
+           
+        
+        
+      
+   
+ 
+
+
+
+
+
+
+    
+    
+
+<!-- ... (your existing code) -->
+
+
+    <!-- <button class="btn btn-primary" (click)="toggleAppointments()">Voir {{ showAllAppointments ? 'moins' : 'plus' }}</button> -->
+  </div>
+
+
+
+
+          <i class="bi bi-arrow-left-circle-fill" (click)="previousStep()" style="font-size: 35px;margin-right: 430px;padding-top: 20px;"></i>
+          <button [disabled]="!appointmentForm.valid" style="border: none; background: none; padding: 0; margin: 0; font-size: 30px;color:#070707">
+            <i class="bi bi-calendar-check-fill"></i>
+          </button>
+
+         <div *ngIf="appointmentForm.invalid" style="color: rgb(230, 87, 87);">Please fill in all required fields.</div>
+        </div>
+
+      </form>
+
+      <div *ngIf="showSuccessMessage" [ngClass]="{'success-message': showSuccessMessage}">
+        <p>Appointment made successfully!</p>
+      </div>
+
+    </div>
+  </div>
+</div>

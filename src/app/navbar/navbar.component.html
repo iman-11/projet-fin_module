@@ -11,7 +11,7 @@
 
         <div class="row">
           <div class="col-md-6 text-center">
-            <button type="button" class="btn btn-primary" [routerLink]="['/login']" data-bs-dismiss="modal">
+            <button type="button" class="btn btn-primary" [routerLink]="['/loginpatiet']" data-bs-dismiss="modal">
               <img src="./assets/images/patient4.png" alt="" class="btnicon">
               PATIENT
             </button>
@@ -119,12 +119,12 @@
     </div>
   </div>
   <div class="dropdown-menu navbar-dropdown" ngbDropdownMenu aria-labelledby="profileDropdown">
-    <a [routerLink]="['/profil']" class="dropdown-item" href="javascript:;">
+    <a [routerLink]="['/profildoc']" class="dropdown-item" href="javascript:;">
       <i class="mdi mdi-cached mr-2 text-success"></i>
       Profil
     </a>
     <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="javascript:;">
+    <a class="dropdown-item" href="javascript:;" (click)="logout()">
       <i class="mdi mdi-logout mr-2 text-primary"></i>
       Signout
     </a>

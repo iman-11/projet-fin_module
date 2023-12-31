@@ -1,0 +1,76 @@
+
+<style>
+    /* Style for table header */
+   
+    /* Style for accept button */
+    .accept {
+        background-color: #80d0c7;
+        margin-right: 5px; /* Adjust the margin as needed */
+
+    }
+    .card-header-patient {
+        background-color: #80d0c7;
+    }
+    .container {
+        width: 100%;
+        
+    }
+
+    section {
+        height: 100vh; /* Set the desired height for the section */
+    }
+
+   
+
+    /* Additional styles for offcanvas */
+    .offcanvas {
+        width: 80%;
+    }
+</style>
+
+
+
+<div class="container mt-4">
+    <section>
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card" style="margin-top: 150px;" >
+                        <div class="card-header card-header-patient"  >
+                            <h4 class="text-center" >PATIENT</h4>
+                        </div>
+                        <div class="card-body" >
+                            <table id="myTable4" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>name</th>
+                                        <th>email</th>
+                                        <th>Type Consultations</th>
+                                        <th>STATUS</th>
+                                        <th>DECISION</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>hicham fassali</td>
+                                        <td>fassali.fst.ac.ma</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="decision">rejected</td>
+                                        <td>
+                                            <button type="button" class="btn btn-info btn-sm view-user" style="color:white;            margin-right: 5px; /* Adjust the margin as needed */
+                                            ">View</button>
+                                            <button type="button" class="accept btn btn-success btn-sm">accept</button>
+                                            <button type="button" class="reject btn btn-danger btn-sm">refuse</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

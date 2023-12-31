@@ -28,6 +28,9 @@ import { FilterDoctorComponent } from './filter-doctor/filter-doctor.component';
 import { Test1Component } from './test1/test1.component';
 import { DashbordComponent } from './dashbord/dashbord.component';
 import { DoctorsectionComponent } from './doctorsection/doctorsection.component';
+import { RendezVousComponent } from './rendez-vous/rendez-vous.component';
+import { LoginpatientComponent } from './loginpatient/loginpatient.component';
+import { ProfilfordoctorComponent } from './profilfordoctor/profilfordoctor.component';
 
 
 
@@ -49,6 +52,9 @@ import { DoctorsectionComponent } from './doctorsection/doctorsection.component'
          Test1Component,
          DashbordComponent,
          DoctorsectionComponent,
+         RendezVousComponent,
+         LoginpatientComponent,
+         ProfilfordoctorComponent,
  
    
   ],

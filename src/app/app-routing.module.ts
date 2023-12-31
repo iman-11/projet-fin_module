@@ -12,6 +12,9 @@ import { DashbordComponent } from './dashbord/dashbord.component';
 import { Test1Component } from './test1/test1.component';
 import { TestComponent } from './test/test.component';
 import { DoctorsectionComponent } from './doctorsection/doctorsection.component';
+import { RendezVousComponent } from './rendez-vous/rendez-vous.component';
+import { LoginpatientComponent } from './loginpatient/loginpatient.component';
+import { ProfilfordoctorComponent } from './profilfordoctor/profilfordoctor.component';
 const routes: Routes = [
 
 
@@ -32,6 +35,17 @@ const routes: Routes = [
       { path: 'test', component: TestComponent },
       { path: 'profil', component: ProfilComponent },
       { path: 'doctor', component: DoctorsectionComponent },
+
+      { path: 'rendez', component: RendezVousComponent },
+
+      { path: 'Appointment', component: AppointmentComponent },
+
+      { path: 'loginpatiet', component: LoginpatientComponent },
+      {path:'profildoc',component:ProfilfordoctorComponent},
+
+
+
+      
 
 
 

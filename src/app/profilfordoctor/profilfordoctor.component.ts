@@ -1,19 +1,19 @@
-import { Component, ViewEncapsulation,HostListener } from '@angular/core';
+import { HttpClient, HttpEventType } from '@angular/common/http';
+import { Component, HostListener } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { PopupComponent } from '../popup/popup.component';
-import { HttpClient, HttpHeaders, HttpEventType } from '@angular/common/http';
-import { ServiceService } from '../service.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import * as bootstrap from 'bootstrap';
-
+import { PopupComponent } from '../popup/popup.component';
+import { ServiceService } from '../service.service';
 
 @Component({
-  selector: 'app-profil',
-  templateUrl: './profil.component.html',
-  styleUrls: ['./profil.component.css'],
-  encapsulation: ViewEncapsulation.None
+  selector: 'app-profilfordoctor',
+  templateUrl: './profilfordoctor.component.html',
+  styleUrls: ['./profilfordoctor.component.css']
 })
-export class ProfilComponent {
+export class ProfilfordoctorComponent {
+
+
 
 
 
@@ -31,32 +31,33 @@ export class ProfilComponent {
     this.downloadImage();
   }
   ngOnInit(): void {
-    // Get the doctorId from the route parameters
-    this.route.queryParams.subscribe((params) => {
-      console.log('Route params:', params);
-
-      // Check if id is available in the route parameters
-      if (params['id']) {
-        // Update the doctorId in the component
-        this.doctorId = '';
-        console.log('Updated doctorId in component:', this.doctorId);
-
-        // Fetch the doctor details
-        this.authservice.getdoctor(this.doctorId).subscribe(
-          (data) => {
-            console.log('Doctor data:', data);
-            this.doctor = data;
-
-            // After getting the doctor's information, download the image
-            this.downloadImage();
-          },
-          (error) => {
-            console.error('Error getting doctor data:', error);
-          }
-        );
-      }
-    });
+    // Get the doctorId from session storage
+    const storedDoctorId = sessionStorage.getItem('userId');
+  
+    // Check if id is available in session storage
+    if (storedDoctorId) {
+      // Update the doctorId in the component
+      this.doctorId = storedDoctorId;
+      console.log('Updated doctorId in component:', this.doctorId);
+  
+      // Fetch the doctor details
+      this.authservice.getdoctor(this.doctorId).subscribe(
+        (data) => {
+          console.log('Doctor data:', data);
+          this.doctor = data;
+  
+          // After getting the doctor's information, download the image
+          this.downloadImage();
+        },
+        (error) => {
+          console.error('Error getting doctor data:', error);
+        }
+      );
+    } else {
+      console.error('Doctor ID not found in session storage.');
+    }
   }
+  
 
 
 
@@ -182,7 +183,4 @@ export class ProfilComponent {
 
 
 }
-
-
-
 
