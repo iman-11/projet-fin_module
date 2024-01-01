@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import * as bootstrap from 'bootstrap';
 import { PopupComponent } from '../popup/popup.component';
 import { ServiceService } from '../service.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-profilfordoctor',
@@ -24,30 +25,32 @@ export class ProfilfordoctorComponent {
   doctor!: any;
   constructor(private http: HttpClient, private dialog: MatDialog,private authservice: ServiceService,private router1: Router,
 
-    private route: ActivatedRoute 
+    private route: ActivatedRoute ,    private spinner: NgxSpinnerService
+
 
     ) {
 
     this.downloadImage();
   }
   ngOnInit(): void {
+    this.spinner.show()
     const storedDoctorId = sessionStorage.getItem('userId');
   
     if (storedDoctorId) {
       this.doctorId = storedDoctorId;
-      console.log('Updated doctorId in component:', this.doctorId);
   
       // Fetch the doctor details
       this.authservice.getdoctor(this.doctorId).subscribe(
         (data) => {
-          console.log('Doctor data:', data);
           this.doctor = data;
   
           // After getting the doctor's information, download the image
           this.downloadImage();
+          this.spinner.hide()
         },
         (error) => {
           console.error('Error getting doctor data:', error);
+          this.spinner.hide()
         }
       );
     } else {
@@ -106,9 +109,7 @@ export class ProfilfordoctorComponent {
       .subscribe(
         (event) => {
           if (event.type === HttpEventType.DownloadProgress) {
-            // Handle download progress if needed
-            // const percentDone = Math.round((100 * event.loaded) / event.total);
-            // console.log(`File is ${percentDone}% downloaded.`);
+          
           } else if (event.type === HttpEventType.Response) {
             // Download completed successfully
             const arrayBuffer = event.body as ArrayBuffer;
@@ -120,7 +121,6 @@ export class ProfilfordoctorComponent {
           console.error('Error downloading image', error);
         }
       );
-      console.log('Downloading image for user ID:', this.doctorId);
 
   }
 

@@ -31,6 +31,9 @@ import { DoctorsectionComponent } from './doctorsection/doctorsection.component'
 import { RendezVousComponent } from './rendez-vous/rendez-vous.component';
 import { LoginpatientComponent } from './loginpatient/loginpatient.component';
 import { ProfilfordoctorComponent } from './profilfordoctor/profilfordoctor.component';
+import { NgToastModule } from 'ng-angular-popup';
+import { PatientsComponent } from './patients/patients.component';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 
@@ -55,6 +58,7 @@ import { ProfilfordoctorComponent } from './profilfordoctor/profilfordoctor.comp
          RendezVousComponent,
          LoginpatientComponent,
          ProfilfordoctorComponent,
+         PatientsComponent,
  
    
   ],
@@ -71,6 +75,9 @@ import { ProfilfordoctorComponent } from './profilfordoctor/profilfordoctor.comp
     MatDialogModule,
     MatSelectModule,
     FormsModule,
+    NgToastModule,
+    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
+
     
     
   ],

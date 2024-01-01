@@ -4,6 +4,7 @@ import { ServiceService } from '../service.service';
 import { Router } from '@angular/router';
 import { AuthenticationResponse } from '../register/authentication-response';
 import { VerificationRequest } from '../register/verification-request';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +19,10 @@ export class LoginComponent implements OnInit{
 
 
   formlogin !:FormGroup;
-  constructor(private fb:FormBuilder,private authservice:ServiceService,private router: Router){}
+  constructor(private fb:FormBuilder,private authservice:ServiceService,private router: Router,
+    private spinner: NgxSpinnerService
+    
+    ){}
   ngOnInit(): void {
     this.formlogin=this.fb.group({
       email:this.fb.control(""),
@@ -29,6 +33,8 @@ export class LoginComponent implements OnInit{
   }
 
   handlelogin() {
+    this.spinner.show();
+
     const email = this.formlogin.get('email')?.value;
     const password = this.formlogin.get('password')?.value;
     this.authservice.login(email, password)
@@ -36,9 +42,13 @@ export class LoginComponent implements OnInit{
         next: (response) => {
           this.authservice.loadprofile1(response);
           this.router.navigate(['/doctor']);
+          this.spinner.hide();
+
         },
         error: (error) => {
           console.error('Login error:', error);
+          this.spinner.hide();
+
           // Handle the error (e.g., show a message to the user)
         }
       });

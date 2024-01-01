@@ -15,6 +15,7 @@ import { DoctorsectionComponent } from './doctorsection/doctorsection.component'
 import { RendezVousComponent } from './rendez-vous/rendez-vous.component';
 import { LoginpatientComponent } from './loginpatient/loginpatient.component';
 import { ProfilfordoctorComponent } from './profilfordoctor/profilfordoctor.component';
+import { PatientsComponent } from './patients/patients.component';
 const routes: Routes = [
 
 
@@ -42,6 +43,10 @@ const routes: Routes = [
 
       { path: 'loginpatiet', component: LoginpatientComponent },
       {path:'profildoc',component:ProfilfordoctorComponent},
+
+      {path:'patients',component:PatientsComponent},
+
+
 
 
 

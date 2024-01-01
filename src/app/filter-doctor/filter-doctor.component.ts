@@ -3,6 +3,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ServiceService } from '../service.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-filter-doctor',
@@ -35,7 +36,9 @@ export class FilterDoctorComponent {
     private fb: FormBuilder,
     private authservice: ServiceService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private spinner: NgxSpinnerService
+
  ) {}
 
   searchText = '';
@@ -43,12 +46,8 @@ export class FilterDoctorComponent {
 
 
 
-  onSubmit(): void {
-    // Handle form submission if necessary
-  }
 
-  selectResult(result: any): void {
-  }
+
 
   downloadImage(userId: string): void {
     if (!userId) {
@@ -115,6 +114,8 @@ export class FilterDoctorComponent {
   }
   
   loadDoctorsAndImages(): void {
+    this.spinner.show()
+
     if (!this.selectedSpecialty) {
       console.error('Selected specialty is not defined.');
       return;
@@ -122,6 +123,7 @@ export class FilterDoctorComponent {
   
     this.authservice.getalldoctor().subscribe(
       (data) => {
+
         // Download images for each doctor
         this.results1 = data.filter((doctor) => {
           const isSelectedSpecialty = doctor.speciality === this.selectedSpecialty;
@@ -130,10 +132,14 @@ export class FilterDoctorComponent {
           }
           return isSelectedSpecialty;
         });
+        this.spinner.hide()
       },
       (error) => {
         console.error('Error loading doctors', error);
+        this.spinner.hide()
+
       }
+      
     );
   }
   

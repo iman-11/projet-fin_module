@@ -21,9 +21,10 @@ export class AppointmentService {
     return this.http.get<Appointment[]>(`${this.apiUrl}rendezvous/all`);
   }
 
-  
+  private baseUrl1 = 'http://localhost:8080/api/rendezvous'
+
  getAllAppointmentsDoctor(userId: string): Observable<Appointment[]> {
-    return this.http.get<Appointment[]>(`${this.baseUrl}/appointments/${userId}`);
+    return this.http.get<Appointment[]>(`${this.baseUrl1}/doctor/${userId}`);
   }
   private apiUrl3 = 'http://localhost:8080/api/rendezvous/updateDecision';
 

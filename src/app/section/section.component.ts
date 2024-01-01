@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ServiceService } from '../service.service';
 import { HttpClient, HttpEventType } from '@angular/common/http';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-section',
@@ -22,7 +23,9 @@ export class SectionComponent {
     private http: HttpClient,
     private fb: FormBuilder,
     private authservice: ServiceService,
-    private router: Router
+    private router: Router,
+    private spinner: NgxSpinnerService
+
   ) {
     document.addEventListener('DOMContentLoaded', () => {
       this.oussama = document.getElementById('och');
@@ -68,15 +71,20 @@ export class SectionComponent {
 
 
   selectResult(result: any): void {
+
   
     // Check if doctorId ais available
     if (result.id) {
+      this.spinner.show();
+
       this.router.navigate(['/doctor-profile'], { queryParams: { id1: result.id } });
       console.log('Selected id:', result.id);
+
 
     } else {
       console.error('Doctor ID is not available');
     }
+    this.spinner.hide()
   }
 
   downloadImage(userId: string): void {

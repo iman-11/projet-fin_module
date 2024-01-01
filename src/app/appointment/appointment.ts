@@ -8,7 +8,7 @@ export interface Appointment {
     adresse: string;
     ville: string;
     dateRendezVous: string;
-    id_Doctor: string;
+    idDoctor: string;
     longueur: number;
     poids: number;
     maladie: string;
@@ -17,7 +17,5 @@ export interface Appointment {
     owner: string;
     email:string;
     id_patient:string;
-    decision:string;
-    isActionTaken:boolean;
-
+    decision: string;
 }

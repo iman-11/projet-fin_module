@@ -86,11 +86,11 @@ export class ServiceService {
   getdoctor(userid: any): Observable<any> {
     return this.http.get<any>(`http://localhost:8080/api/v1/users/getdoctor/${userid}`);
   }
-  private baseUrl = 'http://localhost:8080/api/v1/auth'
+  private baseUrl1 = 'http://localhost:8080/api/v1/auth'
 
   verifyCode(verificationRequest: VerificationRequest) {
     return this.http.post<AuthenticationResponse>
-    (`${this.baseUrl}/verify`, verificationRequest);
+    (`${this.baseUrl1}/ver`, verificationRequest);
   }
   
  

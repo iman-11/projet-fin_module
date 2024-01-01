@@ -33,7 +33,7 @@
          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
        </div>
        <div class="modal-body d-flex justify-content-center align-items-center">
-         <img id="profile-image-modal" src="{{ imageUrl || 'https://bootdey.com/img/Content/avatar/avatar3.png' }}" alt="Profile Image" style="max-width: 100%; max-height: 80vh;">
+         <img id="profile-image-modal" src="{{ imageUrl }}" alt="Profile Image" style="max-width: 100%; max-height: 80vh;">
 
        </div>
        <div class="modal-footer">
@@ -62,7 +62,7 @@
                <div class="profile-header-content">
                   <!-- BEGIN profile-header-img -->
                   <div class="profile-header-img profile-header-img:hover" (click)="openProfileModal()">
-                     <img src="{{ imageUrl || 'https://bootdey.com/img/Content/avatar/avatar3.png' }}" alt="">
+                     <img src="{{ imageUrl }}" alt="">
                  </div>
                   <!-- END profile-header-img -->
                   <!-- BEGIN profile-header-info -->
@@ -127,7 +127,7 @@
               
                   <div class="timeline-body" style="margin-left: 40px; width: 750px;" >
                       <div class="timeline-header">
-                        <img src=".\assets\images\edit-text.png"alt="Icon Description" class="icon"><tr>  </tr>
+                        <img alt="Icon Description" class="icon"><tr>  </tr>
                          <span class="username">Présentation</span>
                       </div>
                       <div class="timeline-content">
@@ -170,7 +170,7 @@
                 
                     <!-- Formations -->
                     <div class="timeline-header">
-                      <img src=".\assets\images\diploma.png" alt="Icon Description" class="icon">
+                      <img  alt="Icon Description" class="icon">
                       <span class="username">Diplômes nationaux et universitaires</span>
                     </div>
                     <div class="timeline-content">
@@ -185,7 +185,7 @@
                 
                     <!-- Experiences -->
                     <div class="timeline-header">
-                      <img src=".\assets\images\experience.png" alt="Icon Description" class="icon">
+                      <img alt="Icon Description" class="icon">
                       <span class="username">Formations</span>
                     </div>
                     <div class="timeline-content">
@@ -221,7 +221,7 @@
               
                   <div class="timeline-body" style="margin-left: 40px; width: 750px;"  id="exp-section">
                      <div class="timeline-header">
-                        <img src=".\assets\images\diploma.png"alt="Icon Description" class="icon"><tr>  </tr>
+                        <img alt="Icon Description" class="icon"><tr>  </tr>
 
                         <span class="username" >expriences</span>
                      </div>
@@ -241,7 +241,7 @@
                      
                       <div class="timeline-footer">
                         
-                        <img src=".\assets\images\translator.png"alt="Icon Description" class="icon"><tr>  </tr>
+                        <img alt="Icon Description" class="icon"><tr>  </tr>
 
                        <span class="username" style=" text-transform: capitalize;font-size: 0.9rem; color: black; font-size: 0.8em;">langue parle</span>
                            <br>
@@ -283,7 +283,7 @@
                   <!-- begin timeline-body -->
                   <div class="timeline-body" style="margin-left: 40px; width: 750px;" id="Horaires-section">
                     <div class="timeline-header">
-                      <img src=".\assets\images\clockk.png" alt="Icon Description" class="icon">
+                      <img  alt="Icon Description" class="icon">
                       <span class="username">Horaires d'ouverture et contacts</span>
                     </div>
                 
@@ -300,7 +300,7 @@
                         </div>
                         <div class="col-md-6">
                           <p style="text-transform: capitalize; font-size: 0.95rem; color: black; font-weight: bold;">Contact d'urgence</p>
-                          <p style="text-transform: capitalize; font-size: 0.9rem; color: black;">En cas d'urgence, contactez le 15 (Samu)</p>
+                          <p style="text-transform: capitalize; font-size: 0.9rem; color: black;">En cas d'urgence, contactez le 15 </p>
 
                           <!-- Ajoutez vos informations de contact d'urgence ici -->
                         </div>
@@ -308,7 +308,7 @@
                     </div>
                 
                     <div class="timeline-footer">
-                      <img src=".\assets\images\translator.png" alt="Icon Description" class="icon">
+                      <img alt="Icon Description" class="icon">
                       <p style="text-transform: capitalize; font-size: 0.95rem; color: black; font-weight: bold;">Coordonnées</p>
                       <br>
                     </div>
@@ -339,7 +339,7 @@
                   <!-- begin timeline-body -->
                   <div class="timeline-body" style="margin-left: 40px; width: 750px;" id="tarif-section">
                     <div class="timeline-header">
-                      <img src=".\assets\images\clockk.png" alt="Icon Description" class="icon">
+                      <img alt="Icon Description" class="icon">
                       <span class="username">Tarifs</span>
                     </div>
                 
@@ -374,7 +374,7 @@
                   <!-- begin timeline-body -->
                   <div class="timeline-body" style="margin-left: 40px; width: 750px;" id="Faqs-section">
                      <div class="timeline-header">
-                       <img src=".\assets\images\help.png" alt="Icon Description" class="icon"><tr> </tr>
+                       <img alt="Icon Description" class="icon"><tr> </tr>
                        <span class="username">Faqs</span>
                      </div>
                    
@@ -403,7 +403,7 @@
                          <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
                            <p style="text-transform: capitalize; font-size: 0.9rem; color: black;">
                              Les langues qui peuvent être parlées avec Dr {{ doctor?.firstname?.toUpperCase() }} {{ doctor?.lastname?.toUpperCase() }} sont les suivantes :
-                             <ng-container *ngFor="let langue of doctor.langues; let last = last">
+                             <ng-container *ngFor="let langue of doctor?.langues; let last = last">
                                {{ langue }}
                                <ng-container *ngIf="!last"> et </ng-container>
                              </ng-container>
@@ -420,7 +420,7 @@
                          </h2>
                          <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
                            <div class="accordion-body">
-                             <p style="text-transform: capitalize; font-size: 0.9rem; color: black;">le numéro de téléphone de Dr {{ doctor?.firstname?.toUpperCase() }} {{ doctor?.lastname?.toUpperCase() }}est {{doctor.telephone}}</p>
+                             <p style="text-transform: capitalize; font-size: 0.9rem; color: black;">le numéro de téléphone de Dr {{ doctor?.firstname?.toUpperCase() }} {{ doctor?.lastname?.toUpperCase() }}est {{doctor?.telephone}}</p>
                            </div>
                          </div>
                        </div>
@@ -444,12 +444,12 @@
       <div class="card bg-white" [ngClass]="{'fixed': isFixed}" style="width: 420px; font-weight: bold;">
           <h4 class="card-header" style="border-bottom: 1px solid #e2e7eb;background-color: #e2e7eb; font-weight: bold;">En résumé</h4>
           <div class="card-body">
-              <p class="card-text" style=" text-transform: capitalize;font-size: 0.9rem; color: black;display: flex;"> <img src=".\assets\images\placeholder.png"alt="Icon Description" class="icon"><tr>  </tr> Accepte les nouveaux patients sur DocLink</p>
+              <p class="card-text" style=" text-transform: capitalize;font-size: 0.9rem; color: black;display: flex;"> <img alt="Icon Description" class="icon"><tr>  </tr> Accepte les nouveaux patients sur DocLink</p>
 
-              <p class="card-text" style=" text-transform: capitalize;font-size: 0.9rem; color: black;display: flex; "><img src=".\assets\images\profile.png"alt="Icon Description" class="icon"><tr>  </tr>
+              <p class="card-text" style=" text-transform: capitalize;font-size: 0.9rem; color: black;display: flex; "><img alt="Icon Description" class="icon"><tr>  </tr>
                Cabinet dentaire du docteur {{ doctor?.firstname?.toUpperCase() }} {{ doctor?.lastname?.toUpperCase() }}
 
-               {{doctor.address}}</p>
+               {{doctor?.address}}</p>
 
               <a  class="btn btn-primary" style="background-color:hsl(175, 49%, 65%); border: none; text-transform: capitalize;font-size: 0.9rem; color:white;  justify-content: center; margin-left: 90px;" (click)="checkAuthentication()" >  <img src=".\assets\images\calendar.png"alt="Icon Description" class="icon">PRENDRE RENDEZ-VOUS</a>
           </div>

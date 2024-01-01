@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders, HttpEventType } from '@angular/common/http';
 import { ServiceService } from '../service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as bootstrap from 'bootstrap';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -24,13 +25,17 @@ export class ProfilComponent {
   doctor!: any;
   constructor(private http: HttpClient, private dialog: MatDialog,private authservice: ServiceService,private router1: Router,
 
-    private route: ActivatedRoute 
+    private route: ActivatedRoute,
+    private spinner: NgxSpinnerService
+ 
 
     ) {
 
     this.downloadImage();
   }
   ngOnInit(): void {
+    this.spinner.show()
+    
     // Get the doctorId from the route parameters
     this.route.queryParams.subscribe((params) => {
       console.log('Route params1:', params);
@@ -49,9 +54,12 @@ export class ProfilComponent {
   
             // After getting the doctor's information, download the image
             this.downloadImage();
+            this.spinner.hide()
           },
           (error) => {
             console.error('Error getting doctor data:', error);
+            this.spinner.hide()
+
           }
         );
       }

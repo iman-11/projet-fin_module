@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Appointment } from '../appointment/appointment';
 import { AppointmentService } from '../appointment/appointment.service';
 import { ServiceService } from '../service.service';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-rendez-vous',
@@ -21,7 +22,11 @@ export class RendezVousComponent {
 
 
   constructor(private appointmentService: AppointmentService,    private authservice: ServiceService,
-) {} // Inject your service
+    private toast: NgToastService
+) {
+
+  
+} 
 
   ngOnInit() {
     this.loadAppointments();
@@ -51,53 +56,57 @@ export class RendezVousComponent {
       }
     );
   }
+  
  
 
   acceptAppointment(appointment: Appointment) {
-    
-    // Perform actions related to accepting the appointment
-    // You can also call sendMail method here with the appropriate parameters
     console.log('Appointment accepted:', appointment);
+    const message = `Dear ${appointment.firstName} ${appointment.lastName},\n\n` +
+      `We are pleased to inform you that your appointment scheduled for ${appointment.dateRendezVous} has been accepted.\n\n` +
+      `Thank you for choosing our service.\n\nBest regards,\nThe Appointment Team`;
 
-
-    // Example: Send email
     this.sendMail(
       appointment.email,
       [appointment.email],
       'Appointment Accepted',
-      'Rendez-vous accepted'
+      message
     );
 
+    // Update the decision on the client side without waiting for the service call
+    appointment.decision = 'accept';
 
-    this.appointmentService.updateAppointmentDecision(appointment.id, 'accept').subscribe(() => {
-      // Mark the action as taken for this appointment
-      appointment.isActionTaken = true;
-    });
-  
+    // Update the decision on the server side
+    this.updateDecision(appointment.id, 'Accepted');
 
-    
+    // Remove the appointment from the appointments array
+    this.appointments = this.appointments.filter(a => a.id !== appointment.id);
   }
 
   rejectAppointment(appointment: Appointment) {
-    // Perform actions related to rejecting the appointment
-    // You can also call sendMail method here with the appropriate parameters
     console.log('Appointment rejected:', appointment);
+    const message = `Dear ${appointment.firstName} ${appointment.lastName},\n\n` +
+      `We regret to inform you that your appointment scheduled for ${appointment.dateRendezVous} has been rejected.\n\n` +
+      `If you have any questions, please contact us.\n\nBest regards,\nThe Appointment Team`;
 
-    // Example: Send email
     this.sendMail(
       appointment.email,
       [appointment.email],
       'Appointment Rejected',
-      'Rendez-vous rejected'
+      message
     );
-    appointment.isActionTaken = true;
 
-    this.appointmentService.updateAppointmentDecision(appointment.id, 'reject').subscribe(() => {
-      // Mark the action as taken for this appointment
-      appointment.isActionTaken = true;
-    });
+    // Update the decision on the client side without waiting for the service call
+    appointment.decision = 'reject';
 
+    // Update the decision on the server side
+    this.updateDecision(appointment.id, 'Rejected');
+
+    // Remove the appointment from the appointments array
+    this.appointments = this.appointments.filter(a => a.id !== appointment.id);
   }
+
+  // ... (your existing code)
+
 
   sendMail(to: string, cc: string[], subject: string, body: string) {
     // Call your sendMail method from the service
@@ -116,6 +125,21 @@ export class RendezVousComponent {
     this.selectedAppointment = appointment;
   }
 
+
+  showSuccess() {
+    this.toast.success({
+      detail: "SUCCESS",
+      summary: 'Appointement Accepted',
+      duration: 5000  // Provide the duration as a number (milliseconds)
+    });
+  }
+  showError() {
+    this.toast.error({
+      detail: "ERROR",
+      summary: 'Appointement Rejected ',
+      sticky: true  // Set sticky to true for a sticky duration
+    });
+  }
 
   
     

@@ -50,7 +50,7 @@ padding-bottom: 50px;
 
 
           <!-- search.component.html -->
-          <form (ngSubmit)="onSubmit()" class="custom-form mt-4 pt-2 mb-lg-0 mb-5">
+          <form  class="custom-form mt-4 pt-2 mb-lg-0 mb-5">
             <div class="input-group input-group-lg position-relative" style="margin-top: 20px;">
               <span class="input-group-text bi-search" id="basic-addon1" ></span>
 
@@ -68,7 +68,7 @@ padding-bottom: 50px;
               <div *ngIf="searchText && results.length > 0; else noResults" class="search-results">
                 <!-- Display results in a list below the search input -->
                 <ul>
-                  <li *ngFor="let result of results" (click)="selectResult(result)">
+                  <li *ngFor="let result of results" >
                     <div class="user-info d-flex align-items-center">
                       <div class="profile-header-img profile-header-img:hover" style="margin-right: 10px;">
                         <img src="{{ result.imageUrl || 'https://bootdey.com/img/Content/avatar/avatar3.png' }}" alt="">

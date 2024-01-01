@@ -5,6 +5,7 @@ import { Spciality } from '../spciality/spciality';
 import { ServiceService } from '../service.service';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { FormBuilder } from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -56,9 +57,15 @@ export class NavbarComponent {
     private route: ActivatedRoute,
     private el: ElementRef,
     private SpcialityService: SpcialityService,
+    private spinner: NgxSpinnerService
 
 
- ) {}
+
+ ) {
+
+  this.downloadImage();
+  this.loadDoctorDetails();
+ }
  
 
   toggleSpecialtyList() {
@@ -154,17 +161,22 @@ export class NavbarComponent {
   
 
   loadDoctorDetails(): void {
+    this.spinner.show()
+
+    
     const userId = sessionStorage.getItem('userId');
   
     if (userId) {
       this.authservice.getdoctor(userId).subscribe(
         (doctorData) => {
-          console.log('Doctor Data:', doctorData); // Check the received data
           this.firstName = doctorData.firstname;
           this.lastName = doctorData.lastname;
+          this.spinner.hide()
         },
         (error) => {
           console.error('Error fetching doctor details:', error);
+          this.spinner.hide()
+
         }
       );
     }
