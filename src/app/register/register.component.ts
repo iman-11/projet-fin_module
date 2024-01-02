@@ -53,15 +53,21 @@ this.message='';
   
     
   .subscribe({
-        next: (response) => {
-           this.authresponse=response
-           this.authservice.loadprofile1(this.authresponse)
-            this.router.navigate(['/test']);
-          
-        }
-      });
+    next: (response) => {
+      if (response) {
+        this.authresponse = response;
+      } else {
+        // inform the user
+        this.message = 'Account created successfully\nYou will be redirected to the Login page in 3 seconds';
+        setTimeout(() => {
+          this.router.navigate(['login']);
+        }, 3000)
+      }
+    }
+  });
 
   }
+
 
 
 

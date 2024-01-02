@@ -15,7 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { TestComponent } from './test/test.component';
 import { MatChipsModule } from '@angular/material/chips';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { ProfilComponent } from './profil/profil.component';
@@ -66,6 +66,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    NoopAnimationsModule,
     HttpClientModule,
     MatChipsModule,
     BrowserAnimationsModule,

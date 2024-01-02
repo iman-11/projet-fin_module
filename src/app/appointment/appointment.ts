@@ -7,7 +7,7 @@ export interface Appointment {
     dateNaissance: string;
     adresse: string;
     ville: string;
-    dateRendezVous: string;
+    dateRendezVous: Date;
     idDoctor: string;
     longueur: number;
     poids: number;

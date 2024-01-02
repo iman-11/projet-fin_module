@@ -12,6 +12,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
   encapsulation:ViewEncapsulation.None
 })
 export class FilterDoctorComponent {
+
   selectedSpecialty: string = ''; 
   results1: any[] = [];
 
@@ -168,5 +169,8 @@ export class FilterDoctorComponent {
     });
   }
 
+  prendrerendezvous(doctorId: string): void {
+    this.router.navigate(['/Appointment'], { queryParams: { id: doctorId } });
+  }
 
 }

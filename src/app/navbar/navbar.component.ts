@@ -64,7 +64,6 @@ export class NavbarComponent {
  ) {
 
   this.downloadImage();
-  this.loadDoctorDetails();
  }
  
 
@@ -122,6 +121,7 @@ export class NavbarComponent {
     this.downloadImage();
     this.loadDoctorDetails();
 
+
   }
 
 
@@ -161,7 +161,6 @@ export class NavbarComponent {
   
 
   loadDoctorDetails(): void {
-    this.spinner.show()
 
     
     const userId = sessionStorage.getItem('userId');
@@ -171,11 +170,9 @@ export class NavbarComponent {
         (doctorData) => {
           this.firstName = doctorData.firstname;
           this.lastName = doctorData.lastname;
-          this.spinner.hide()
         },
         (error) => {
           console.error('Error fetching doctor details:', error);
-          this.spinner.hide()
 
         }
       );
