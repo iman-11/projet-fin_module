@@ -10,7 +10,7 @@ import { VerificationRequest } from './verification-request';
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
-  encapsulation:ViewEncapsulation.None
+
 })
 export class RegisterComponent {
   constructor(private fb:FormBuilder,private authservice:ServiceService,private router: Router){}

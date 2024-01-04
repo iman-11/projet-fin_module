@@ -21,7 +21,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { ProfilComponent } from './profil/profil.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PopupComponent } from './popup/popup.component';
-import { ContactService } from './contact/contact.service';
 import { FormsModule } from '@angular/forms';
 import { AppointmentComponent } from './appointment/appointment.component';
 import { FilterDoctorComponent } from './filter-doctor/filter-doctor.component';
@@ -34,18 +33,19 @@ import { ProfilfordoctorComponent } from './profilfordoctor/profilfordoctor.comp
 import { NgToastModule } from 'ng-angular-popup';
 import { PatientsComponent } from './patients/patients.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { DisplayqrComponent } from './displayqr/displayqr.component';
 
 
 
 @NgModule({
   declarations: [
-    AppComponent,
+          AppComponent,
     NavbarComponent,
     FooterComponent,
     SectionComponent,
     ContactComponent,
     
-    LoginComponent,
+         LoginComponent,
          RegisterComponent,
          TestComponent,
          ProfilComponent,
@@ -59,6 +59,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
          LoginpatientComponent,
          ProfilfordoctorComponent,
          PatientsComponent,
+         DisplayqrComponent,
  
    
   ],
@@ -77,10 +78,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     MatSelectModule,
     FormsModule,
     NgToastModule,
-    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
-
-    
-    
+    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }) 
   ],
   providers: [],
   bootstrap: [AppComponent,]
