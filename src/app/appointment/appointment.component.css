@@ -198,39 +198,67 @@ li {
   width: 20px; /* Set the desired width */
   height: 20px; 
 }
-
-.no-slots-message {
-  color: hsl(0, 0%, 0%); /* Dark red text color */
-  padding: 15px; /* Padding around the message */
-  size: 10px;
-  font-family: Arial, Helvetica, sans-serif;
-  border-radius: 5px; /* Rounded corners */
-  margin-bottom: 20px; /* Bottom margin for separation */
-}
-
-.appointment-component .time-slots {
+.appointment-component {
   display: flex;
   flex-wrap: wrap;
 }
-.appointment-component .time-slot label {
-  margin: 0; /* Supprime toute marge interne (padding) du label */
+
+
+.appointment-component {
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .appointment-component .time-slot {
-  flex: 1 0 22%; /* Répartit l'espace disponible en 4 colonnes avec une marge */
+  flex: 0 0 auto;
   margin: 5px;
   border: 1px solid #ccc;
   padding: 3px;
-  text-align: center; /* Centre le texte à l'intérieur du cadre */
-  color: rgb(12, 207, 241); /* Couleur du texte pour les heures */
+  text-align: center;
+  background-color: #fcfcfc;
+  color: #aba9ad;
 }
 
 .appointment-component .time-slot input {
-  margin-left: 5px; /* Ajoute un espace entre le texte et la case à cocher */
+  margin-left: 5px;
+}
+.custom-time-slot {
+  color: #37c0ca; /* Example color */
+ 
+
 }
 
-/* Ajoutez ces styles dans votre fichier CSS ou dans le style de votre composant */
-.selected-slot {
-  background-color:#d3caca; /* Remplacez par la couleur que vous souhaitez */
-  color:#333; /* Remplacez par la couleur du texte que vous souhaitez */
+.appointment-component .selected-slot {
+  background-color: #c3e3e4;
+  color: #656666;
 }
+
+
+#c {
+  border: none;
+  margin-top: 1px;
+  border-radius: 8px;
+  height: 250px;
+  width: 330px;
+  padding: 120px;
+  background-image: url('https://cdn.pixabay.com/photo/2017/07/18/23/23/user-2517433_960_720.png'); /* Replace 'path/to/your/image.jpg' with the actual path to your image file */
+  background-size: cover; /* Adjust how the background image is displayed */
+  background-position: center; /* Center the background image */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#c1{
+color: #000;
+
+}
+.expanded {
+  height: 500px; /* Ajustez la hauteur selon vos besoins */
+}
+
+.absolute-position {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+

@@ -63,9 +63,10 @@ export class LoginComponent implements OnInit{
         next: (response) => {
           this.authResponse = response;
           if (!this.authResponse.mfaEnabled) {
-            localStorage.setItem('token', response.accessToken as string);
+            this.authservice.loadprofile1(response)
             this.router.navigate(['/doctor']);
           }
+          this.spinner.hide()
         }
       });
   }

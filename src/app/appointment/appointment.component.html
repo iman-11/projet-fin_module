@@ -1,33 +1,62 @@
-
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-12">
 
       <form  *ngIf="!showSuccessMessage" [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
-
-          <div *ngIf="currentStep === 0">
-            <div [@cardAnimation]="'visible'" class="card mx-auto mt-4" style="max-width: 1800px; margin-top: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); width: 500px;">
+            <div *ngIf="currentStep === 0">
+              <div [@cardAnimation]="'visible'" class="card mx-auto mt-4" style="max-width: 1800px; margin-top: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                <div class="card-header" style="background-color: #e7e9e8; color: #070707; border-radius: 10px 10px 0 0;">
+                  <div style="display: flex; align-items: center;">
+                    <div style="cursor: pointer;" class="back-button">
+                      Have you ever consulted this practitioner ?<br>
+                      If you are making an appointment for someone else, this question concerns them
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item" style="height: 80px;"(click)="setConsultation('Yes')">
+                      <i class="fas fa-check"></i> YES
+                    </li>
+                    <li class="list-group-item" style="height: 80px; cursor: pointer;"(click)="setConsultation('No')">
+                      <i class="fas fa-times"></i> No
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="currentStep === 1">
+              <div [@cardAnimation]="'visible'" class="card mx-auto mt-4" style=" margin-top: 20px;width:330px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);" (click)="imageInput.click()">
               <div class="card-header" style="background-color: #e7e9e8; color: #070707; border-radius: 10px 10px 0 0;">
                 <div style="display: flex; align-items: center;">
                   <div style="cursor: pointer;" class="back-button">
-                    Your appointment matters. Your time is valuable, and we're here to ensure a seamless and convenient scheduling experience just for you
+                    Please choose an image for the appointment.<br>
+                  
                   </div>
                 </div>
               </div>
-              <div class="card-body">
+              <div class="card-body"  id="c">
                 <ul class="list-group list-group-flush">
-                  <li class="list-group-item" style="height: 90px; cursor: pointer;" (click)="nextStep()">
-                    <i class="fas fa-times"></i> Click to make your appointment here
-                  </li>
+                  <div class="form-group image-upload">
+                    <div *ngIf="appointmentForm.get('image')?.value" class="image-frame">
+                      <img [src]="appointmentForm.get('image')?.value" alt="Patient Image" class="uploaded-image">
+                    </div>
+               
+                      <input type="file" id="imageUpload" #imageInput style="display: none ;" (change)="onImageUpload($event)" accept="image/*">
+                    
+                  </div>
                 </ul>
               </div>
             </div>
-          </div>
-  
-
+     
+              <i class="bi bi-arrow-left-circle-fill" (click)="previousStep()" style="font-size: 35px;padding-right: 270px;"></i>
+              <i class="bi bi-arrow-right-circle-fill" (click)="nextStep()" style="font-size: 35px;padding: 270;"></i>
+            </div>
+       
+            
 
         <!-- Step 1: Who are you making this appointment for? -->
-        <div *ngIf="currentStep === 1" style="margin-top: 90px;">
+        <div *ngIf="currentStep === 2" style="margin-top: 90px;">
           <label for="owner">Who are you making this appointment for?</label>
             <select formControlName="owner" id="Owner" class="form-control">
               <option value="Me">Me</option>
@@ -51,7 +80,7 @@
         </div>
 
         <!-- Step 2: Additional user details -->
-        <div *ngIf="currentStep === 2" style="width:350px ;margin-top: 90px;">
+        <div *ngIf="currentStep === 3" style="width:350px ;margin-top: 90px;">
 
           <label for="dateNaissance">Email:*</label>
           <input formControlName="email" id="email" type="text" class="form-control"/>
@@ -69,7 +98,7 @@
             <option *ngFor="let city of getPostalCodeCities()" [value]="city">{{ city }}</option>
           </select>
 
-          <label for="zipCode">Postal Code:*</label>
+          <label for="zipCode">Postal Code:</label>
           <select formControlName="zipCode" id="zipCode" class="form-control">
             <option value="">Select a postal code</option>
             <option *ngFor="let city of getPostalCodeKeys()" [value]="postalCodes ? postalCodes[city] : ''">{{ city }}: {{ postalCodes ? postalCodes[city] : '' }}</option>
@@ -79,11 +108,11 @@
         </div>
 
         <!-- Step 3: Health details -->
-        <div *ngIf="currentStep === 3" style="width:350px ;">
-          <label for="longueur">Length (in cm) :*</label>
+        <div *ngIf="currentStep === 4" style="width:350px ;">
+          <label for="longueur">Length (in cm) :</label>
           <input formControlName="longueur" id="longueur" type="number" class="form-control"/>
 
-          <label for="poids">weight (in kg) :*</label>
+          <label for="poids">weight (in kg) :</label>
           <input formControlName="poids" id="poids" type="number" class="form-control"/>
 
            <label for="maladie">disease :*</label>
@@ -96,7 +125,7 @@
 
         <!-- Step 4: Choose the type of appointment -->
        <!-- Step 4: Choose the type of appointment -->
-<div *ngIf="currentStep === 4">
+<div *ngIf="currentStep === 5">
   <div [@cardAnimation]="'visible'" class="card mx-auto mt-4" style="max-width: 900px; margin-top: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
     <div class="card-header" style="background-color: #e7e9e8; color: #070707; border-radius: 10px 10px 0 0;">
       <div style="display: flex; align-items: center;">
@@ -119,97 +148,69 @@
   <i class="bi bi-arrow-left-circle-fill" (click)="previousStep()" style="font-size: 35px;padding-right: 270px;"></i>
 </div>
 <!-- Your component template -->
-<div *ngIf="currentStep === 5" style="width:500px; height: 500px; margin-top: 70px; margin-bottom: 30px;">
-  <div class="timeline-body">
+<div *ngIf="currentStep === 6" [ngClass]="{'expanded': showAllAppointments}" style="width:500px; height: 100px; margin-bottom: 300px; margin-top: -140px;">
+  <div class="timeline-body" [ngClass]="{'absolute-position': showMoreAppointments}">
     <div class="timeline-header">
-      <span class="username">Choose the appointment date</span>
+      <span class="username">choose the appointment date</span>
     </div>
-
     <div class="accordion accordion-flush" id="accordionFlushExample">
-      <div *ngFor="let day of availableSlots.slice(0, 4)">
-        <div class="accordion-item">
-          <h2 class="accordion-header" [id]="'flush-heading' + day.jour">
-            <button
-              class="accordion-button collapsed"
-              type="button"
-              [attr.data-bs-toggle]="'collapse'"
-              [attr.data-bs-target]="'#flush-collapse' + day.jour"
-              [attr.aria-expanded]="isSelectedDay(day)"
-              [attr.aria-controls]="'flush-collapse' + day.jour"
-              (click)="toggleTimeSlots(day)"
-            >
-              {{ day.jour }}
-            </button>
-          </h2>
-         <!-- ... votre code existant ... -->
-
-         <div [id]="'flush-collapse' + day.jour" class="appointment-component accordion-collapse collapse" [attr.aria-labelledby]="'flush-heading' + day.jour" [attr.data-bs-parent]="'#accordionFlushExample'" *ngIf="isSelectedDay(day)">
+      <div class="accordion-item" *ngFor="let day of getVisibleDays(); let i = index">
+        <h2 class="accordion-header" [id]="'flush-heading' + i">
+          <button class="accordion-button collapsed custom-button" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#flush-collapse' + i" aria-expanded="false" [attr.aria-controls]="'flush-collapse' + i">
+            {{ day.dayWithMonth }}
+          </button>
+        </h2>
+        <div [id]="'flush-collapse' + i" class="accordion-collapse collapse" [attr.aria-labelledby]="'flush-heading' + i" data-bs-parent="#accordionFlushExample">
           <div class="accordion-body">
-            <div *ngIf="selectedDay && selectedDay.timeSlots && selectedDay.timeSlots.length > 0; else noSlots">
-              <p class="time-slots">
-                <ng-container *ngFor="let slot of selectedDay.timeSlots; let i = index">
-                  <span class="time-slot" (click)="onTimeSlotClick(slot)" [class.selected-slot]="isSelectedSlot(slot)">
-                    {{ slot }}
-                  </span>
-                  
-                  <span *ngIf="i < selectedDay.timeSlots.length - 1"></span> 
-                </ng-container>
-              </p>
-            </div>
-          
-            <ng-template #noSlots>
-              <div class="no-slots-message" style="color: #070707; font-size: medium; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
-                <p sty>No available time slots for this day</p>
+            <div class="appointment-component">
+              <div *ngFor="let hour of appointmentHours" class="time-slot" [class.selected-slot]="isSelectedSlot(hour)" (click)="onTimeSlotClick(hour, day)">
+                <p class="custom-time-slot">{{ hour }}</p>
               </div>
-            </ng-template>
+            </div>
           </div>
         </div>
-        
-     
-</div>
-</div>
-</div>
-
-
-
-           
-        
-        
-      
-   
- 
-
-
-
-
-
-
-    
-    
-
-<!-- ... (your existing code) -->
-
-
-    <!-- <button class="btn btn-primary" (click)="toggleAppointments()">Voir {{ showAllAppointments ? 'moins' : 'plus' }}</button> -->
-  </div>
-
-
-
-
-          <i class="bi bi-arrow-left-circle-fill" (click)="previousStep()" style="font-size: 35px;margin-right: 430px;padding-top: 20px;"></i>
-          <button [disabled]="!appointmentForm.valid" style="border: none; background: none; padding: 0; margin: 0; font-size: 30px;color:#070707">
-            <i class="bi bi-calendar-check-fill"></i>
-          </button>
-
-         <div *ngIf="appointmentForm.invalid" style="color: rgb(230, 87, 87);">Please fill in all required fields.</div>
-        </div>
-
-      </form>
-
-      <div *ngIf="showSuccessMessage" [ngClass]="{'success-message': showSuccessMessage}">
-        <p>Appointment made successfully!</p>
       </div>
-
-    </div>
+    </div> 
   </div>
+  <button class="btn btn-primary" (click)="showPreviousWeek()">Pervious Week</button>
+<button class="btn btn-primary" style="margin-left: 230px;" (click)="showNextWeek()">Next Week</button>
+  
+<i class="bi bi-arrow-left-circle-fill" (click)="previousStep()" style="font-size: 35px; padding-right: 10px; margin-top: 20px;"></i>
+  <i class="bi bi-arrow-right-circle-fill" (click)="nextStep()" style="font-size: 35px; margin-left: 410px; margin-top: 20px;"></i>
+</div>
+
+<div *ngIf="currentStep === 7">
+  <h1 style="margin-bottom: 20px;align-self: center ;color:#4bbdbd; margin-top:-40px; font-size: 25px; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+    Thank you for choosing our services. We appreciate your trust in us.
+</h1>
+
+  <div [@cardAnimation]="'visible'" class="card mx-auto mt-4" style="max-width: 900px; margin-top: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+    <div class="card-header" style="background-color: #e7e9e9; color: #070707; border-radius: 10px 10px 0 0;">
+      <div style="display: flex; align-items: center;">
+        <div style="cursor: pointer; padding: 20px;" class="back-button">
+          Please click on "Save" to register your Appointment.
+        </div>
+        
+            
+        <button [disabled]="!appointmentForm.valid" style="border: none; background: none; padding: 0; margin: 0; font-size: 30px; color: #070707" (click)="onSave()">
+          <i class="bi bi-calendar-check-fill"></i>
+        </button>
+      </div>
+      
+    </div>
+    <!-- Ajoutez le contenu de la carte ici si nécessaire -->
+  </div>
+  <i class="bi bi-arrow-left-circle-fill" (click)="previousStep()" style="font-size: 35px;padding-right: 270px; margin-top: 10px;"></i>
+  <div *ngIf="appointmentForm.invalid" style="color: rgb(230, 87, 87);">Please fill in all required fields.</div>
+</div>
+
+
+
+</form>
+
+<div *ngIf="showSuccessMessage" [ngClass]="{'success-message': showSuccessMessage}">
+<p>Appointment made successfully!</p>
+</div>
+
+</div>
 </div>

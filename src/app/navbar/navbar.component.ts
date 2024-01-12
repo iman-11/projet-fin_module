@@ -57,7 +57,6 @@ export class NavbarComponent {
     private route: ActivatedRoute,
     private el: ElementRef,
     private SpcialityService: SpcialityService,
-    private spinner: NgxSpinnerService
 
 
 
