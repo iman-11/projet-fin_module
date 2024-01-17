@@ -49,7 +49,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
         appointmentType: ['', Validators.required],
         owner: ['', Validators.required],
         email:['', Validators.required],
-         id_Doctor:['',Validators.required],
+         idDoctor:['',Validators.required],
         id_patient:['',Validators.required],
         status: ['', Validators.required],
         image: ['' ],
@@ -97,8 +97,8 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
         });  
     
         if (this.doctorId) {
-          this.appointmentForm.get('id_Doctor')?.setValue(this.doctorId);
-          console.log('ID_Doctor in Form:', this.appointmentForm.get('id_Doctor')?.value);
+          this.appointmentForm.get('idDoctor')?.setValue(this.doctorId);
+          console.log('ID_Doctor in Form:', this.appointmentForm.get('idDoctor')?.value);
 
         }
     

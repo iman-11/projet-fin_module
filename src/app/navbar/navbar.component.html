@@ -4,7 +4,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">LoG</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Login</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -111,7 +111,7 @@
 <li *ngIf="(getRoleFromSessionStorage() === 'DOCTOR')" class="nav-item nav-profile dropdown" ngbDropdown>
   <div class="d-flex align-items-center" ngbDropdownToggle>
     <div class="nav-profile-img mr-2">
-      <img [src]="imageUrl" alt="image" class="rounded-circle profile-image" style="width: 40px; height: 40px;" loading="lazy" ngbDropdownToggle>
+      <img [src]="imageUrl || 'assets/images/conversation.png'" alt="image" class="rounded-circle profile-image" style="width: 40px; height: 40px;" loading="lazy" ngbDropdownToggle>
       <span class="availability-status online"></span>
     </div>
     <div class="nav-profile-text">

@@ -56,11 +56,17 @@ this.message='';
     next: (response) => {
       if (response) {
         this.authresponse = response;
+        this.authservice.loadprofile1(response)
+
+        this.router.navigate(['/test']);
+
       } else {
         // inform the user
         this.message = 'Account created successfully\nYou will be redirected to the Login page in 3 seconds';
         setTimeout(() => {
-          this.router.navigate(['login']);
+          this.authservice.loadprofile1(response)
+
+          this.router.navigate(['/test']);
         }, 3000)
       }
     }
@@ -99,7 +105,6 @@ this.message='';
           next: (response) => {
             this.message = 'Account created successfully\nYou will be redirected to the Welcome page in 3 seconds';
             setTimeout(() => {
-              localStorage.setItem('token', response.accessToken as string);
               this.router.navigate(['/login']);
             }, 3000);
           }

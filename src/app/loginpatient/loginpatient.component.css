@@ -35,14 +35,14 @@ background: #eee;
     text-align: left;
   }
   
-  input[type="text"],
-  input[type="password"] {
-    width: 93%;
+  input[type="email"], input[type="password"] {
+    width: 100%;
     padding: 10px;
     font-size: 16px;
     border: 1px solid #cccccc;
     border-radius: 4px;
-  }
+}
+
   
   button {
     width: 100%;
