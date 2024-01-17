@@ -91,8 +91,9 @@ export class LoginComponent implements OnInit{
     this.authservice.verifyCode(verifyRequest)
       .subscribe({
         next: (response) => {
-          localStorage.setItem('token', response.accessToken as string);
-          this.router.navigate(['/section']);
+          this.authservice.loadprofile1(response)
+
+          this.router.navigate(['/doctor']);
         }
       });
   }
