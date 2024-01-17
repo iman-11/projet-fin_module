@@ -58,7 +58,6 @@ this.message='';
         this.authresponse = response;
         this.authservice.loadprofile1(response)
 
-        this.router.navigate(['/test']);
 
       } else {
         // inform the user
@@ -66,7 +65,7 @@ this.message='';
         setTimeout(() => {
           this.authservice.loadprofile1(response)
 
-          this.router.navigate(['/test']);
+          
         }, 3000)
       }
     }
