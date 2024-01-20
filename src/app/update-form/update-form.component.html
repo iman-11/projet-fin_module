@@ -1,0 +1,117 @@
+<!-- update-form.component.html -->
+<form class="main-body">
+    <div class="row gx-3 mb-3">
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="inputFirstName" class="form-label">First Name</label>
+          <input type="text" class="form-control" id="inputFirstName" [(ngModel)]="updatedAppointment.firstName" name="firstName">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="inputLastName" class="form-label">Last Name</label>
+          <input type="text" class="form-control" id="inputLastName" [(ngModel)]="updatedAppointment.lastName" name="lastName">
+        </div>
+      </div>
+    </div>
+  
+    <div class="row gx-3 mb-3">
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="inputEmail" class="form-label">Email</label>
+          <input type="text" class="form-control" id="inputEmail" [(ngModel)]="updatedAppointment.email" name="email">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="inputPhone" class="form-label">Phone</label>
+          <input type="text" class="form-control" id="inputPhone" [(ngModel)]="updatedAppointment.phone" name="phone">
+        </div>
+      </div>
+    </div>
+  
+    <div class="row gx-3 mb-3">
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="inputSexe" class="form-label">Gender</label>
+          <input type="text" class="form-control" id="inputSexe" [(ngModel)]="updatedAppointment.sexe" name="sexe">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="inputBirthday" class="form-label">Date of Birth</label>
+          <input type="text" class="form-control" id="inputBirthday" [(ngModel)]="updatedAppointment.dateNaissance" name="dateNaissance">
+        </div>
+      </div>
+    </div>
+  
+    <div class="row gx-3 mb-3">
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="inputAdresse" class="form-label">Address</label>
+          <input type="text" class="form-control" id="inputAdresse" [(ngModel)]="updatedAppointment.adresse" name="adresse">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="inputVille" class="form-label">City</label>
+          <input type="text" class="form-control" id="inputVille" [(ngModel)]="updatedAppointment.ville" name="ville">
+        </div>
+      </div>
+    </div>
+  
+    <div class="row gx-3 mb-3">
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="inputLongueur" class="form-label">Length</label>
+          <input type="number" class="form-control" id="inputLongueur" [(ngModel)]="updatedAppointment.longueur" name="longueur">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="inputPoids" class="form-label">Weight</label>
+          <input type="number" class="form-control" id="inputPoids" [(ngModel)]="updatedAppointment.poids" name="poids">
+        </div>
+      </div>
+    </div>
+  
+    <div class="row gx-3 mb-3">
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="inputMaladie" class="form-label">Disease</label>
+          <input type="text" class="form-control" id="inputMaladie" [(ngModel)]="updatedAppointment.maladie" name="maladie">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="inputZipCode" class="form-label">Zip Code</label>
+          <input type="text" class="form-control" id="inputZipCode" [(ngModel)]="updatedAppointment.zipCode" name="zipCode">
+        </div>
+      </div>
+    </div>
+  
+    <div class="row gx-3 mb-3">
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="inputAppointmentType" class="form-label">Appointment Type</label>
+          <input type="text" class="form-control" id="inputAppointmentType" [(ngModel)]="updatedAppointment.appointmentType" name="appointmentType">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="inputDecision" class="form-label">Decision</label>
+          <input type="text" class="form-control" id="inputDecision" [(ngModel)]="updatedAppointment.decision" name="decision">
+        </div>
+      </div>
+    </div>
+  
+  
+  
+    <!-- Update button -->
+    <div class="row gx-3 mb-3">
+        <div class="col-md-12">
+          <button mat-button (click)="updateAppointment()" class="btn btn-primary">Update</button>
+        </div>
+      </div>
+  </form>
+  

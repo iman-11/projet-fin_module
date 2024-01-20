@@ -3,6 +3,7 @@ import { Appointment } from '../appointment/appointment';
 import { AppointmentService } from '../appointment/appointment.service';
 import { ServiceService } from '../service.service';
 import { NgToastService } from 'ng-angular-popup';
+import { HttpClient, HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'app-rendez-vous',
@@ -12,6 +13,7 @@ import { NgToastService } from 'ng-angular-popup';
 export class RendezVousComponent {
  
 
+  imageUrl: string | undefined;
 
 
 
@@ -19,9 +21,11 @@ export class RendezVousComponent {
 
   appointments: Appointment[] = [];
   selectedAppointment: Appointment | undefined;
+  results: any;
 
 
-  constructor(private appointmentService: AppointmentService,    private authservice: ServiceService,
+  constructor(private appointmentService: AppointmentService,      private http: HttpClient,
+     private authservice: ServiceService,
     private toast: NgToastService
 ) {
 
@@ -74,9 +78,10 @@ export class RendezVousComponent {
 
     // Update the decision on the client side without waiting for the service call
     appointment.decision = 'accept';
-
+    console.log('idapp',appointment.id)
     // Update the decision on the server side
     this.updateDecision(appointment.id, 'Accepted');
+    
 
     // Remove the appointment from the appointments array
     this.appointments = this.appointments.filter(a => a.id !== appointment.id);
@@ -123,6 +128,8 @@ export class RendezVousComponent {
 
   viewAppointmentDetails(appointment: Appointment) {
     this.selectedAppointment = appointment;
+    this.downloadImage(); // Call the method to download the patient's image
+
   }
 
 
@@ -144,6 +151,38 @@ export class RendezVousComponent {
   
     
   
+  downloadImage(): void {
+    if (!this.selectedAppointment || !this.selectedAppointment.id_patient) {
+      return;
+    }
+  
+    // Use HttpClient to download the image from the server
+    this.http
+      .get(`http://localhost:8080/image/download/${this.selectedAppointment.id_patient}`, {
+        responseType: 'arraybuffer', // Set the response type to arraybuffer
+        observe: 'events', // Observe progress events
+      })
+      .subscribe(
+        (event) => {
+          if (event.type === HttpEventType.DownloadProgress) {
+            // Handle download progress if needed
+            // const percentDone = Math.round((100 * event.loaded) / event.total);
+            // console.log(`File is ${percentDone}% downloaded.`);
+          } else if (event.type === HttpEventType.Response) {
+            // Download completed successfully
+            const arrayBuffer = event.body as ArrayBuffer;
+            const blob = new Blob([arrayBuffer], { type: 'image/png' }); // Adjust the type as needed
+            this.imageUrl = URL.createObjectURL(blob);
+          }
+        },
+        (error) => {
+          console.error('Error downloading image', error);
+        }
+      );
+    console.log('Downloading image for user ID:', this.selectedAppointment.id_patient);
+  }
+  
+
 
 }
 

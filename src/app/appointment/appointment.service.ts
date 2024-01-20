@@ -1,6 +1,6 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, catchError, throwError } from 'rxjs';
 import { Appointment } from './appointment';
 
 @Injectable({
@@ -28,10 +28,20 @@ export class AppointmentService {
   }
   private apiUrl3 = 'http://localhost:8080/api/rendezvous/updateDecision';
 
-  updateAppointmentDecision(id: string, decision: string): Observable<any> {
+  updateAppointmentDecision(id: string, decision: string) {
     const url = `${this.apiUrl3}/${id}`;
     const body = { decision: decision };
-    return this.http.put(url, body);
+    
+    return this.http.post(url, body, { responseType: 'text' }).pipe(
+      catchError((error: HttpErrorResponse) => {
+        if (error.error instanceof ErrorEvent) {
+          console.error('An error occurred:', error.error.message);
+        } else {
+          console.error(`Server returned code ${error.status}, body was: `, error.error);
+        }
+        return throwError('Something went wrong; please try again later.');
+      })
+    );
   }
 
 
@@ -47,6 +57,7 @@ export class AppointmentService {
   
     return this.http.get<any[]>(url, { params });
   }
+
 
 }
 

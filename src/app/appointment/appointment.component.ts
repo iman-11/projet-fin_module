@@ -1,10 +1,12 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
   import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
   import { AppointmentService } from './appointment.service';
-  import { ActivatedRoute } from '@angular/router';
+  import { ActivatedRoute, Router } from '@angular/router';
   import { ServiceService } from '../service.service';
   import { formatDate } from '@angular/common';
   import { format, addDays } from 'date-fns';
+import { NgToastService } from 'ng-angular-popup';
+import { HttpClient, HttpEventType } from '@angular/common/http';
   @Component({
     selector: 'app-appointment',
     templateUrl: './appointment.component.html',
@@ -13,6 +15,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
   export class AppointmentComponent implements OnInit {
     showMoreAppointments: boolean = false;
     currentWeekIndex: number = 0;
+    imageUrl: any;
 
     postalCodes: { [key: string]: string } | undefined;
     currentStep = 0;
@@ -25,14 +28,17 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
     selectedDay: { jour: string; timeSlots: any[] } | null = null;
   showAllAppointments = false;
   selectedTimeSlot: string | null = null;
-  doctorId: string | null = null;
+  doctorId: string  = '';
+  patientId:string| null='';
   days: { date: Date, dayWithMonth: string }[] = [];
   appointmentHours: string[] = [];
   selectedHours: FormArray | undefined;
   dateRendezVous: string | null = null;
  
 
-    constructor(private formBuilder: FormBuilder, private appointmentService: AppointmentService,private route: ActivatedRoute,private service: ServiceService,private cdr: ChangeDetectorRef) {
+    constructor(private formBuilder: FormBuilder, private appointmentService: AppointmentService,private route: ActivatedRoute,private authservice: ServiceService,private cdr: ChangeDetectorRef,    private toast: NgToastService,    private router: Router,
+      private http: HttpClient
+      ) {
       this.appointmentForm = this.formBuilder.group({
         firstName: ['', Validators.required],
         lastName: ['', Validators.required],
@@ -49,10 +55,9 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
         appointmentType: ['', Validators.required],
         owner: ['', Validators.required],
         email:['', Validators.required],
-         idDoctor:['',Validators.required],
+        idDoctor:[''],
         id_patient:['',Validators.required],
         status: ['', Validators.required],
-        image: ['' ],
     
         
       
@@ -67,44 +72,35 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
   
     }
     
-    
-    ngOnInit(): void {
-      this.loadPostalCodes();
-    
-    
-      this.route.queryParams.subscribe((params) => {
-        console.log('Route params:', params);
+   ngOnInit(): void {
+    this.patientId=sessionStorage.getItem('userId');
 
-        // Check if id is available in the route parameters
-        if (params['id']) {
-          // Update the doctorId in the component
-          this.doctorId = params['id'];
-          console.log('Updated doctorId in component:', this.doctorId);
+  this.loadPostalCodes();
 
-          // Fetch the doctor details
-        
-        }
-      });     
-        
-    
-        console.log('Doctor ID from URL:', this.doctorId);
-    
-        this.appointmentForm.get('owner')?.valueChanges.subscribe((selectedValue) => {
-          console.log('Selected Owner:', selectedValue);
-          this.appointmentForm.patchValue({
-            id_patient: sessionStorage.getItem('userId'),
-          });
-        });  
-    
-        if (this.doctorId) {
-          this.appointmentForm.get('idDoctor')?.setValue(this.doctorId);
-          console.log('ID_Doctor in Form:', this.appointmentForm.get('idDoctor')?.value);
+  this.route.queryParams.subscribe((params) => {
+    console.log('Route params app:', params);
 
-        }
+    // Check if id is available in the route parameters
+    if (params['id']) {
+      // Update the doctorId in the component
+      this.doctorId = params['id'];
+      console.log('doctorId from login:', this.doctorId);
+
+      // Fetch the doctor details
+
+      // Set idDoctor in the form
     
-  
     }
-    
+  });
+
+  this.appointmentForm.get('owner')?.valueChanges.subscribe((selectedValue) => {
+    console.log('Selected Owner:', selectedValue);
+    this.appointmentForm.patchValue({
+      id_patient: sessionStorage.getItem('userId'),
+    });
+  });
+}
+
 
 
   isSelectedSlot(hour: string): boolean {
@@ -118,7 +114,6 @@ updateDateRendezVous(selectedDay: { date: Date, dayWithMonth: string }, selected
   this.dateRendezVous = dateTimeString;
 }
 initializeAppointmentHours(): void {
-  // Start and end times
   const startTime = 10;
   const endTime = 18;
 
@@ -190,34 +185,37 @@ initializeAppointmentHours(): void {
   }
 
 
-  onImageUpload(event: any) {
-    const file = event.target.files[0];
 
-    if (file) {
-      this.appointmentForm.get('image')?.setValue(file); 
+  onSubmit(): void {
+    console.log('id de doctor:', this.doctorId);
+  
+    if (this.appointmentForm.valid && this.dateRendezVous && this.currentStep >= 7) {
+      // Set idDoctor in the form
+      this.appointmentForm.get('idDoctor')?.setValue(this.doctorId);
+  
+      const appointmentData = { ...this.appointmentForm.value, dateRendezVous: this.dateRendezVous };
+      console.log('Données du formulaire:', appointmentData);
+  
+      this.appointmentService.createAppointment(appointmentData).subscribe(
+        (response) => {
+          console.log('Rendez-vous créé avec succès:', response);
+          this.showSuccess();
+          this.router.navigate(['/section']);
+          this.showSuccessMessage = true;
+          this.appointmentForm.reset();
+          sessionStorage.clear();
+        },
+        (error) => {
+          console.error('Erreur lors de la création du rendez-vous', error);
+          console.log('Erreur lors de la création du rendez-vous', error.message);
+        }
+      );
+    } else {
+      console.log('Veuillez remplir tous les champs requis et sélectionner une date de rendez-vous valide.');
     }
   }
-  onSubmit(): void {
-      // Vous pouvez ajuster la condition pour ne permettre l'enregistrement qu'à partir d'une certaine étape
-      if (this.appointmentForm.valid && this.dateRendezVous && this.currentStep >= 7) {
-        const appointmentData = { ...this.appointmentForm.value, dateRendezVous: this.dateRendezVous };
-        console.log('Données du formulaire :', appointmentData);
-    
-        this.appointmentService.createAppointment(appointmentData).subscribe(
-          (response) => {
-            console.log('Rendez-vous créé avec succès :', response);
-            this.showSuccessMessage = true;
-            this.appointmentForm.reset();
-          },
-          (error) => {
-            console.error('Erreur lors de la création du rendez-vous', error);
-          }
-        );
-      } else {
-        console.log('Veuillez remplir tous les champs requis et sélectionner une date de rendez-vous valide.');
-      }
-    }
-    
+  
+
   
 
 
@@ -297,6 +295,58 @@ initializeAppointmentHours(): void {
         this.currentWeekIndex = 0; // Revenir à la première semaine si on a atteint la fin
       }
     }
+    showSuccess() {
+      this.toast.success({
+        detail: "SUCCESS",
+        summary: 'Appointment made successfully!',
+        duration: 5000  // Provide the duration as a number (milliseconds)
+      });
+    }
 
-    
+    uploadImage(formData: FormData): void {
+      console.log("id de patient",this.patientId)
+
+      if (!this.patientId) {
+        return;
+      }
+  
+      // Append user ID to the form data
+      formData.append('userId', this.patientId);
+  
+      this.http.post<any>(`http://localhost:8080/image/${this.patientId}`, formData).subscribe(
+        (response) => {
+          // Image upload successful
+          const imageUrl = response.imageUrl;
+          const fileName = response.fileName;
+  
+          // Update the image URL in your model
+          // Make sure your model has an imageUrl property
+          this.imageUrl = imageUrl;
+  
+          // After upload, download the image again
+        },
+        (error) => {
+          console.error('Error uploading image', error);
+        }
+      );
+    }
+  
+  
+    onFileSelected(event: any): void {
+      const file: File = event.target.files[0];
+  
+      if (file) {
+        // Use HttpClient to upload the image to the server
+        const formData = new FormData();
+        formData.append('image', file);
+  
+        this.uploadImage(formData);
+      }
+    }
+  
+
+
+
+
+
   }

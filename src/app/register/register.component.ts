@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Register } from './register';
 import { AuthenticationResponse } from './authentication-response';
 import { VerificationRequest } from './verification-request';
+import { NgToastService } from 'ng-angular-popup';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +16,9 @@ export class RegisterComponent {
   constructor(
     private fb: FormBuilder,
     private authservice: ServiceService,
-    private router: Router
+    private router: Router,
+    private toast: NgToastService
+
   ) {}
   message = '';
   formregister!: FormGroup;
@@ -91,17 +94,13 @@ export class RegisterComponent {
 
     this.authservice.verifyCode(verifyRequest).subscribe({
       next: (response) => {
-        this.message =
-          'Account verification successful. Redirecting...';
+        this.showSuccess()
+        
         setTimeout(() => {
           this.navigateBasedOnRole();
         }, 3000);
       },
-      error: (error) => {
-        console.error('Verification error:', error);
-        // Handle the error as needed
-        this.message = 'Verification failed. Please try again.';
-      },
+    
     });
   }
 
@@ -111,5 +110,14 @@ export class RegisterComponent {
     } else if (this.formregister.value.role === 'PATIENT') {
       this.router.navigate(['/Appointment']);
     }
+  }
+
+
+  showSuccess() {
+    this.toast.success({
+      detail: "SUCCESS",
+      summary: 'Account verification successful. Redirecting...',
+      duration: 5000  // Provide the duration as a number (milliseconds)
+    });
   }
 }

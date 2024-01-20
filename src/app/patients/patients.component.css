@@ -1,0 +1,52 @@
+.example-spacer {
+    flex: 1 1 auto;
+  }
+  
+  .main-body {
+    padding-top: 20px;
+    margin: 0 20px;
+    max-width: 1395px;
+    mat-form-field {
+      width: 80%;
+    }
+  }
+
+ 
+
+
+  .action {
+    display: flex;
+    gap: 5px;
+  }
+  
+  .action button {
+    flex: 0 0 auto; /* Ensures the buttons don't grow and maintain their original size */
+  }
+  
+  body{margin-top:20px;
+    background-color:#f2f6fc;
+    }
+    .img-account-profile {
+        height: 10rem;
+    }
+    .rounded-circle {
+        border-radius: 50% !important;
+    }
+    .card {
+        box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%);
+    }
+    .card .card-header {
+        font-weight: 500;
+    }
+    .card-header:first-child {
+        border-radius: 0.35rem 0.35rem 0 0;
+    }
+    .card-header {
+        padding: 1rem 1.35rem;
+        margin-bottom: 0;
+        background-color: rgba(33, 40, 50, 0.03);
+        border-bottom: 1px solid rgba(33, 40, 50, 0.125);
+    }
+   
+   /* Appliquer le style au mat-header-cell dans le th ayant la classe custom-header */
+

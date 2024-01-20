@@ -17,22 +17,39 @@ export class LoginpatientComponent  implements OnInit{
 
 
   public totpForm!: FormGroup;
+  doctorId: string  = '';
 
 
   formlogin !:FormGroup;
   constructor(private fb:FormBuilder,private authservice:ServiceService,private router: Router,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,private route: ActivatedRoute
     
     ){}
   ngOnInit(): void {
+    
     this.formlogin=this.fb.group({
       email:this.fb.control(""),
       password:this.fb.control("")
 
-    
+   
 
 
     })
+    this.route.queryParams.subscribe((params) => {
+      console.log('Route params:', params);
+  
+      // Check if id is available in the route parameters
+      if (params['id']) {
+        // Update the doctorId in the component
+        this.doctorId = params['id'];
+        console.log('doctorId in login:', this.doctorId);
+  
+        // Fetch the doctor details
+  
+        // Set idDoctor in the form
+      
+      }
+    });
     this.totpForm = new FormGroup({
       totp_digit1: new FormControl('', [Validators.required, Validators.maxLength(1), Validators.pattern("^[0-9]{1}$")]),
       totp_digit2: new FormControl('', [Validators.required, Validators.maxLength(1), Validators.pattern("^[0-9]{1}$")]),
@@ -63,7 +80,7 @@ export class LoginpatientComponent  implements OnInit{
           this.authResponse = response;
           if (!this.authResponse.mfaEnabled) {
             this.authservice.loadprofile1(response)
-            this.router.navigate(['/Appointment']);
+            this.router.navigate(['/Appointment'], { queryParams: { id: this.doctorId } });
           }
           this.spinner.hide()
         }
@@ -92,7 +109,7 @@ export class LoginpatientComponent  implements OnInit{
         next: (response) => {
           this.authservice.loadprofile1(response)
 
-          this.router.navigate(['/Appointment']);
+          this.router.navigate(['/Appointment'], { queryParams: { id: this.doctorId } });
         }
       });
   }

@@ -7,7 +7,7 @@ export interface Appointment {
     dateNaissance: string;
     adresse: string;
     ville: string;
-    dateRendezVous: Date;
+    dateRendezVous: string;
     idDoctor: string;
     longueur: number;
     poids: number;
@@ -17,5 +17,7 @@ export interface Appointment {
     owner: string;
     email:string;
     id_patient:string;
+    status: 'Yes' | 'No';
+    image:string;
     decision: string;
 }

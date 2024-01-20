@@ -34,6 +34,17 @@ import { NgToastModule } from 'ng-angular-popup';
 import { PatientsComponent } from './patients/patients.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { DisplayqrComponent } from './displayqr/displayqr.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { UpdateFormComponent } from './update-form/update-form.component';
 
 
 
@@ -60,6 +71,7 @@ import { DisplayqrComponent } from './displayqr/displayqr.component';
          ProfilfordoctorComponent,
          PatientsComponent,
          DisplayqrComponent,
+         UpdateFormComponent,
  
    
   ],
@@ -72,13 +84,22 @@ import { DisplayqrComponent } from './displayqr/displayqr.component';
     MatChipsModule,
     BrowserAnimationsModule,
     MatInputModule,
-    MatIconModule,
     NgMultiSelectDropDownModule,
     MatDialogModule,
     MatSelectModule,
     FormsModule,
     NgToastModule,
-    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }) 
+    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }) ,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatSnackBarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatRadioModule,
   ],
   providers: [],
   bootstrap: [AppComponent,]

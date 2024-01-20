@@ -40,6 +40,9 @@ const routes: Routes = [
       { path: 'rendez', component: RendezVousComponent },
 
       { path: 'Appointment', component: AppointmentComponent },
+      { path: 'patient', component: PatientsComponent },
+
+
 
       { path: 'loginpatiet', component: LoginpatientComponent },
       {path:'profildoc',component:ProfilfordoctorComponent},

@@ -120,8 +120,24 @@ export class ServiceService {
     return this.http.post<string>(`http://localhost:8080/mail/send`, formData, { headers });
   }
 
+  private baseUrl4 = 'http://localhost:8080/api/rendezvous';
+
+  getDoctorAppointments(idDoctor: string): Observable<any[]> {
+    const url = `${this.baseUrl4}/doctor-appointments/${idDoctor}`;
+    return this.http.get<any[]>(url);
+  }
+  private apiUrl12 = 'http://localhost:8080/api/rendezvous';
 
 
-
+  updateAppointment(id: string, updatedAppointment: any): Observable<any> {
+    const url = `${this.apiUrl12}/update/${id}`;
+    return this.http.put(url, updatedAppointment);
+  }
   
+  deleteAppointment(id: string): Observable<void> {
+    const url = `${this.apiUrl12}/delete/${id}`;
+    return this.http.delete<void>(url);
+  }
+
+
 }

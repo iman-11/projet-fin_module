@@ -38,11 +38,8 @@
               <div class="card-body"  id="c">
                 <ul class="list-group list-group-flush">
                   <div class="form-group image-upload">
-                    <div *ngIf="appointmentForm.get('image')?.value" class="image-frame">
-                      <img [src]="appointmentForm.get('image')?.value" alt="Patient Image" class="uploaded-image">
-                    </div>
                
-                      <input type="file" id="imageUpload" #imageInput style="display: none ;" (change)="onImageUpload($event)" accept="image/*">
+                      <input type="file"  (change)="onFileSelected($event)" id="imageUpload" #imageInput style="display: none ;" accept="image/*">
                     
                   </div>
                 </ul>
@@ -208,9 +205,7 @@
 
 </form>
 
-<div *ngIf="showSuccessMessage" [ngClass]="{'success-message': showSuccessMessage}">
-<p>Appointment made successfully!</p>
-</div>
+
 
 </div>
 </div>
