@@ -58,7 +58,7 @@
                   <th>email</th>
                   <th>Type Consultation</th>
                   <th>STATUS</th>
-                  <th>DECISION</th>
+                  <th>Address</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -70,7 +70,7 @@
                   <td>{{ appointment.email }}</td>
                   <td>{{ appointment.appointmentType }}</td>
                   <td>{{appointment.status}}</td>
-                  <td class="decision">{{appointment.decision}}</td>
+                  <td class="decision">{{appointment.adresse}}</td>
                   <td>
                     <button type="button" class="btn btn-info btn-sm view-user" style="color: white; margin-right: 5px;" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight"  aria-controls="offcanvasRight"     (click)="viewAppointmentDetails(appointment)"
                     >View</button>

@@ -38,6 +38,11 @@ export class ServiceService {
     // Implement the logic to send a PUT request to your backend
     return this.http.put(`${this.apiUrl}/${userId}`, doctorData);
   }
+  changepassword(changepassword:any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/change-password`,changepassword);
+
+  }
+
   loadprofile(data: any) {
     this.accesstoken = data['access_token'];  
     let jwtdecoder: any = jwtDecode(this.accesstoken);

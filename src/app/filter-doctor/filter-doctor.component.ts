@@ -169,8 +169,25 @@ export class FilterDoctorComponent {
     });
   }
 
-  prendrerendezvous(doctorId: string): void {
-    this.router.navigate(['/Appointment'], { queryParams: { id: doctorId } });
+  
+
+
+
+  checkAuthentication(doctorId: string): void {
+    // Check if the user is authenticated
+    const isAuthenticated = this.authservice.isAuthenticated(); // Implement this method in ServiceService
+
+    if (!isAuthenticated) {
+      // Redirect to login page if not authenticated
+      this.router.navigate(['/loginpatiet'], { queryParams: { id: doctorId } });
+
+
+    }else{
+      this.router.navigate(['/Appointment'], { queryParams: { id: doctorId } });
+
+    }
+  
   }
+
 
 }

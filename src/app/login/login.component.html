@@ -1,4 +1,4 @@
-<section class="vh-100" style="background-color: white;" *ngIf="!authResponse.mfaEnabled"  >
+<section class="vh-100" style="background-color: white;" *ngIf="!authResponse.mfaEnabled && !showResetPasswordForm"  >
   <div class="container py-5 h-100" style="margin-top: 50px;">
     <div class="row d-flex align-items-center justify-content-center h-100">
       <div class="col-md-8 col-lg-7 col-xl-6">
@@ -24,7 +24,7 @@
               <input class="form-check-input" type="checkbox" value="" id="form1Example3" checked/>
               <label class="form-check-label" for="form1Example3"> Remember me </label>
             </div>
-            <a href="#!">Forgot password?</a>
+            <a href="javascript:void(0);" (click)="showResetPassword()">Forgot password?</a>
           </div>
 
           <!-- Submit button -->
@@ -44,7 +44,7 @@
 
 
 
-<div class="card" style="height: 100vh;"  *ngIf="authResponse.mfaEnabled" >
+<div class="card" style="height: 100vh;"  *ngIf="authResponse.mfaEnabled"  >
   <div class="card-header d-flex flex-column align-items-center p-4">
      
       <h6 class="card-subtitle">Two-Factor Authentication</h6>
@@ -89,6 +89,41 @@
 
 
 
+<div class="container py-5 h-100" style="margin-top: 100px;">
+  <!-- ... Votre formulaire de connexion existant ... -->
+
+  <!-- Ajouter le formulaire de réinitialisation de mot de passe -->
+  <div *ngIf="showResetPasswordForm">
+    <form [formGroup]="resetPasswordForm" (ngSubmit)="submitResetPassword()">
+      <!-- Champ d'e-mail pour la réinitialisation -->
+      <div class="form-outline mb-4">
+        <input type="email" id="resetEmail" class="form-control form-control-sm" formControlName="email"/>
+        <label class="form-label" for="resetEmail">Email</label>
+      </div>
+
+      <!-- Champs de réinitialisation de mot de passe -->
+      <div class="form-outline mb-4">
+        <input type="password" id="resetCurrentPassword" class="form-control form-control-lg" formControlName="currentPassword"/>
+        <label class="form-label" for="resetCurrentPassword">Current Password</label>
+      </div>
+
+      <div class="form-outline mb-4">
+        <input type="password" id="resetNewPassword" class="form-control form-control-lg" formControlName="newPassword"/>
+        <label class="form-label" for="resetNewPassword">New Password</label>
+      </div>
+
+      <div class="form-outline mb-4">
+        <input type="password" id="resetConfirmationPassword" class="form-control form-control-lg" formControlName="confirmationPassword"/>
+        <label class="form-label" for="resetConfirmationPassword">Confirm New Password</label>
+      </div>
+
+      <!-- Bouton de soumission pour la réinitialisation -->
+      <button type="submit" style="background-color: #80d0c7;" class="btn btn-primary btn-lg btn-block">Reset Password</button>
+      <button type="button" class="btn btn-secondary btn-lg btn-block" (click)="cancelResetPassword()" style="margin-top: 30px;">Cancel</button>
+
+    </form>
+  </div>
+</div>
 
 
 
