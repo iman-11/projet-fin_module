@@ -1,258 +1,282 @@
 <style>
- /* Remove line-height property from #oussamach */
-#oussamach {
-    font-size: 3em;
-    text-align: center;
-    font-weight: bold;
-}
-
-/* Update styling for #och and #ouch */
-#och, #ouch {
-    display: inline-block;
-    margin-bottom: 25px;
-}
-
-</style>
-
-
-
-
-  <main>
-    <section class="hero-section d-flex justify-content-center align-items-center" id="section_1" style="padding-bottom: 220px;">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-12 mx-auto">
-                    <h2 id="oussamach" style="margin-right: 70px;">
-                        FIND A <span id="och" class="grish">{{ jobType }} </span> THAT<br>
-                        <span class="grish">MATCHES</span> YOUR <span id="ouch">{{ passionType }}</span>
-                    </h2>
-
-                    <!-- search.component.html -->
-                    <form (ngSubmit)="onSubmit($event)" class="custom-form mt-4 pt-2 mb-lg-0 mb-5" style="border-radius: 10%;">
-                        <div class="input-group input-group-lg position-relative search-container" style="margin-top: 20px;">
-                            <span class="input-group-text bi-search" id="basic-addon1"></span>
-
-                            <input
-                                name="keyword"
-                                type="search"
-                                class="form-control"
-                                id="keyword"
-                                placeholder="Hospital, Speciality, Doctor... "
-                                aria-label="Search"
-                                [(ngModel)]="searchText"
-                                (input)="search()"
-                            />
-
-                            <div *ngIf="searchText && results.length > 0; else noResults" class="search-results">
-                                <!-- Display results in a list below the search input -->
-                                <ul>
-                                    <li *ngFor="let result of results" (click)="selectResult(result)">
-                                        <div class="user-info d-flex align-items-center">
-                                            <div class="profile-header-img profile-header-img:hover" style="margin-right: 10px;">
-                                                <img src="{{ result.imageUrl || 'https://bootdey.com/img/Content/avatar/avatar3.png' }}" alt="">
+    /* Remove line-height property from #oussamach */
+   #oussamach {
+       font-size: 3em;
+       text-align: center;
+       font-weight: bold;
+   }
+   
+   /* Update styling for #och and #ouch */
+   #och, #ouch {
+       display: inline-block;
+       margin-bottom: 25px;
+   }
+   
+   </style>
+   
+   
+   
+   
+     <main>
+        <section class="hero-section d-flex justify-content-center align-items-center" id="section_1" style="padding-bottom: 220px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-12 mx-auto">
+                        <h2 id="oussamach" style="margin-right: 70px;">
+                            FIND A <span id="och" class="grish">{{ jobType }} </span> THAT<br>
+                            <span class="grish">MATCHES</span> YOUR <span id="ouch">{{ passionType }}</span>
+                        </h2>
+    
+                        <!-- search.component.html -->
+                        <form (ngSubmit)="onSubmit($event)" class="custom-form mt-4 pt-2 mb-lg-0 mb-5" style="border-radius: 10%;">
+                            <div class="input-group input-group-lg position-relative search-container" style="margin-top: 20px;">
+                                <span class="input-group-text bi-search" id="basic-addon1"></span>
+    
+                                <input
+                                    name="keyword"
+                                    type="search"
+                                    class="form-control"
+                                    id="keyword"
+                                    placeholder="Hospital, Speciality, Doctor... "
+                                    aria-label="Search"
+                                    [(ngModel)]="searchText"
+                                    (input)="search()"
+                                />
+    
+                                <div *ngIf="searchText && results.length > 0; else noResults" class="search-results">
+                                    <!-- Display results in a list below the search input -->
+                                    <ul>
+                                        <li *ngFor="let result of results" (click)="selectResult(result)">
+                                            <div class="user-info d-flex align-items-center">
+                                                <div class="profile-header-img profile-header-img:hover" style="margin-right: 10px;">
+                                                    <img src="{{ result.imageUrl || 'https://bootdey.com/img/Content/avatar/avatar3.png' }}" alt="">
+                                                </div>
+                                                <div>
+                                                    <span class="user-name">{{ result.firstname }} {{ result.lastname }}</span>
+                                                    <p class="user-details">{{ result.speciality }} - {{ result.address }}</p>
+                                                </div>
                                             </div>
-                                            <div>
-                                                <span class="user-name">{{ result.firstname }} {{ result.lastname }}</span>
-                                                <p class="user-details">{{ result.speciality }} - {{ result.address }}</p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+    
+                                <ng-template #noResults>
+                                    <!-- Display a message when there are no results -->
+                                </ng-template>
+    
+                                <button type="submit" class="form-control">Search</button>
                             </div>
-
-                            <ng-template #noResults>
-                                <!-- Display a message when there are no results -->
-                            </ng-template>
-
-                            <button type="submit" class="form-control">Search</button>
-                        </div>
-                    </form>
-
-                </div>
-
-            </div>
-        </div>
-    </section>
+                        </form>
     
-
-
-      <section class="explore-section section-padding" id="section_2" style="z-index: -900;">
-        <div class="container">
-            <div class="row">
-                <div  style="margin-left:32% ; margin-bottom: 20px;">
-                    <h2 class="mb-4">DoctoLink: at your service</h2>
-                </div>
+                    </div>
     
-                <!-- Première section -->
-                <div class="col-lg-4 col-12 mb-4">
-                    <img src="https://www.doctolib.fr/webpack/f8cdf108482e901cc7ad.svg" class="img-fluid" alt="First Image">
-                    <p>Quickly and easily access a large community of practices</p>
-                </div>
-    
-                <!-- Deuxième section -->
-                <div class="col-lg-4 col-12 mb-4">
-                    <img src="https://www.doctolib.fr/webpack/6125995a814287e52791.svg" class="img-fluid" alt="Second Image">
-                    <p>Manage your health and that of your loved ones securely: account, documents, appointments</p>
-                </div>
-    
-                <!-- Troisième section -->
-                <div class="col-lg-4 col-12 mb-4">
-                    <img src="https://www.doctolib.fr/webpack/bfde12c508371a531414.svg" class="img-fluid" alt="Third Image">
-                    <p>Prevent the outbreak of diseases with awareness messages.</p>
                 </div>
             </div>
-        </div>
-    </section>
-    
-    <section class="timeline-section section-padding" id="section_3"  style="background-image: url('assets/images/hit.jpg');">
-        <div class="section-overlay"></div>
-
-          <div class="container">
-              <div class="row">
-
-                  <div class="col-12 text-center">
-                      <h2 class="text-white mb-4">Welcome to our website</h2>
-                  </div>
-
-                  <div class="col-lg-10 col-12 mx-auto">
-                      <div class="timeline-container">
-                          <ul class="vertical-scrollable-timeline" id="vertical-scrollable-timeline">
-                              <div class="list-progress">
-                                  <div class="inner"></div>
-                              </div>
-
-                              <li>
-                                  <h4 class="text-white mb-3">Research your topic</h4>
-
-                                  <p class="text-white">Use the search bar at the top of the page. You can enter the name of the doctor you are looking for or the name of a medical specialty or hospital you want</p>
-
-                                  <div class="icon-holder">
-                                    <i class="bi-search"></i>
-                                  </div>
-                              </li>
-                              
-                              <li>
-                                  <h4 class="text-white mb-3">A Guide to Personalized Health and Wellness</h4>
-
-                                  <p class="text-white">Explorez une approche proactive envers votre santé en planifiant dès maintenant une consultation personnalisée avec nos professionnels de confiance. Simplifiez le processus en réservant votre rendez-vous en ligne et découvrez des soins dévoués à votre bien-être.</p>
-                                  <div class="icon-holder">
-                                    <i class="bi-bookmark"></i>
-                                  </div>
-                              </li>
-
-                              <li>
-                                  <h4 class="text-white mb-3">Book Your Appointment</h4>
-
-                                  <p class="text-white">Schedule your appointment now and experience personalized healthcare at its best. Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi vero quisquam, rem assumenda similique voluptas distinctio, iste est hic eveniet debitis ut ducimus beatae id? Quam culpa deleniti officiis autem?</p>
-                                  
-
-                                  <div class="icon-holder">
-                                    <i class="bi-book"></i>
-                                  </div>
-                              </li>
-                          </ul>
-                      </div>
-                  </div>
-
-                  <div class="col-12 text-center mt-5">
-                      <p class="text-white">
-                          Want to learn more?
-                          <a href="https://www.youtube.com/@doclinkbyaltec" class="btn custom-btn custom-border-btn ms-3">Check out Youtube</a>
-                      </p>
-                  </div>
-              </div>
-          </div>
-      </section>
-
-
-      <section class="faq-section section-padding" id="section_4">
-          <div class="container">
-              <div class="row">
-
-                  <div class="col-lg-6 col-12">
-                      <h2 class="mb-4">Frequently Asked Questions</h2>
-                  </div>
-
-                  <div class="clearfix"></div>
-
-                  <div class="col-lg-5 col-12">
-                      <img src="https://online-doctor.ca/wp-content/uploads/2020/10/nurse_doctor_2-1.png" class="img-fluid" alt="FAQs">
-                  </div>
-
-                  
-                    
-
-              </div>
-          </div>
-      </section>
-
-
-      <section class="contact-section section-padding section-bg" id="section_5">
-          <div class="container">
-              <div class="row">
-
-      
-
-                  <div class="col-lg-5 col-12 mb-4 mb-lg-0">
-                    
-                    <iframe class="google-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3325.765058013344!2d-5.9168718!3d35.7633854!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd0b875cf04c132d%3A0x76bfc571bfb4e17a!2sTanger!5e0!3m2!1sen!2sma!4vYOUR_MAP_API_KEY" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    
-                    <p>Tanger: Morocco</p>
-                </div>
-                <div class="col-lg-3 col-md-6 col-12 mb-3 mb-lg- mb-md-0 ms-auto">
-                    <h4 class="mb-3">Make an appointment online</h4>
-                
-                    <p>Select the créneau that you are comfortable with and plan your way back to our home.</p>
-                
-                    <hr>
-                
-                    <p class="d-flex align-items-center mb-1">
-                        <span class="me-2">phone</span>
-                        <a href="tel: 305-240-9671" class="site-footer-link">
-                            07-11-54-32-20
-                        </a>
-                    </p>
-                
-                    <p class="d-flex align-items-center">
-                        <span class="me-2">Email</span>
-                        <a href="mailto:info@company.com" class="site-footer-link">
-                            DocLink@gmail.com
-                        </a>
-                    </p>
-                </div>
-                
-                <div class="col-lg-3 col-md-6 col-12 mx-auto">
-                    <h4 class="mb-3">Our address</h4>
-                
-                    <p>Tanger-Morroco</p>
-                
-                    <hr>
-                
-                    <p class="d-flex align-items-center mb-1">
-                        <span class="me-2">phone</span>
-                        <a href="tel: 110-220-3400" class="site-footer-link">
-                            07-11-54-32-15
-                        </a>
-                    </p>
-                
-                    <p class="d-flex align-items-center">
-                        <span class="me-2">Email</span>
-                        <a href="mailto:info@company.com" class="site-footer-link">
-                            info@company.com
-                        </a>
-                    </p>
-                </div>
-                
-              </div>
-              </div>
-    </section>
-  
-
-  </main>
-
-
-
-
-
-
-
+        </section>
+       
+   
+       <section class="explore-section section-padding" id="section_2" style="height: 50vh;">
+           <div class="container" style="margin-top: -100px;">
+               <div class="row">
+              
+                   <!-- Première section -->
+                   <div class="col-lg-4 col-12 mb-4 text-center"  style="margin-top:50px;">
+                     <img src="https://www.doctolib.fr/webpack/f8cdf108482e901cc7ad.svg" class="img-fluid mx-auto" alt="First Image">
+                     <p class="text-center" style="color:black;margin-top: 10px;">Quickly and easily access a large community of practices</p>
+                 </div>
+   
+                   <!-- Deuxième section -->
+                   <div class="col-lg-4 col-12 mb-4 text-center"  style="margin-top:50px;">
+                       <img src="https://www.doctolib.fr/webpack/6125995a814287e52791.svg" class="img-fluid mx-auto" alt="Second Image">
+                       <p class="text-center" style="color:black;margin-top: 10px;">Manage your health and that of your loved ones securely: account, documents, appointments</p>
+                   </div>
+   
+                   <!-- Troisième section -->
+                   <div class="col-lg-4 col-12 mb-4 text-center"  style="margin-top:50px;">
+                       <img src="https://www.doctolib.fr/webpack/bfde12c508371a531414.svg" class="img-fluid mx-auto" alt="Third Image">
+                       <p class="text-center" style="color:black;margin-top: 10px;"> Prevent the outbreak of diseases with awareness messages.</p>
+                   </div>
+               </div>
+           </div>
+       </section>
+   
+       <section class="timeline-section section-padding" id="section_3"  style="background-image: url('assets/images/hit.jpg');">
+           <div class="section-overlay"></div>
+   
+             <div class="container">
+                 <div class="row">
+   
+                     <div class="col-12 text-center">
+                         <h2 class="text-white mb-4">Welcome to our website</h2>
+                     </div>
+   
+                     <div class="col-lg-10 col-12 mx-auto">
+                         <div class="timeline-container">
+                             <ul class="vertical-scrollable-timeline" id="vertical-scrollable-timeline">
+                                 <div class="list-progress">
+                                     <div class="inner"></div>
+                                 </div>
+   
+                                 <li>
+                                     <h4 class="text-white mb-3">Research your topic</h4>
+   
+                                     <p class="text-white">Use the search bar at the top of the page. You can enter the name of the doctor you are looking for or the name of a medical specialty or hospital you want</p>
+   
+                                     <div class="icon-holder">
+                                       <i class="bi-search"></i>
+                                     </div>
+                                 </li>
+   
+                                 <li>
+                                     <h4 class="text-white mb-3">A Guide to Personalized Health and Wellness</h4>
+   
+                                     <p class="text-white">Take a proactive approach to your health by scheduling a personalized consultation with our trusted professionals. Simplify the process by booking your appointment online and discover dedicated care for your well-being</p>
+                                     <div class="icon-holder">
+                                       <i class="bi-bookmark"></i>
+                                     </div>
+                                 </li>
+   
+                                 <li>
+                                     <h4 class="text-white mb-3">Book Your Appointment</h4>
+   
+                                     <p class="text-white">Schedule your appointment now and experience personalized healthcare at its best. Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi vero quisquam, rem assumenda similique voluptas distinctio, iste est hic eveniet debitis ut ducimus beatae id? Quam culpa deleniti officiis autem?</p>
+   
+   
+                                     <div class="icon-holder">
+                                       <i class="bi-book"></i>
+                                     </div>
+                                 </li>
+                             </ul>
+                         </div>
+                     </div>
+   
+                     <div class="col-12 text-center mt-5">
+                         <p class="text-white">
+                             Want to learn more?
+                             <a href="https://www.youtube.com/@doclinkbyaltec" class="btn custom-btn custom-border-btn ms-3">Check out Youtube</a>
+                         </p>
+                     </div>
+                 </div>
+             </div>
+         </section>
+   
+         <div style="margin-bottom: 40px; margin-top: 40px; margin-right: 30px;margin-left: 30px;">
+   
+           <div class="separator-hr"></div>
+   
+           <div class="grid-container grid-x">
+   
+               <div class="card-pricing large-4 medium-4 small-4 cell auto">
+   
+                   <div class="header">
+                       <div class="label">Generalist</div>
+                       <div class="price">
+                           <div class="chiffre">1€</div>
+                           <div class="appel">/call</div>
+                       </div>
+                   </div>
+                   <ul>
+                       <li><i class="bi bi-check-circle"></i><span>Priority call</span></li>
+                       <li><i class="bi bi-check-circle"></i><span>General practitioners </span></li>
+                       <li><i class="bi bi-check-circle"></i><span>An agent calls for me</span></li>
+                       <li><i class="bi bi-check-circle"></i><span>If no appointment within 48 hours, Allodocteur reimburses me.</span></li>
+                   </ul>
+   
+               </div>
+               <div class="card-pricing large-4 medium-4 small-4 cell auto">
+   
+                   <div class="header">
+                       <div class="label">Specialist</div>
+                       <div class="price">
+                           <div class="chiffre">4€</div>
+                           <div class="appel">/call</div>
+                       </div>
+                   </div>
+                   <ul>
+                       <li><i class="bi bi-check-circle"></i><span>Priority call</span></li>
+                       <li><i class="bi bi-check-circle"></i><span>Specialists </span></li>
+                       <li><i class="bi bi-check-circle"></i><span>An agent calls for me</span></li>
+                       <li><i class="bi bi-check-circle"></i><span>If no appointment within a week, Allodocteur reimburses me.</span></li>
+                   </ul>
+   
+               </div>
+               <div class="card-pricing large-4 medium-4 small-4 cell auto">
+                   <div class="header">
+                       <div class="label">Redirection</div>
+                       <div class="price">
+                           <div class="chiffre">0€</div>
+                           <div class="appel">/redirection</div>
+                       </div>
+                   </div>
+                   <ul>
+                       <li><i class="bi bi-check-circle"></i><span>Specialists and/or generalists with an online schedule</span></li>
+                       <li><i class="bi bi-check-circle"></i><span>Redirection to the practitioner's schedule website. Choosing a time slot based on remaining availability.</span></li>
+                   </ul>
+   
+               </div>
+           </div>
+       </div>
+   
+   
+         <section class="contact-section section-padding section-bg" id="section_5">
+             <div class="container">
+                 <div class="row">
+   
+   
+   
+                     <div class="col-lg-5 col-12 mb-4 mb-lg-0">
+   
+                       <iframe class="google-map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3325.765058013344!2d-5.9168718!3d35.7633854!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd0b875cf04c132d%3A0x76bfc571bfb4e17a!2sTanger!5e0!3m2!1sen!2sma!4vYOUR_MAP_API_KEY" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+   
+                       <p>Tanger: Morocco</p>
+                   </div>
+                   <div class="col-lg-3 col-md-6 col-12 mb-3 mb-lg- mb-md-0 ms-auto">
+                       <h4 class="mb-3">Make an appointment online</h4>
+   
+                       <p>Select the créneau that you are comfortable with and plan your way back to our home.</p>
+   
+                       <hr>
+   
+                       <p class="d-flex align-items-center mb-1">
+                           <span class="me-2">phone</span>
+                           <a href="tel: 305-240-9671" class="site-footer-link">
+                               07-11-54-32-20
+                           </a>
+                       </p>
+   
+                       <p class="d-flex align-items-center">
+                           <span class="me-2">Email</span>
+                           <a href="mailto:info@company.com" class="site-footer-link">
+                               DocLink@gmail.com
+                           </a>
+                       </p>
+                   </div>
+   
+                   <div class="col-lg-3 col-md-6 col-12 mx-auto">
+                       <h4 class="mb-3">Our address</h4>
+   
+                       <p>Tanger-Morroco</p>
+   
+                       <hr>
+   
+                       <p class="d-flex align-items-center mb-1">
+                           <span class="me-2">phone</span>
+                           <a href="tel: 110-220-3400" class="site-footer-link">
+                               07-11-54-32-15
+                           </a>
+                       </p>
+   
+                       <p class="d-flex align-items-center">
+                           <span class="me-2">Email</span>
+                           <a href="mailto:info@company.com" class="site-footer-link">
+                               info@company.com
+                           </a>
+                       </p>
+                   </div>
+   
+                 </div>
+                 </div>
+       </section>
+ 
+   
+   </main>

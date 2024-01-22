@@ -58,3 +58,74 @@
 .grish {
     color: #338573;
 }
+/* Assurez-vous d'ajuster ces styles en fonction de vos besoins spécifiques */
+
+/* Utilisation d'un système de grille */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Trois colonnes égales */
+    gap: 20px; /* Espacement entre les cartes */
+}
+
+/* Styles spécifiques à chaque carte */
+.card-pricing {
+    /* Ajoutez ici les styles spécifiques à chaque carte */
+    background-color: #f7f7f7;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-pricing .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.card-pricing .label {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.card-pricing .price {
+    display: flex;
+    align-items: baseline;
+}
+
+.card-pricing .chiffre {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.card-pricing .appel {
+    font-size: 14px;
+    color: #777;
+    margin-left: 5px;
+}
+
+.card-pricing ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.card-pricing li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.card-pricing li i {
+    margin-right: 10px;
+    color: #50d1c0; /* Couleur de la coche (vert) */
+}
+
+/* Style de la séparation */
+.separator-hr {
+    border: 1px solid #ddd;
+}
