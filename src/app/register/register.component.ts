@@ -106,7 +106,7 @@ export class RegisterComponent {
 
   navigateBasedOnRole() {
     if (this.formregister.value.role === 'DOCTOR') {
-      this.router.navigate(['/doctor']);
+      this.router.navigate(['/test']);
     } else if (this.formregister.value.role === 'PATIENT') {
       this.router.navigate(['/Appointment']);
     }

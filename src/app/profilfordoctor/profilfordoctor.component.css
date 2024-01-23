@@ -1,4 +1,4 @@
-
+o hada css 
 body{
     margin-top:20px;
     background:#eee;
@@ -662,4 +662,12 @@ select.form-control:not([size]):not([multiple]) {
     /* Add any other styles for your icon */
     margin-right: 6px;
   }
-  
+  .edit-doctor-form {
+    position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  width: 700px; /* Ajustez la largeur en fonction de vos besoins */
+  height: 600px;
+  }

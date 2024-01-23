@@ -6,6 +6,7 @@ import * as bootstrap from 'bootstrap';
 import { PopupComponent } from '../popup/popup.component';
 import { ServiceService } from '../service.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-profilfordoctor',
@@ -16,13 +17,14 @@ export class ProfilfordoctorComponent {
 
 
 
-
+  isEditing = false; 
 
   doctorId:string|null=null;
 
   isFixed = false;
   imageUrl: any;
   doctor!: any;
+editedDoctor: any;
   constructor(private http: HttpClient, private dialog: MatDialog,private authservice: ServiceService,private router1: Router,
 
     private route: ActivatedRoute ,    private spinner: NgxSpinnerService
@@ -43,6 +45,7 @@ export class ProfilfordoctorComponent {
       this.authservice.getdoctor(this.doctorId).subscribe(
         (data) => {
           this.doctor = data;
+          this.editedDoctor = { ...this.doctor };
   
           // After getting the doctor's information, download the image
           this.downloadImage();
@@ -176,8 +179,50 @@ export class ProfilfordoctorComponent {
 
     }
   }
+  toggleEditMode() {
+    this.isEditing = !this.isEditing;
+
+    // If exiting edit mode, reset the edited data
+    if (!this.isEditing) {
+      this.editedDoctor = { ...this.doctor };
+    }
+  }
+  submit(form: NgForm): void {
+    if (!this.doctorId) {
+      console.error('Doctor ID not available.');
+      return;
+    }
+  
+    console.log('Doctor data before update:', this.doctor);
+    console.log('Edited doctor data:', this.editedDoctor);
+  
+    this.authservice.updateDoctor(this.doctorId, this.editedDoctor).subscribe(
+      response => {
+        console.log('Doctor updated successfully:', response);
+        // Update component data with new data
+        this.doctor = { ...this.editedDoctor };
+        form.resetForm(); // Reset the form after a successful update
+        this.isEditing = false; // Exit edit mode
+      },
+      error => {
+        console.error('Error updating doctor:', error);
+        this.isEditing = false;
+        // Handle error, show an error message, etc.
+      }
+    );
+  }
   
 
 
-}
+  cancel(): void {
+    this.isEditing = false;
+  }
 
+
+  openEditProfilePopup() {
+    console.log('Edit Profile button clicked');
+    this.isEditing = true;
+  }
+
+
+}
